@@ -115,6 +115,11 @@ namespace Not_Defteri
 			richTextBox.Undo();
 		}
 
+		private void ileriAlToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Redo();
+		}
+
 		private void kesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			richTextBox.Cut();
@@ -266,5 +271,7 @@ namespace Not_Defteri
 				e.Handled = true; // Klavye olayını işlendi olarak işaretle
 			}
 		}
+
+		
 	}
 }

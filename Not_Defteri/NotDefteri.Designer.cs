@@ -51,6 +51,7 @@ namespace Not_Defteri
 			this.saatTarihToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ileriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -136,6 +137,7 @@ namespace Not_Defteri
 			// 
 			this.düzenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.geriAlToolStripMenuItem,
+            this.ileriAlToolStripMenuItem,
             this.kesToolStripMenuItem,
             this.kopyalaToolStripMenuItem,
             this.yapıştırToolStripMenuItem,
@@ -235,6 +237,15 @@ namespace Not_Defteri
 			this.notDefteriHakkindaToolStripMenuItem.Text = "Not Defteri Hakkında";
 			this.notDefteriHakkindaToolStripMenuItem.Click += new System.EventHandler(this.notDefteriHakkindaToolStripMenuItem_Click);
 			// 
+			// ileriAlToolStripMenuItem
+			// 
+			this.ileriAlToolStripMenuItem.Name = "ileriAlToolStripMenuItem";
+			this.ileriAlToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Z)));
+			this.ileriAlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.ileriAlToolStripMenuItem.Text = "İleri Al";
+			this.ileriAlToolStripMenuItem.Click += new System.EventHandler(this.ileriAlToolStripMenuItem_Click);
+			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,5 +289,6 @@ namespace Not_Defteri
 		private ToolStripMenuItem degistirToolStripMenuItem;
 		private ToolStripMenuItem tumunuSecToolStripMenuItem;
 		private ToolStripMenuItem saatTarihToolStripMenuItem;
+		private ToolStripMenuItem ileriAlToolStripMenuItem;
 	}
 }
