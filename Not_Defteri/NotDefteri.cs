@@ -69,23 +69,18 @@ namespace Not_Defteri
 
 		private void kaydetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// 'Kaydet' menü öğesi için kodlar
-			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			// Eğer dosya zaten bir kere kaydedildi ise, mevcut dosya yoluna kaydet
+			if (!string.IsNullOrEmpty(currentFilePath))
 			{
-				// Kaydedilebilecek dosya türlerini belirleme
-				saveFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar|*.*";
-				saveFileDialog.DefaultExt = "txt"; // Varsayılan uzantı
-				saveFileDialog.AddExtension = true; // Uzantıyı otomatik ekle
-
-				if (saveFileDialog.ShowDialog() == DialogResult.OK)
-				{
-					// Dosya olarak kaydetme işlemi
-					File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
-					currentFilePath = saveFileDialog.FileName; // Yeni dosya yolu güncelleme
-					savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-					isFileSaved = true;
-					UpdateFormTitle(); // Başlık güncelleme
-				}
+				File.WriteAllText(currentFilePath, richTextBox.Text);
+				savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+				isFileSaved = true;
+				UpdateFormTitle(); // Başlık güncelleme
+			}
+			else
+			{
+				// Eğer dosya daha önce hiç kaydedilmediyse, "Farklı Kaydet" diyalogunu göster
+				SaveFileAs();
 			}
 		}
 
@@ -246,10 +241,12 @@ namespace Not_Defteri
 		{
 			if (richTextBox.Text == savedContent)
 			{
+				richTextBox.Modified = false;
 				isFileSaved = true;
 			}
-			else if (isFileSaved)
+			else
 			{
+				richTextBox.Modified = true;
 				isFileSaved = false;
 			}
 			UpdateFormTitle();
