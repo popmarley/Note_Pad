@@ -172,8 +172,8 @@ namespace Not_Defteri
 
 		private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// Eğer richTextBox'ta değişiklik yapıldıysa kullanıcıya sor
-			if (richTextBox.Modified)
+			// richTextBox'ta değişiklik yapıldıysa ve içerik kaydedilmediyse kullanıcıya sor
+			if (richTextBox.Modified && !isFileSaved)
 			{
 				var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
@@ -181,7 +181,6 @@ namespace Not_Defteri
 				{
 					// Kaydetme işlemi
 					SaveFile();
-					richTextBox.Modified = false;
 				}
 				else if (result == DialogResult.Cancel)
 				{
