@@ -55,5 +55,25 @@ namespace Not_Defteri
 				}
 			}
 		}
+
+		private void yeniPencereToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Yeni pencere açma işlemi
+			NotDefteri yeniPencere = new NotDefteri();
+			yeniPencere.Show();
+		}
+
+		private void farkliKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Farklı kaydetme işlemi
+			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
+				}
+			}
+		}
 	}
 }
