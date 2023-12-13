@@ -297,5 +297,26 @@ namespace Not_Defteri
 			// richTextBox'ın içeriğini yazdır
 			e.Graphics.DrawString(richTextBox.Text, new Font("Arial", 12), Brushes.Black, 25, 25);
 		}
+
+		private void richTextBox_SelectionChanged(object sender, EventArgs e)
+		{
+			int index = richTextBox.SelectionStart;
+			int line = richTextBox.GetLineFromCharIndex(index);
+			int column = index - richTextBox.GetFirstCharIndexFromLine(line);
+
+			toolStripStatusLabel1.Text = $"St: {line + 1}, Stn: {column + 1}";
+		}
+
+		private void durumcubuguToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Menü öğesinin 'Checked' durumunu tersine çevir
+			durumcubuguToolStripMenuItem.Checked = !durumcubuguToolStripMenuItem.Checked;
+
+			// Durum çubuğunun görünürlüğünü menü öğesinin 'Checked' durumuna bağla
+			statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
+		}
+
+		
 	}
+	
 }

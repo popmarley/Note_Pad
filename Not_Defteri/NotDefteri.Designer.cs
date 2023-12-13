@@ -39,8 +39,10 @@ namespace Not_Defteri
 			this.acToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.farkliKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yazdırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.düzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.geriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ileriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kopyalaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.yapıştırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,12 +51,21 @@ namespace Not_Defteri
 			this.degistirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tumunuSecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saatTarihToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.görünümToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yakınlaştırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yakınlastirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.uzaklastirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.varsayilanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.durumcubuguToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ileriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.yazdırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// richTextBox
@@ -66,6 +77,7 @@ namespace Not_Defteri
 			this.richTextBox.Size = new System.Drawing.Size(784, 426);
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
+			this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
 			this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
 			// 
 			// menuStrip
@@ -73,6 +85,7 @@ namespace Not_Defteri
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.düzenToolStripMenuItem,
+            this.görünümToolStripMenuItem,
             this.yardımToolStripMenuItem});
 			this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -136,6 +149,14 @@ namespace Not_Defteri
 			this.farkliKaydetToolStripMenuItem.Text = "Farklı Kaydet";
 			this.farkliKaydetToolStripMenuItem.Click += new System.EventHandler(this.farkliKaydetToolStripMenuItem_Click);
 			// 
+			// yazdırToolStripMenuItem
+			// 
+			this.yazdırToolStripMenuItem.Name = "yazdırToolStripMenuItem";
+			this.yazdırToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+			this.yazdırToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+			this.yazdırToolStripMenuItem.Text = "Yazdır";
+			this.yazdırToolStripMenuItem.Click += new System.EventHandler(this.yazdırToolStripMenuItem_Click);
+			// 
 			// düzenToolStripMenuItem
 			// 
 			this.düzenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,6 +181,15 @@ namespace Not_Defteri
 			this.geriAlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
 			this.geriAlToolStripMenuItem.Text = "Geri Al";
 			this.geriAlToolStripMenuItem.Click += new System.EventHandler(this.geriAlToolStripMenuItem_Click);
+			// 
+			// ileriAlToolStripMenuItem
+			// 
+			this.ileriAlToolStripMenuItem.Name = "ileriAlToolStripMenuItem";
+			this.ileriAlToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Z)));
+			this.ileriAlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.ileriAlToolStripMenuItem.Text = "İleri Al";
+			this.ileriAlToolStripMenuItem.Click += new System.EventHandler(this.ileriAlToolStripMenuItem_Click);
 			// 
 			// kesToolStripMenuItem
 			// 
@@ -225,6 +255,52 @@ namespace Not_Defteri
 			this.saatTarihToolStripMenuItem.Text = "Saat/Tarih";
 			this.saatTarihToolStripMenuItem.Click += new System.EventHandler(this.saatTarihToolStripMenuItem_Click);
 			// 
+			// görünümToolStripMenuItem
+			// 
+			this.görünümToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.yakınlaştırToolStripMenuItem,
+            this.durumcubuguToolStripMenuItem});
+			this.görünümToolStripMenuItem.Name = "görünümToolStripMenuItem";
+			this.görünümToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+			this.görünümToolStripMenuItem.Text = "Görünüm";
+			// 
+			// yakınlaştırToolStripMenuItem
+			// 
+			this.yakınlaştırToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.yakınlastirToolStripMenuItem1,
+            this.uzaklastirToolStripMenuItem,
+            this.varsayilanToolStripMenuItem});
+			this.yakınlaştırToolStripMenuItem.Name = "yakınlaştırToolStripMenuItem";
+			this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.yakınlaştırToolStripMenuItem.Text = "Yakınlaştır";
+			// 
+			// yakınlastirToolStripMenuItem1
+			// 
+			this.yakınlastirToolStripMenuItem1.Name = "yakınlastirToolStripMenuItem1";
+			this.yakınlastirToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
+			this.yakınlastirToolStripMenuItem1.Text = "Yakınlaştır";
+			// 
+			// uzaklastirToolStripMenuItem
+			// 
+			this.uzaklastirToolStripMenuItem.Name = "uzaklastirToolStripMenuItem";
+			this.uzaklastirToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+			this.uzaklastirToolStripMenuItem.Text = "Uzaklaştır";
+			// 
+			// varsayilanToolStripMenuItem
+			// 
+			this.varsayilanToolStripMenuItem.Name = "varsayilanToolStripMenuItem";
+			this.varsayilanToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+			this.varsayilanToolStripMenuItem.Text = "Varsayılan Yakınlaştırma";
+			// 
+			// durumcubuguToolStripMenuItem
+			// 
+			this.durumcubuguToolStripMenuItem.Checked = true;
+			this.durumcubuguToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.durumcubuguToolStripMenuItem.Name = "durumcubuguToolStripMenuItem";
+			this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
+			this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
+			// 
 			// yardımToolStripMenuItem
 			// 
 			this.yardımToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -240,32 +316,45 @@ namespace Not_Defteri
 			this.notDefteriHakkindaToolStripMenuItem.Text = "Not Defteri Hakkında";
 			this.notDefteriHakkindaToolStripMenuItem.Click += new System.EventHandler(this.notDefteriHakkindaToolStripMenuItem_Click);
 			// 
-			// ileriAlToolStripMenuItem
-			// 
-			this.ileriAlToolStripMenuItem.Name = "ileriAlToolStripMenuItem";
-			this.ileriAlToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Z)));
-			this.ileriAlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-			this.ileriAlToolStripMenuItem.Text = "İleri Al";
-			this.ileriAlToolStripMenuItem.Click += new System.EventHandler(this.ileriAlToolStripMenuItem_Click);
-			// 
-			// yazdırToolStripMenuItem
-			// 
-			this.yazdırToolStripMenuItem.Name = "yazdırToolStripMenuItem";
-			this.yazdırToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-			this.yazdırToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-			this.yazdırToolStripMenuItem.Text = "Yazdır";
-			this.yazdırToolStripMenuItem.Click += new System.EventHandler(this.yazdırToolStripMenuItem_Click);
-			// 
 			// printDocument1
 			// 
 			this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel3});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(784, 22);
+			this.statusStrip1.TabIndex = 2;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripStatusLabel2
+			// 
+			this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+			this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+			// 
+			// toolStripStatusLabel1
+			// 
+			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(43, 17);
+			this.toolStripStatusLabel1.Text = "St , Stn";
+			// 
+			// toolStripStatusLabel3
+			// 
+			this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+			this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 17);
+			this.toolStripStatusLabel3.Text = "yüzdelik";
 			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(784, 450);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.richTextBox);
 			this.Controls.Add(this.menuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -277,6 +366,8 @@ namespace Not_Defteri
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NotDefteri_KeyDown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -307,5 +398,15 @@ namespace Not_Defteri
 		private ToolStripMenuItem ileriAlToolStripMenuItem;
 		private ToolStripMenuItem yazdırToolStripMenuItem;
 		private System.Drawing.Printing.PrintDocument printDocument1;
+		private ToolStripMenuItem görünümToolStripMenuItem;
+		private ToolStripMenuItem yakınlaştırToolStripMenuItem;
+		private ToolStripMenuItem yakınlastirToolStripMenuItem1;
+		private ToolStripMenuItem uzaklastirToolStripMenuItem;
+		private ToolStripMenuItem varsayilanToolStripMenuItem;
+		private ToolStripMenuItem durumcubuguToolStripMenuItem;
+		private StatusStrip statusStrip1;
+		private ToolStripStatusLabel toolStripStatusLabel1;
+		private ToolStripStatusLabel toolStripStatusLabel2;
+		private ToolStripStatusLabel toolStripStatusLabel3;
 	}
 }
