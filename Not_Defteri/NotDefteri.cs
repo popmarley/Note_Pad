@@ -13,12 +13,36 @@ namespace Not_Defteri
 {
 	public partial class NotDefteri : Form
 	{
+		private string savedContent = "";
+		private string currentFilePath = null;
+		private bool isFileSaved = true;
 		public NotDefteri()
 		{
 			InitializeComponent();
+			this.KeyPreview = true;
+
+
+			string[] args = Environment.GetCommandLineArgs();
+
+			// Eğer argüman olarak bir dosya yolu verilmişse, bu dosyayı aç
+			if (args.Length > 1)
+			{
+				string filePath = args[1]; // args[0], uygulamanın kendisinin yoludur, bu yüzden args[1] kullanılır
+				OpenFile(filePath);
+			}
 		}
 
-		
+		public void OpenFile(string filePath)
+		{
+			if (File.Exists(filePath))
+			{
+				richTextBox.Text = File.ReadAllText(filePath);
+				currentFilePath = filePath; // Dosya yolu güncelleme
+				savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+				isFileSaved = true;
+				UpdateFormTitle(); // Başlık güncelleme
+			}
+		}
 
 		private void yeniToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -31,9 +55,14 @@ namespace Not_Defteri
 			// 'Aç' menü öğesi için kodlar
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
+				openFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
 				if (openFileDialog.ShowDialog() == DialogResult.OK)
 				{
 					richTextBox.Text = File.ReadAllText(openFileDialog.FileName);
+					currentFilePath = openFileDialog.FileName; // Dosya yolu güncelleme
+					savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+					isFileSaved = true;
+					UpdateFormTitle(); // Başlık güncelleme
 				}
 			}
 		}
@@ -52,6 +81,10 @@ namespace Not_Defteri
 				{
 					// Dosya olarak kaydetme işlemi
 					File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
+					currentFilePath = saveFileDialog.FileName; // Yeni dosya yolu güncelleme
+					savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+					isFileSaved = true;
+					UpdateFormTitle(); // Başlık güncelleme
 				}
 			}
 		}
@@ -80,6 +113,162 @@ namespace Not_Defteri
 		{
 			Hakkinda hakkinda = new Hakkinda();
 			hakkinda.Show();
+		}
+
+		private void geriAlToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Undo();
+		}
+
+		private void kesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Cut();
+		}
+
+		private void kopyalaToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Copy();
+		}
+
+		private void yapıştırToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Paste();
+		}
+
+		private void silToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.Clear();
+		}
+
+		private void bulToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (Bul bulForm = new Bul())
+			{
+				bulForm.TextBoxReferans = this.richTextBox; // Bu formdaki richTextBox kontrolünün referansını geçirin.
+				bulForm.Show();
+			}
+		}
+
+		private void degistirToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string arananMetin = Microsoft.VisualBasic.Interaction.InputBox("Değiştirilecek metni girin:", "Bul", "", -1, -1);
+			if (!string.IsNullOrEmpty(arananMetin))
+			{
+				string yeniMetin = Microsoft.VisualBasic.Interaction.InputBox("Yeni metni girin:", "Değiştir", "", -1, -1);
+				richTextBox.Text = richTextBox.Text.Replace(arananMetin, yeniMetin);
+			}
+		}
+
+		private void tumunuSecToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectAll();
+		}
+
+		private void saatTarihToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Saat/Tarih bilgisini metin kutusunun mevcut konumuna ekler.
+			richTextBox.SelectedText = DateTime.Now.ToString();
+		}
+
+		private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			// Eğer richTextBox'ta değişiklik yapıldıysa kullanıcıya sor
+			if (richTextBox.Modified)
+			{
+				var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+				if (result == DialogResult.Yes)
+				{
+					// Kaydetme işlemi
+					SaveFile();
+					richTextBox.Modified = false;
+				}
+				else if (result == DialogResult.Cancel)
+				{
+					// Kapatmayı iptal et
+					e.Cancel = true;
+				}
+				// No seçeneği için ekstra bir işlem yapmaya gerek yok. Form kapatılacak.
+			}
+		}
+
+		private void SaveFile()
+		{
+			if (string.IsNullOrEmpty(currentFilePath))
+			{
+				// Dosya daha önce kaydedilmemişse, "Farklı Kaydet" diyalogunu göster
+				SaveFileAs();
+			}
+			else
+			{
+				// Dosya daha önce kaydedilmişse, mevcut dosya yoluna kaydet
+				File.WriteAllText(currentFilePath, richTextBox.Text);
+				savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+				isFileSaved = true;
+				UpdateFormTitle(); // Başlık güncelleme
+			}
+		}
+
+		private void SaveFileAs()
+		{
+			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
+				// Mevcut dosyanın adını ve dizinini SaveFileDialog'da önceden ayarla
+				if (!string.IsNullOrEmpty(currentFilePath))
+				{
+					saveFileDialog.FileName = Path.GetFileName(currentFilePath);
+					saveFileDialog.InitialDirectory = Path.GetDirectoryName(currentFilePath);
+				}
+
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
+					currentFilePath = saveFileDialog.FileName; // Yeni dosya yolu güncelleme
+					savedContent = richTextBox.Text;
+					isFileSaved = true;
+					UpdateFormTitle(); // Başlığı güncelle
+				}
+			}
+		}
+
+		private void UpdateFormTitle()
+		{
+			string fileName = "Adsız";
+			if (!string.IsNullOrEmpty(currentFilePath))
+			{
+				fileName = Path.GetFileNameWithoutExtension(currentFilePath);
+			}
+			this.Text = $"{fileName}{(isFileSaved ? "" : " *")} - Not Defteri";
+
+		}
+
+		private void richTextBox_TextChanged(object sender, EventArgs e)
+		{
+			if (richTextBox.Text == savedContent)
+			{
+				isFileSaved = true;
+			}
+			else if (isFileSaved)
+			{
+				isFileSaved = false;
+			}
+			UpdateFormTitle();
+		}
+
+		private void NotDefteri_Load(object sender, EventArgs e)
+		{
+			savedContent = richTextBox.Text;
+			UpdateFormTitle();
+		}
+
+		private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Control && e.KeyCode == Keys.S)
+			{
+				SaveFile();
+				e.Handled = true; // Klavye olayını işlendi olarak işaretle
+			}
 		}
 	}
 }

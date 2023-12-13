@@ -39,6 +39,16 @@ namespace Not_Defteri
 			this.acToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.farkliKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.düzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.geriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.kesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.kopyalaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yapıştırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.degistirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tumunuSecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saatTarihToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
@@ -53,11 +63,13 @@ namespace Not_Defteri
 			this.richTextBox.Size = new System.Drawing.Size(784, 426);
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
+			this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
 			// 
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
+            this.düzenToolStripMenuItem,
             this.yardımToolStripMenuItem});
 			this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -120,6 +132,94 @@ namespace Not_Defteri
 			this.farkliKaydetToolStripMenuItem.Text = "Farklı Kaydet";
 			this.farkliKaydetToolStripMenuItem.Click += new System.EventHandler(this.farkliKaydetToolStripMenuItem_Click);
 			// 
+			// düzenToolStripMenuItem
+			// 
+			this.düzenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.geriAlToolStripMenuItem,
+            this.kesToolStripMenuItem,
+            this.kopyalaToolStripMenuItem,
+            this.yapıştırToolStripMenuItem,
+            this.silToolStripMenuItem,
+            this.bulToolStripMenuItem,
+            this.degistirToolStripMenuItem,
+            this.tumunuSecToolStripMenuItem,
+            this.saatTarihToolStripMenuItem});
+			this.düzenToolStripMenuItem.Name = "düzenToolStripMenuItem";
+			this.düzenToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+			this.düzenToolStripMenuItem.Text = "Düzen";
+			// 
+			// geriAlToolStripMenuItem
+			// 
+			this.geriAlToolStripMenuItem.Name = "geriAlToolStripMenuItem";
+			this.geriAlToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+			this.geriAlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.geriAlToolStripMenuItem.Text = "Geri Al";
+			this.geriAlToolStripMenuItem.Click += new System.EventHandler(this.geriAlToolStripMenuItem_Click);
+			// 
+			// kesToolStripMenuItem
+			// 
+			this.kesToolStripMenuItem.Name = "kesToolStripMenuItem";
+			this.kesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+			this.kesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.kesToolStripMenuItem.Text = "Kes";
+			this.kesToolStripMenuItem.Click += new System.EventHandler(this.kesToolStripMenuItem_Click);
+			// 
+			// kopyalaToolStripMenuItem
+			// 
+			this.kopyalaToolStripMenuItem.Name = "kopyalaToolStripMenuItem";
+			this.kopyalaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+			this.kopyalaToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.kopyalaToolStripMenuItem.Text = "Kopyala";
+			this.kopyalaToolStripMenuItem.Click += new System.EventHandler(this.kopyalaToolStripMenuItem_Click);
+			// 
+			// yapıştırToolStripMenuItem
+			// 
+			this.yapıştırToolStripMenuItem.Name = "yapıştırToolStripMenuItem";
+			this.yapıştırToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+			this.yapıştırToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.yapıştırToolStripMenuItem.Text = "Yapıştır";
+			this.yapıştırToolStripMenuItem.Click += new System.EventHandler(this.yapıştırToolStripMenuItem_Click);
+			// 
+			// silToolStripMenuItem
+			// 
+			this.silToolStripMenuItem.Name = "silToolStripMenuItem";
+			this.silToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+			this.silToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.silToolStripMenuItem.Text = "Sil";
+			this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
+			// 
+			// bulToolStripMenuItem
+			// 
+			this.bulToolStripMenuItem.Name = "bulToolStripMenuItem";
+			this.bulToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.bulToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.bulToolStripMenuItem.Text = "Bul...";
+			this.bulToolStripMenuItem.Click += new System.EventHandler(this.bulToolStripMenuItem_Click);
+			// 
+			// degistirToolStripMenuItem
+			// 
+			this.degistirToolStripMenuItem.Name = "degistirToolStripMenuItem";
+			this.degistirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+			this.degistirToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.degistirToolStripMenuItem.Text = "Değiştir...";
+			this.degistirToolStripMenuItem.Click += new System.EventHandler(this.degistirToolStripMenuItem_Click);
+			// 
+			// tumunuSecToolStripMenuItem
+			// 
+			this.tumunuSecToolStripMenuItem.Name = "tumunuSecToolStripMenuItem";
+			this.tumunuSecToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+			this.tumunuSecToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.tumunuSecToolStripMenuItem.Text = "Tümünü Seç";
+			this.tumunuSecToolStripMenuItem.Click += new System.EventHandler(this.tumunuSecToolStripMenuItem_Click);
+			// 
+			// saatTarihToolStripMenuItem
+			// 
+			this.saatTarihToolStripMenuItem.Name = "saatTarihToolStripMenuItem";
+			this.saatTarihToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+			this.saatTarihToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+			this.saatTarihToolStripMenuItem.Text = "Saat/Tarih";
+			this.saatTarihToolStripMenuItem.Click += new System.EventHandler(this.saatTarihToolStripMenuItem_Click);
+			// 
 			// yardımToolStripMenuItem
 			// 
 			this.yardımToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -146,6 +246,9 @@ namespace Not_Defteri
 			this.MainMenuStrip = this.menuStrip;
 			this.Name = "NotDefteri";
 			this.Text = "Not Defteri";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NotDefteri_FormClosing);
+			this.Load += new System.EventHandler(this.NotDefteri_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NotDefteri_KeyDown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.ResumeLayout(false);
@@ -165,5 +268,15 @@ namespace Not_Defteri
 		private System.Windows.Forms.ToolStripMenuItem farkliKaydetToolStripMenuItem;
 		private ToolStripMenuItem yardımToolStripMenuItem;
 		private ToolStripMenuItem notDefteriHakkindaToolStripMenuItem;
+		private ToolStripMenuItem düzenToolStripMenuItem;
+		private ToolStripMenuItem geriAlToolStripMenuItem;
+		private ToolStripMenuItem kesToolStripMenuItem;
+		private ToolStripMenuItem kopyalaToolStripMenuItem;
+		private ToolStripMenuItem yapıştırToolStripMenuItem;
+		private ToolStripMenuItem silToolStripMenuItem;
+		private ToolStripMenuItem bulToolStripMenuItem;
+		private ToolStripMenuItem degistirToolStripMenuItem;
+		private ToolStripMenuItem tumunuSecToolStripMenuItem;
+		private ToolStripMenuItem saatTarihToolStripMenuItem;
 	}
 }
