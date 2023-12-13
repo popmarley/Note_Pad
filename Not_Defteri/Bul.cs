@@ -28,13 +28,19 @@ namespace Not_Defteri
 
 			if (TextBoxReferans != null && !string.IsNullOrEmpty(arananMetin))
 			{
-				int startIndex = TextBoxReferans.SelectionStart + TextBoxReferans.SelectionLength;
+				int startIndex, endIndex;
 				if (yukariRadioButton.Checked)
 				{
-					startIndex = TextBoxReferans.SelectionStart - 1;
+					startIndex = 0;
+					endIndex = TextBoxReferans.SelectionStart;
+				}
+				else
+				{
+					startIndex = TextBoxReferans.SelectionStart + TextBoxReferans.SelectionLength;
+					endIndex = TextBoxReferans.Text.Length;
 				}
 
-				int foundIndex = TextBoxReferans.Find(arananMetin, startIndex, options);
+				int foundIndex = TextBoxReferans.Find(arananMetin, startIndex, endIndex, options);
 
 				if (foundIndex != -1)
 				{

@@ -16,6 +16,9 @@ namespace Not_Defteri
 		private string savedContent = "";
 		private string currentFilePath = null;
 		private bool isFileSaved = true;
+
+		private Bul bulForm = null;
+
 		public NotDefteri()
 		{
 			InitializeComponent();
@@ -154,11 +157,16 @@ namespace Not_Defteri
 
 		private void bulToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (Bul bulForm = new Bul())
+			// Eğer Bul formu daha önce oluşturulmadıysa veya kapandıysa, yeni bir örnek oluştur
+			if (bulForm == null || bulForm.IsDisposed)
 			{
-				bulForm.TextBoxReferans = this.richTextBox; // Bu formdaki richTextBox kontrolünün referansını geçirin.
-				bulForm.Show();
+				bulForm = new Bul();
+				bulForm.TextBoxReferans = this.richTextBox; // richTextBox referansını geçir
 			}
+
+			// Bul formunu modaless olarak göster
+			bulForm.Show();
+			bulForm.Focus(); // Bul formuna odaklan
 		}
 
 		private void degistirToolStripMenuItem_Click(object sender, EventArgs e)
