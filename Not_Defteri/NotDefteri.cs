@@ -140,6 +140,18 @@ namespace Not_Defteri
 			richTextBox.Clear();
 		}
 
+		private void yazdırToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Kullanıcıyı yazdırma işlemi hakkında uyar
+			DialogResult dialogResult = MessageBox.Show("Varsayılan yazıcı üzerinden yazdırılma işlemi yapılacaktır. Devam etmek istiyor musunuz?", "Yazdırma Onayı", MessageBoxButtons.YesNo);
+
+			// Eğer kullanıcı 'Evet' derse, yazdırma işlemine başla
+			if (dialogResult == DialogResult.Yes)
+			{
+				printDocument1.Print();
+			}
+		}
+
 		private void bulToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (Bul bulForm = new Bul())
@@ -272,6 +284,10 @@ namespace Not_Defteri
 			}
 		}
 
-		
+		private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+		{
+			// richTextBox'ın içeriğini yazdır
+			e.Graphics.DrawString(richTextBox.Text, new Font("Arial", 12), Brushes.Black, 25, 25);
+		}
 	}
 }

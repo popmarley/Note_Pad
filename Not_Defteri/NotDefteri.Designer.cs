@@ -52,6 +52,8 @@ namespace Not_Defteri
 			this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ileriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yazdırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -86,7 +88,8 @@ namespace Not_Defteri
             this.yeniPencereToolStripMenuItem,
             this.acToolStripMenuItem,
             this.kaydetToolStripMenuItem,
-            this.farkliKaydetToolStripMenuItem});
+            this.farkliKaydetToolStripMenuItem,
+            this.yazdırToolStripMenuItem});
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
 			this.toolStripMenuItem1.Size = new System.Drawing.Size(51, 20);
 			this.toolStripMenuItem1.Text = "Dosya";
@@ -246,6 +249,18 @@ namespace Not_Defteri
 			this.ileriAlToolStripMenuItem.Text = "İleri Al";
 			this.ileriAlToolStripMenuItem.Click += new System.EventHandler(this.ileriAlToolStripMenuItem_Click);
 			// 
+			// yazdırToolStripMenuItem
+			// 
+			this.yazdırToolStripMenuItem.Name = "yazdırToolStripMenuItem";
+			this.yazdırToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+			this.yazdırToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+			this.yazdırToolStripMenuItem.Text = "Yazdır";
+			this.yazdırToolStripMenuItem.Click += new System.EventHandler(this.yazdırToolStripMenuItem_Click);
+			// 
+			// printDocument1
+			// 
+			this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,5 +305,7 @@ namespace Not_Defteri
 		private ToolStripMenuItem tumunuSecToolStripMenuItem;
 		private ToolStripMenuItem saatTarihToolStripMenuItem;
 		private ToolStripMenuItem ileriAlToolStripMenuItem;
+		private ToolStripMenuItem yazdırToolStripMenuItem;
+		private System.Drawing.Printing.PrintDocument printDocument1;
 	}
 }
