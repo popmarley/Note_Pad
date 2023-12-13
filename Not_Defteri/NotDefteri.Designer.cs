@@ -39,6 +39,8 @@ namespace Not_Defteri
 			this.acToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.kaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.farkliKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -55,7 +57,8 @@ namespace Not_Defteri
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.yardımToolStripMenuItem});
 			this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
@@ -117,6 +120,21 @@ namespace Not_Defteri
 			this.farkliKaydetToolStripMenuItem.Text = "Farklı Kaydet";
 			this.farkliKaydetToolStripMenuItem.Click += new System.EventHandler(this.farkliKaydetToolStripMenuItem_Click);
 			// 
+			// yardımToolStripMenuItem
+			// 
+			this.yardımToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notDefteriHakkindaToolStripMenuItem});
+			this.yardımToolStripMenuItem.Name = "yardımToolStripMenuItem";
+			this.yardımToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.yardımToolStripMenuItem.Text = "Yardım";
+			// 
+			// notDefteriHakkindaToolStripMenuItem
+			// 
+			this.notDefteriHakkindaToolStripMenuItem.Name = "notDefteriHakkindaToolStripMenuItem";
+			this.notDefteriHakkindaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.notDefteriHakkindaToolStripMenuItem.Text = "Not Defteri Hakkında";
+			this.notDefteriHakkindaToolStripMenuItem.Click += new System.EventHandler(this.notDefteriHakkindaToolStripMenuItem_Click);
+			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,5 +163,7 @@ namespace Not_Defteri
 		private System.Windows.Forms.ToolStripMenuItem kaydetToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem yeniPencereToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem farkliKaydetToolStripMenuItem;
+		private ToolStripMenuItem yardımToolStripMenuItem;
+		private ToolStripMenuItem notDefteriHakkindaToolStripMenuItem;
 	}
 }

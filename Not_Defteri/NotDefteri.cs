@@ -75,5 +75,11 @@ namespace Not_Defteri
 				}
 			}
 		}
+
+		private void notDefteriHakkindaToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Hakkinda hakkinda = new Hakkinda();
+			hakkinda.Show();
+		}
 	}
 }
