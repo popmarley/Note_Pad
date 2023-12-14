@@ -43,6 +43,7 @@
 			// 
 			// label1
 			// 
+			this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 22);
 			this.label1.Name = "label1";
@@ -52,6 +53,7 @@
 			// 
 			// arananTextBox
 			// 
+			this.arananTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.arananTextBox.Location = new System.Drawing.Point(62, 19);
 			this.arananTextBox.Name = "arananTextBox";
 			this.arananTextBox.Size = new System.Drawing.Size(231, 20);
@@ -59,6 +61,7 @@
 			// 
 			// sonrakiniBulButton
 			// 
+			this.sonrakiniBulButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.sonrakiniBulButton.Location = new System.Drawing.Point(299, 19);
 			this.sonrakiniBulButton.Name = "sonrakiniBulButton";
 			this.sonrakiniBulButton.Size = new System.Drawing.Size(80, 23);
@@ -69,6 +72,7 @@
 			// 
 			// button2
 			// 
+			this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.button2.Location = new System.Drawing.Point(299, 48);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(80, 23);
@@ -79,6 +83,7 @@
 			// 
 			// buyukKucukHarfCheckBox
 			// 
+			this.buyukKucukHarfCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.buyukKucukHarfCheckBox.AutoSize = true;
 			this.buyukKucukHarfCheckBox.Location = new System.Drawing.Point(21, 54);
 			this.buyukKucukHarfCheckBox.Name = "buyukKucukHarfCheckBox";
@@ -89,6 +94,7 @@
 			// 
 			// checkBox2
 			// 
+			this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.checkBox2.AutoSize = true;
 			this.checkBox2.Location = new System.Drawing.Point(21, 77);
 			this.checkBox2.Name = "checkBox2";
@@ -99,6 +105,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.groupBox1.Controls.Add(this.radioButton2);
 			this.groupBox1.Controls.Add(this.yukariRadioButton);
 			this.groupBox1.Location = new System.Drawing.Point(169, 54);
@@ -110,6 +117,7 @@
 			// 
 			// radioButton2
 			// 
+			this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.radioButton2.AutoSize = true;
 			this.radioButton2.Location = new System.Drawing.Point(67, 19);
 			this.radioButton2.Name = "radioButton2";
@@ -121,6 +129,7 @@
 			// 
 			// yukariRadioButton
 			// 
+			this.yukariRadioButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.yukariRadioButton.AutoSize = true;
 			this.yukariRadioButton.Location = new System.Drawing.Point(6, 19);
 			this.yukariRadioButton.Name = "yukariRadioButton";
