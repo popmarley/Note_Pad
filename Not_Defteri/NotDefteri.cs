@@ -49,8 +49,11 @@ namespace Not_Defteri
 
 		private void yeniToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// 'Yeni' menü öğesi için kodlar
+			// Mevcut not defterinin içeriğini temizle
 			richTextBox.Clear();
+			currentFilePath = null; // Dosya yolu sıfırlanıyor
+			isFileSaved = true; // Dosya kaydedildi olarak işaretle
+			UpdateFormTitle(); // Başlık güncelleme
 		}
 
 		private void acToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,7 +92,10 @@ namespace Not_Defteri
 
 		private void yeniPencereToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// Yeni pencere açma işlemi
+			richTextBox.Clear();
+			currentFilePath = null; // Dosya yolu sıfırlanıyor
+			isFileSaved = true; // Dosya kaydedildi olarak işaretle
+			UpdateFormTitle(); // Başlık güncelleme
 			NotDefteri yeniPencere = new NotDefteri();
 			yeniPencere.Show();
 		}
