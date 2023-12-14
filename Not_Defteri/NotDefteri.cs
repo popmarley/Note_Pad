@@ -23,7 +23,8 @@ namespace Not_Defteri
 		{
 			InitializeComponent();
 			this.KeyPreview = true;
-
+			richTextBox.MouseWheel += new MouseEventHandler(richTextBox_MouseWheel);
+			toolStripStatusLabel3.Text = "100%";
 
 			string[] args = Environment.GetCommandLineArgs();
 
@@ -196,10 +197,10 @@ namespace Not_Defteri
 			richTextBox.SelectedText = DateTime.Now.ToString();
 		}
 
+		private bool promptShown = false;
 		private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// richTextBox'ta değişiklik yapıldıysa ve içerik kaydedilmediyse kullanıcıya sor
-			if (richTextBox.Modified && !isFileSaved)
+			if (!promptShown && richTextBox.Modified && !isFileSaved)
 			{
 				var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
@@ -213,10 +214,9 @@ namespace Not_Defteri
 					// Kapatmayı iptal et
 					e.Cancel = true;
 				}
-				// No seçeneği için ekstra bir işlem yapmaya gerek yok. Form kapatılacak.
+				promptShown = true; // Set the flag after showing the prompt
 			}
-			// Uygulamadaki açık form sayısını kontrol et
-			if (Application.OpenForms.Count == 1)
+			else if (Application.OpenForms.Count == 1)
 			{
 				Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
 			}
@@ -315,7 +315,12 @@ namespace Not_Defteri
 			int line = richTextBox.GetLineFromCharIndex(index);
 			int column = index - richTextBox.GetFirstCharIndexFromLine(line);
 
+			//satır ve sütun gösterme
 			toolStripStatusLabel1.Text = $"St: {line + 1}, Stn: {column + 1}";
+
+			//karakter sayısını gösterme
+			int textLength = richTextBox.Text.Length;
+			toolStripStatusLabel4.Text = $"Krktr S: {textLength}";
 		}
 
 		private void durumcubuguToolStripMenuItem_Click(object sender, EventArgs e)
@@ -327,7 +332,60 @@ namespace Not_Defteri
 			statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
 		}
 
-		
+		private int zoomLevel = 100; // Default zoom level
+
+		private void richTextBox_MouseWheel(object sender, MouseEventArgs e)
+		{
+			if (Control.ModifierKeys == Keys.Control)
+			{
+				// Zoom in
+				if (e.Delta > 0 && zoomLevel < 500)
+				{
+					zoomLevel += 10;
+				}
+				// Zoom out
+				else if (e.Delta < 0 && zoomLevel > 10)
+				{
+					zoomLevel -= 10;
+				}
+
+				// Apply zoom level
+				richTextBox.ZoomFactor = zoomLevel / 100f;
+
+				// Update status label
+				toolStripStatusLabel3.Text = $"{zoomLevel}%";
+			}
+		}
+
+		private void yakınlastirToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			if (zoomLevel < 500)
+			{
+				zoomLevel += 10;
+				ApplyZoom();
+			}
+		}
+
+		private void uzaklastirToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (zoomLevel > 10)
+			{
+				zoomLevel -= 10;
+				ApplyZoom();
+			}
+		}
+
+		private void varsayilanToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			zoomLevel = 100;
+			ApplyZoom();
+		}
+
+		private void ApplyZoom()
+		{
+			richTextBox.ZoomFactor = zoomLevel / 100f;
+			toolStripStatusLabel3.Text = $"{zoomLevel}%";
+		}
 	}
-	
+
 }

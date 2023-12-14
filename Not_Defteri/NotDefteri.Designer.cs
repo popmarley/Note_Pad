@@ -64,6 +64,7 @@ namespace Not_Defteri
 			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -74,7 +75,7 @@ namespace Not_Defteri
 			this.richTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBox.Location = new System.Drawing.Point(0, 24);
 			this.richTextBox.Name = "richTextBox";
-			this.richTextBox.Size = new System.Drawing.Size(784, 404);
+			this.richTextBox.Size = new System.Drawing.Size(784, 443);
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
 			this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
@@ -271,7 +272,7 @@ namespace Not_Defteri
             this.uzaklastirToolStripMenuItem,
             this.varsayilanToolStripMenuItem});
 			this.yakınlaştırToolStripMenuItem.Name = "yakınlaştırToolStripMenuItem";
-			this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.yakınlaştırToolStripMenuItem.Text = "Yakınlaştır";
 			// 
 			// yakınlastirToolStripMenuItem1
@@ -279,25 +280,28 @@ namespace Not_Defteri
 			this.yakınlastirToolStripMenuItem1.Name = "yakınlastirToolStripMenuItem1";
 			this.yakınlastirToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
 			this.yakınlastirToolStripMenuItem1.Text = "Yakınlaştır";
+			this.yakınlastirToolStripMenuItem1.Click += new System.EventHandler(this.yakınlastirToolStripMenuItem1_Click);
 			// 
 			// uzaklastirToolStripMenuItem
 			// 
 			this.uzaklastirToolStripMenuItem.Name = "uzaklastirToolStripMenuItem";
 			this.uzaklastirToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
 			this.uzaklastirToolStripMenuItem.Text = "Uzaklaştır";
+			this.uzaklastirToolStripMenuItem.Click += new System.EventHandler(this.uzaklastirToolStripMenuItem_Click);
 			// 
 			// varsayilanToolStripMenuItem
 			// 
 			this.varsayilanToolStripMenuItem.Name = "varsayilanToolStripMenuItem";
 			this.varsayilanToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
 			this.varsayilanToolStripMenuItem.Text = "Varsayılan Yakınlaştırma";
+			this.varsayilanToolStripMenuItem.Click += new System.EventHandler(this.varsayilanToolStripMenuItem_Click);
 			// 
 			// durumcubuguToolStripMenuItem
 			// 
 			this.durumcubuguToolStripMenuItem.Checked = true;
 			this.durumcubuguToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.durumcubuguToolStripMenuItem.Name = "durumcubuguToolStripMenuItem";
-			this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+			this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
 			this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
 			// 
@@ -322,11 +326,13 @@ namespace Not_Defteri
 			// 
 			// statusStrip1
 			// 
+			this.statusStrip1.AutoSize = false;
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
-            this.toolStripStatusLabel3});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 467);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(784, 22);
 			this.statusStrip1.TabIndex = 2;
@@ -349,14 +355,20 @@ namespace Not_Defteri
 			this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 17);
 			this.toolStripStatusLabel3.Text = "yüzdelik";
 			// 
+			// toolStripStatusLabel4
+			// 
+			this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+			this.toolStripStatusLabel4.Size = new System.Drawing.Size(41, 17);
+			this.toolStripStatusLabel4.Text = "Krktr S";
+			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(784, 450);
+			this.ClientSize = new System.Drawing.Size(784, 489);
 			this.Controls.Add(this.richTextBox);
-			this.Controls.Add(this.menuStrip);
 			this.Controls.Add(this.statusStrip1);
+			this.Controls.Add(this.menuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip;
 			this.Name = "NotDefteri";
@@ -408,5 +420,6 @@ namespace Not_Defteri
 		private ToolStripStatusLabel toolStripStatusLabel1;
 		private ToolStripStatusLabel toolStripStatusLabel2;
 		private ToolStripStatusLabel toolStripStatusLabel3;
+		private ToolStripStatusLabel toolStripStatusLabel4;
 	}
 }
