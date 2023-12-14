@@ -16,7 +16,10 @@ namespace Not_Defteri
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new NotDefteri());
+			// Ana formu belirtmeden uygulamayı başlat
+			NotDefteri anaForm = new NotDefteri();
+			anaForm.Show();
+			Application.Run();
 		}
 	}
 }

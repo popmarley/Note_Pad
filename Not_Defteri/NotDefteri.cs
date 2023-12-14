@@ -215,6 +215,11 @@ namespace Not_Defteri
 				}
 				// No seçeneği için ekstra bir işlem yapmaya gerek yok. Form kapatılacak.
 			}
+			// Uygulamadaki açık form sayısını kontrol et
+			if (Application.OpenForms.Count == 1)
+			{
+				Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
+			}
 		}
 
 		private void SaveFile()
