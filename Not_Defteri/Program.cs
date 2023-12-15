@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace Not_Defteri
 		[STAThread]
 		static void Main()
 		{
+			if (Environment.OSVersion.Version.Major >= 5) { SetProcessDPIAware(); }
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			// Ana formu belirtmeden uygulamayı başlat
@@ -21,5 +23,7 @@ namespace Not_Defteri
 			anaForm.Show();
 			Application.Run();
 		}
+		[DllImport("user32.dll")]
+		private static extern bool SetProcessDPIAware();
 	}
 }

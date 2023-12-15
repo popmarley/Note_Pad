@@ -272,7 +272,7 @@ namespace Not_Defteri
             this.uzaklastirToolStripMenuItem,
             this.varsayilanToolStripMenuItem});
 			this.yakınlaştırToolStripMenuItem.Name = "yakınlaştırToolStripMenuItem";
-			this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.yakınlaştırToolStripMenuItem.Text = "Yakınlaştır";
 			// 
 			// yakınlastirToolStripMenuItem1
@@ -301,7 +301,7 @@ namespace Not_Defteri
 			this.durumcubuguToolStripMenuItem.Checked = true;
 			this.durumcubuguToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.durumcubuguToolStripMenuItem.Name = "durumcubuguToolStripMenuItem";
-			this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
 			this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
 			this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
 			// 
@@ -363,8 +363,8 @@ namespace Not_Defteri
 			// 
 			// NotDefteri
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(784, 489);
 			this.Controls.Add(this.richTextBox);
 			this.Controls.Add(this.statusStrip1);
