@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,11 @@ namespace Not_Defteri
 		public NotDefteri()
 		{
 			InitializeComponent();
+			DoubleBuffered = true;
+			typeof(RichTextBox).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |
+            BindingFlags.Instance | BindingFlags.SetProperty, null,
+            richTextBox, new object[] { true });
+
 			this.KeyPreview = true;
 			richTextBox.MouseWheel += new MouseEventHandler(richTextBox_MouseWheel);
 			toolStripStatusLabel3.Text = "100%";
