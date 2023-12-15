@@ -79,6 +79,7 @@ namespace Not_Defteri
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
 			this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+		
 			this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
 			// 
 			// menuStrip

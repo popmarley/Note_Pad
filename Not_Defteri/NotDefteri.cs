@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,10 +24,7 @@ namespace Not_Defteri
 		public NotDefteri()
 		{
 			InitializeComponent();
-			DoubleBuffered = true;
-			typeof(RichTextBox).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |
-            BindingFlags.Instance | BindingFlags.SetProperty, null,
-            richTextBox, new object[] { true });
+			this.DoubleBuffered = true;
 
 			this.KeyPreview = true;
 			richTextBox.MouseWheel += new MouseEventHandler(richTextBox_MouseWheel);
@@ -392,6 +390,45 @@ namespace Not_Defteri
 			richTextBox.ZoomFactor = zoomLevel / 100f;
 			toolStripStatusLabel3.Text = $"{zoomLevel}%";
 		}
+
+		public class CustomRichTextBox : RichTextBox
+		{
+			private const int WM_MOUSEWHEEL = 0x20A;
+			private const int SB_LINEUP = 0;
+			private const int SB_LINEDOWN = 1;
+			private const int EM_LINESCROLL = 0x00B6;
+
+			[DllImport("user32.dll")]
+			private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+			protected override void WndProc(ref Message m)
+			{
+				if (m.Msg == WM_MOUSEWHEEL)
+				{
+					int wheelDelta = (int)m.WParam >> 16;
+					int linesToScroll = 3; // Her tekerlek hareketi için kaydırılacak satır sayısı
+
+					if (wheelDelta > 0)
+					{
+						// Yukarı kaydır
+						SendMessage(this.Handle, EM_LINESCROLL, IntPtr.Zero, (IntPtr)(-linesToScroll));
+					}
+					else if (wheelDelta < 0)
+					{
+						// Aşağı kaydır
+						SendMessage(this.Handle, EM_LINESCROLL, IntPtr.Zero, (IntPtr)linesToScroll);
+					}
+				}
+				else
+				{
+					base.WndProc(ref m);
+				}
+			}
+		}
+
+
+
+
 	}
 
 }
