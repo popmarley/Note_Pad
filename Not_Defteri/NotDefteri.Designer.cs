@@ -71,6 +71,7 @@ namespace Not_Defteri
 			// 
 			// richTextBox
 			// 
+			this.richTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBox.Location = new System.Drawing.Point(0, 24);
@@ -79,7 +80,6 @@ namespace Not_Defteri
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
 			this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
-		
 			this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
 			// 
 			// menuStrip
