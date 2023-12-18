@@ -79,6 +79,7 @@ namespace Not_Defteri
 			this.richTextBox.Size = new System.Drawing.Size(784, 443);
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
+			this.richTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox_LinkClicked);
 			this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
 			this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
 			// 

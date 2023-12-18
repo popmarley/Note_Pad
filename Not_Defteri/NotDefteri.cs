@@ -426,9 +426,10 @@ namespace Not_Defteri
 			}
 		}
 
-
-
-
+		private void richTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(e.LinkText);
+		}
 	}
 
 }
