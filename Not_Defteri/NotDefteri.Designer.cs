@@ -96,6 +96,10 @@ namespace Not_Defteri
 			this.SagaHizalaStripButton15 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
 			this.BoyutStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+			this.sayfaYukariStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.sayfaAsagiStripButton2 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -427,7 +431,11 @@ namespace Not_Defteri
             this.OrtalaStripButton14,
             this.toolStripSeparator14,
             this.SagaHizalaStripButton15,
-            this.toolStripSeparator15});
+            this.toolStripSeparator15,
+            this.sayfaYukariStripButton1,
+            this.toolStripSeparator16,
+            this.sayfaAsagiStripButton2,
+            this.toolStripSeparator10});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(784, 25);
@@ -661,6 +669,36 @@ namespace Not_Defteri
 			this.BoyutStripLabel1.Name = "BoyutStripLabel1";
 			this.BoyutStripLabel1.Size = new System.Drawing.Size(0, 22);
 			// 
+			// sayfaYukariStripButton1
+			// 
+			this.sayfaYukariStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.sayfaYukariStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("sayfaYukariStripButton1.Image")));
+			this.sayfaYukariStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.sayfaYukariStripButton1.Name = "sayfaYukariStripButton1";
+			this.sayfaYukariStripButton1.Size = new System.Drawing.Size(23, 22);
+			this.sayfaYukariStripButton1.Text = "toolStripButton1";
+			this.sayfaYukariStripButton1.Click += new System.EventHandler(this.sayfaYukariStripButton1_Click);
+			// 
+			// sayfaAsagiStripButton2
+			// 
+			this.sayfaAsagiStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.sayfaAsagiStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("sayfaAsagiStripButton2.Image")));
+			this.sayfaAsagiStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.sayfaAsagiStripButton2.Name = "sayfaAsagiStripButton2";
+			this.sayfaAsagiStripButton2.Size = new System.Drawing.Size(23, 22);
+			this.sayfaAsagiStripButton2.Text = "toolStripButton2";
+			this.sayfaAsagiStripButton2.Click += new System.EventHandler(this.sayfaAsagiStripButton2_Click);
+			// 
+			// toolStripSeparator10
+			// 
+			this.toolStripSeparator10.Name = "toolStripSeparator10";
+			this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+			// 
+			// toolStripSeparator16
+			// 
+			this.toolStripSeparator16.Name = "toolStripSeparator16";
+			this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
+			// 
 			// NotDefteri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -755,5 +793,9 @@ namespace Not_Defteri
 		private ToolStripButton SagaHizalaStripButton15;
 		private ToolStripSeparator toolStripSeparator15;
 		private ToolStripLabel BoyutStripLabel1;
+		private ToolStripButton sayfaAsagiStripButton2;
+		private ToolStripButton sayfaYukariStripButton1;
+		private ToolStripSeparator toolStripSeparator10;
+		private ToolStripSeparator toolStripSeparator16;
 	}
 }

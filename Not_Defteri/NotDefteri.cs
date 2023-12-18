@@ -247,6 +247,15 @@ namespace Not_Defteri
 			richTextBox.SelectionAlignment = HorizontalAlignment.Right;
 		}
 
+		private void sayfaAsagiStripButton2_Click(object sender, EventArgs e)
+		{
+			NativeMethods.SendMessage(richTextBox.Handle, NativeMethods.WM_VSCROLL, NativeMethods.SB_PAGEUP, IntPtr.Zero);
+		}
+
+		private void sayfaYukariStripButton1_Click(object sender, EventArgs e)
+		{
+			NativeMethods.SendMessage(richTextBox.Handle, NativeMethods.WM_VSCROLL, NativeMethods.SB_PAGEDOWN, IntPtr.Zero);
+		}
 
 		private void yazdırToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -415,12 +424,12 @@ namespace Not_Defteri
 			int line = richTextBox.GetLineFromCharIndex(index);
 			int column = index - richTextBox.GetFirstCharIndexFromLine(line);
 
-			//satır ve sütun gösterme
-			toolStripStatusLabel1.Text = $"St: {line + 1}, Stn: {column + 1}";
+			// Satır ve sütun numarasını formatlayarak gösterme
+			toolStripStatusLabel1.Text = $"St: {line + 1:N0}, Stn: {column + 1:N0}";
 
-			//karakter sayısını gösterme
+			// Karakter sayısını formatlayarak gösterme
 			int textLength = richTextBox.Text.Length;
-			toolStripStatusLabel4.Text = $"Krktr S: {textLength}";
+			toolStripStatusLabel4.Text = $"Krktr S: {textLength:N0}";
 		}
 
 		private void durumcubuguToolStripMenuItem_Click(object sender, EventArgs e)
@@ -586,8 +595,19 @@ namespace Not_Defteri
 			BoyutStripLabel1.Text = $"{newSize}";
 			
 		}
-		#endregion
 
+		class NativeMethods
+		{
+			public const int WM_VSCROLL = 0x115;
+			public const int SB_PAGEUP = 2;
+			public const int SB_PAGEDOWN = 3;
+
+			[DllImport("user32.dll", CharSet = CharSet.Auto)]
+			public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, IntPtr lParam);
+		}
+
+
+		#endregion
 
 	}
 
