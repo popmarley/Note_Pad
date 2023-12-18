@@ -212,12 +212,12 @@ namespace Not_Defteri
 
 		private void BuyutStripButton11_Click(object sender, EventArgs e)
 		{
-			richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size + 1);
+			ChangeFontSize(1); // Font boyutunu 1 birim artır
 		}
 
 		private void KucultStripButton12_Click(object sender, EventArgs e)
 		{
-			richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size - 1);
+			ChangeFontSize(-1); // Font boyutunu 1 birim azalt
 		}
 
 		private void MaddeleStripButton9_Click(object sender, EventArgs e)
@@ -569,6 +569,23 @@ namespace Not_Defteri
 			richTextBox.Lines = lines;
 		}
 
+
+		private void ChangeFontSize(float change)
+		{
+			if (richTextBox.SelectionFont != null)
+			{
+				float newSize = richTextBox.SelectionFont.Size + change;
+				newSize = Math.Max(1, newSize); // Font boyutunu 1'den küçük olmamasını sağlar
+				richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, newSize, richTextBox.SelectionFont.Style);
+				UpdateFontSizeLabel(newSize); // Font boyutu etiketini güncelle
+			}
+		}
+
+		private void UpdateFontSizeLabel(float newSize)
+		{
+			BoyutStripLabel1.Text = $"{newSize}";
+			
+		}
 		#endregion
 
 
