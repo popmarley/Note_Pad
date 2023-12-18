@@ -52,6 +52,8 @@ namespace Not_Defteri
 			}
 		}
 
+		#region Kısayollar
+
 		private void yeniToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			// Mevcut not defterinin içeriğini temizle
@@ -154,6 +156,98 @@ namespace Not_Defteri
 			richTextBox.Clear();
 		}
 
+		private void richTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(e.LinkText);
+		}
+
+		private void GeriAlStripButton1_Click(object sender, EventArgs e)
+		{
+			richTextBox.Undo();
+
+		}
+
+		private void İleriAlStripButton2_Click(object sender, EventArgs e)
+		{
+			richTextBox.Redo();
+
+		}
+
+		private void KesStripButton3_Click(object sender, EventArgs e)
+		{
+			richTextBox.Cut();
+		}
+
+		private void KopyalaStripButton4_Click(object sender, EventArgs e)
+		{
+			richTextBox.Copy();
+
+		}
+
+		private void YapistirStripButton5_Click(object sender, EventArgs e)
+		{
+			richTextBox.Paste();
+		}
+
+		
+
+
+		private void KalinStripButton6_Click(object sender, EventArgs e)
+		{
+			isBoldActive = !isBoldActive;
+			UpdateFontStyle();
+		}
+
+		private void İtalicStripButton7_Click(object sender, EventArgs e)
+		{
+			isItalicActive = !isItalicActive;
+			UpdateFontStyle();
+		}
+
+		private void AltiCizgiliStripButton8_Click(object sender, EventArgs e)
+		{
+			isUnderlineActive = !isUnderlineActive;
+			UpdateFontStyle();
+		}
+
+		private void BuyutStripButton11_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size + 1);
+		}
+
+		private void KucultStripButton12_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size - 1);
+		}
+
+		private void MaddeleStripButton9_Click(object sender, EventArgs e)
+		{
+			isBulletedListActive = !isBulletedListActive;
+			richTextBox.SelectionBullet = isBulletedListActive;
+		}
+
+		private void SiralaStripButton10_Click(object sender, EventArgs e)
+		{
+			isNumberedListActive = !isNumberedListActive;
+			ApplyNumbering();
+		}
+
+		private void SolaHizalaStripButton13_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectionAlignment = HorizontalAlignment.Left;
+		}
+
+		private void OrtalaStripButton14_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectionAlignment = HorizontalAlignment.Center;
+		}
+
+		private void SagaHizalaStripButton15_Click(object sender, EventArgs e)
+		{
+			richTextBox.SelectionAlignment = HorizontalAlignment.Right;
+		}
+
+
 		private void yazdırToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			// Kullanıcıyı yazdırma işlemi hakkında uyar
@@ -200,6 +294,8 @@ namespace Not_Defteri
 			// Saat/Tarih bilgisini metin kutusunun mevcut konumuna ekler.
 			richTextBox.SelectedText = DateTime.Now.ToString();
 		}
+
+		#endregion
 
 		private bool promptShown = false;
 		private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
@@ -426,10 +522,56 @@ namespace Not_Defteri
 			}
 		}
 
-		private void richTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+
+		#region kısayollar metotlar
+
+		bool isBoldActive = false;
+		bool isItalicActive = false;
+		bool isUnderlineActive = false;
+		bool isBulletedListActive = false;
+		bool isNumberedListActive = false;
+
+		private void UpdateFontStyle()
 		{
-			System.Diagnostics.Process.Start(e.LinkText);
+			FontStyle style = FontStyle.Regular;
+
+			if (isBoldActive)
+				style |= FontStyle.Bold;
+
+			if (isItalicActive)
+				style |= FontStyle.Italic;
+
+			if (isUnderlineActive)
+				style |= FontStyle.Underline;
+
+			richTextBox.SelectionFont = new Font(richTextBox.Font, style);
 		}
+
+		private void ApplyNumbering()
+		{
+			int lineNumber = 1;
+			string[] lines = richTextBox.Lines;
+			for (int i = 0; i < lines.Length; i++)
+			{
+				if (isNumberedListActive)
+				{
+					if (!lines[i].StartsWith($"{lineNumber}. "))
+					{
+						lines[i] = $"{lineNumber}. {lines[i]}";
+					}
+					lineNumber++;
+				}
+				else
+				{
+					lines[i] = lines[i].Substring(lines[i].IndexOf(' ') + 1);
+				}
+			}
+			richTextBox.Lines = lines;
+		}
+
+		#endregion
+
+
 	}
 
 }
