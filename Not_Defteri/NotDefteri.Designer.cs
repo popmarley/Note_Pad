@@ -84,6 +84,7 @@ namespace Not_Defteri
 			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
 			this.BuyutStripButton11 = new System.Windows.Forms.ToolStripButton();
 			this.KucultStripButton12 = new System.Windows.Forms.ToolStripButton();
+			this.BoyutStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
 			this.MaddeleStripButton9 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -95,11 +96,10 @@ namespace Not_Defteri
 			this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
 			this.SagaHizalaStripButton15 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-			this.BoyutStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.sayfaYukariStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
 			this.sayfaAsagiStripButton2 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -582,6 +582,13 @@ namespace Not_Defteri
 			this.KucultStripButton12.Text = "Küçült";
 			this.KucultStripButton12.Click += new System.EventHandler(this.KucultStripButton12_Click);
 			// 
+			// BoyutStripLabel1
+			// 
+			this.BoyutStripLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.BoyutStripLabel1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+			this.BoyutStripLabel1.Name = "BoyutStripLabel1";
+			this.BoyutStripLabel1.Size = new System.Drawing.Size(0, 22);
+			// 
 			// toolStripSeparator11
 			// 
 			this.toolStripSeparator11.Name = "toolStripSeparator11";
@@ -662,13 +669,6 @@ namespace Not_Defteri
 			this.toolStripSeparator15.Name = "toolStripSeparator15";
 			this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
 			// 
-			// BoyutStripLabel1
-			// 
-			this.BoyutStripLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-			this.BoyutStripLabel1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-			this.BoyutStripLabel1.Name = "BoyutStripLabel1";
-			this.BoyutStripLabel1.Size = new System.Drawing.Size(0, 22);
-			// 
 			// sayfaYukariStripButton1
 			// 
 			this.sayfaYukariStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -676,8 +676,13 @@ namespace Not_Defteri
 			this.sayfaYukariStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.sayfaYukariStripButton1.Name = "sayfaYukariStripButton1";
 			this.sayfaYukariStripButton1.Size = new System.Drawing.Size(23, 22);
-			this.sayfaYukariStripButton1.Text = "toolStripButton1";
+			this.sayfaYukariStripButton1.Text = "Aşağı";
 			this.sayfaYukariStripButton1.Click += new System.EventHandler(this.sayfaYukariStripButton1_Click);
+			// 
+			// toolStripSeparator16
+			// 
+			this.toolStripSeparator16.Name = "toolStripSeparator16";
+			this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
 			// 
 			// sayfaAsagiStripButton2
 			// 
@@ -686,18 +691,13 @@ namespace Not_Defteri
 			this.sayfaAsagiStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.sayfaAsagiStripButton2.Name = "sayfaAsagiStripButton2";
 			this.sayfaAsagiStripButton2.Size = new System.Drawing.Size(23, 22);
-			this.sayfaAsagiStripButton2.Text = "toolStripButton2";
+			this.sayfaAsagiStripButton2.Text = "Yukarı";
 			this.sayfaAsagiStripButton2.Click += new System.EventHandler(this.sayfaAsagiStripButton2_Click);
 			// 
 			// toolStripSeparator10
 			// 
 			this.toolStripSeparator10.Name = "toolStripSeparator10";
 			this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-			// 
-			// toolStripSeparator16
-			// 
-			this.toolStripSeparator16.Name = "toolStripSeparator16";
-			this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
 			// 
 			// NotDefteri
 			// 
