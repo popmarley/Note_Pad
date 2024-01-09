@@ -38,6 +38,27 @@ namespace Not_Defteri
 				string filePath = args[1]; // args[0], uygulamanın kendisinin yoludur, bu yüzden args[1] kullanılır
 				OpenFile(filePath);
 			}
+
+			// RichTextBox için ContextMenuStrip oluştur
+			ContextMenuStrip richtextBoxContextMenu = new ContextMenuStrip();
+			ToolStripMenuItem geriAlMenuItem = new ToolStripMenuItem("Geri Al");
+			ToolStripMenuItem kesMenuItem = new ToolStripMenuItem("Kes");
+			ToolStripMenuItem kopyalaMenuItem = new ToolStripMenuItem("Kopyala");
+			ToolStripMenuItem yapistirMenuItem = new ToolStripMenuItem("Yapıştır");
+			ToolStripMenuItem silMenuItem = new ToolStripMenuItem("Sil"); // Sil menü öğesi
+
+			// Menü öğelerini ContextMenuStrip'e ekle
+			richtextBoxContextMenu.Items.AddRange(new ToolStripItem[] { geriAlMenuItem, kesMenuItem, kopyalaMenuItem, yapistirMenuItem, silMenuItem });
+
+			// Menü öğelerine tıklama olaylarını ekle
+			geriAlMenuItem.Click += (sender, e) => richTextBox.Undo();
+			kesMenuItem.Click += (sender, e) => richTextBox.Cut();
+			kopyalaMenuItem.Click += (sender, e) => richTextBox.Copy();
+			yapistirMenuItem.Click += (sender, e) => richTextBox.Paste();
+			silMenuItem.Click += (sender, e) => richTextBox.SelectedText = ""; // Seçili metni siler
+
+			// RichTextBox'ın ContextMenuStrip özelliğini ayarla
+			richTextBox.ContextMenuStrip = richtextBoxContextMenu;
 		}
 
 		public void OpenFile(string filePath)
