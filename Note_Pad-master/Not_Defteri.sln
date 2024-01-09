@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Not_Defteri", "Not_Defteri\Not_Defteri.csproj", "{A222D7E6-A654-448E-B6F3-63C14087173B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Not Defteri Setup", "Not Defteri Setup\Not Defteri Setup.vdproj", "{732FE04B-B013-4C7F-8469-060704BF62ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{A222D7E6-A654-448E-B6F3-63C14087173B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A222D7E6-A654-448E-B6F3-63C14087173B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A222D7E6-A654-448E-B6F3-63C14087173B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732FE04B-B013-4C7F-8469-060704BF62ED}.Debug|Any CPU.ActiveCfg = Debug
+		{732FE04B-B013-4C7F-8469-060704BF62ED}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
