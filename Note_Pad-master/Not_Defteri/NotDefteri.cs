@@ -86,20 +86,36 @@ namespace Not_Defteri
 
 		private void acToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// 'Aç' menü öğesi için kodlar
-			using (OpenFileDialog openFileDialog = new OpenFileDialog())
-			{
-				openFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
-				if (openFileDialog.ShowDialog() == DialogResult.OK)
-				{
-					richTextBox.Text = File.ReadAllText(openFileDialog.FileName);
-					currentFilePath = openFileDialog.FileName; // Dosya yolu güncelleme
-					savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-					isFileSaved = true;
-					UpdateFormTitle(); // Başlık güncelleme
-				}
-			}
-		}
+            // Mevcut içerik değiştirildiyse ve kaydedilmediyse, kullanıcıya kaydetme seçeneği sun
+            if (richTextBox.Modified && !isFileSaved)
+            {
+                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    SaveFile(); // Kaydetme işlemi
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return; // Kullanıcı iptal ederse, dosya açmayı durdur
+                }
+                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan devam et
+            }
+
+            // 'Aç' diyalog kutusunu göster
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox.Text = File.ReadAllText(openFileDialog.FileName);
+                    currentFilePath = openFileDialog.FileName; // Dosya yolu güncelleme
+                    savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
+                    isFileSaved = true;
+                    UpdateFormTitle(); // Başlık güncelleme
+                }
+            }
+        }
 
 		private void kaydetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -120,13 +136,26 @@ namespace Not_Defteri
 
 		private void yeniPencereToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			richTextBox.Clear();
-			currentFilePath = null; // Dosya yolu sıfırlanıyor
-			isFileSaved = true; // Dosya kaydedildi olarak işaretle
-			UpdateFormTitle(); // Başlık güncelleme
-			NotDefteri yeniPencere = new NotDefteri();
-			yeniPencere.Show();
-		}
+            // Mevcut pencerede yapılan değişiklikleri kontrol et
+            if (richTextBox.Modified && !isFileSaved)
+            {
+                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    SaveFile(); // Kaydetme işlemi
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return; // Kullanıcı iptal ederse, yeni pencere açmayı durdur
+                }
+                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan yeni pencere aç
+            }
+
+            // Yeni bir NotDefteri örneği oluştur ve göster
+            NotDefteri yeniPencere = new NotDefteri();
+            yeniPencere.Show();
+        }
 
 		private void farkliKaydetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
