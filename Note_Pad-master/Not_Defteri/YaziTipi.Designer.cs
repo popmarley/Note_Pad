@@ -48,6 +48,7 @@
             this.txtboxsecilenYaziTipi.Name = "txtboxsecilenYaziTipi";
             this.txtboxsecilenYaziTipi.Size = new System.Drawing.Size(140, 20);
             this.txtboxsecilenYaziTipi.TabIndex = 0;
+       
             // 
             // txtboxsecilenYaziTipiStili
             // 
@@ -104,6 +105,7 @@
             // 
             // txtboxYaziTipi
             // 
+            this.txtboxYaziTipi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtboxYaziTipi.FormattingEnabled = true;
             this.txtboxYaziTipi.Location = new System.Drawing.Point(12, 51);
             this.txtboxYaziTipi.Name = "txtboxYaziTipi";
@@ -113,6 +115,7 @@
             // 
             // txtboxYaziTipiStili
             // 
+            this.txtboxYaziTipiStili.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtboxYaziTipiStili.FormattingEnabled = true;
             this.txtboxYaziTipiStili.Location = new System.Drawing.Point(168, 51);
             this.txtboxYaziTipiStili.Name = "txtboxYaziTipiStili";
