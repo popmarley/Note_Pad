@@ -657,8 +657,14 @@ namespace Not_Defteri
 		}
 
 
-		#endregion
 
-	}
+        #endregion
+
+        private void yazimBicimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            YaziTipi yaziTipi = new YaziTipi();
+            yaziTipi.Show();
+        }
+    }
 
 }
