@@ -102,6 +102,8 @@ namespace Not_Defteri
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.sayfaAsagiStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBoxYaziTipi = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripComboBoxYaziBoyutu = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -308,7 +310,7 @@ namespace Not_Defteri
             // yazimBicimiToolStripMenuItem
             // 
             this.yazimBicimiToolStripMenuItem.Name = "yazimBicimiToolStripMenuItem";
-            this.yazimBicimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.yazimBicimiToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.yazimBicimiToolStripMenuItem.Text = "Yazı Tipi...";
             this.yazimBicimiToolStripMenuItem.Click += new System.EventHandler(this.yazimBicimiToolStripMenuItem_Click);
             // 
@@ -430,6 +432,8 @@ namespace Not_Defteri
             this.toolStripSeparator4,
             this.YapistirStripButton5,
             this.toolStripSeparator5,
+            this.toolStripComboBoxYaziTipi,
+            this.toolStripComboBoxYaziBoyutu,
             this.KalinStripButton6,
             this.toolStripSeparator6,
             this.İtalicStripButton7,
@@ -717,6 +721,28 @@ namespace Not_Defteri
             this.toolStripSeparator10.Name = "toolStripSeparator10";
             this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripComboBoxYaziTipi
+            // 
+            this.toolStripComboBoxYaziTipi.DropDownHeight = 85;
+            this.toolStripComboBoxYaziTipi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxYaziTipi.DropDownWidth = 105;
+            this.toolStripComboBoxYaziTipi.IntegralHeight = false;
+            this.toolStripComboBoxYaziTipi.Name = "toolStripComboBoxYaziTipi";
+            this.toolStripComboBoxYaziTipi.Size = new System.Drawing.Size(95, 25);
+            this.toolStripComboBoxYaziTipi.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziTipi_SelectedIndexChanged);
+            this.toolStripComboBoxYaziTipi.Click += new System.EventHandler(this.toolStripComboBoxYaziTipi_Click);
+            // 
+            // toolStripComboBoxYaziBoyutu
+            // 
+            this.toolStripComboBoxYaziBoyutu.DropDownHeight = 85;
+            this.toolStripComboBoxYaziBoyutu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxYaziBoyutu.DropDownWidth = 25;
+            this.toolStripComboBoxYaziBoyutu.IntegralHeight = false;
+            this.toolStripComboBoxYaziBoyutu.Name = "toolStripComboBoxYaziBoyutu";
+            this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(75, 25);
+            this.toolStripComboBoxYaziBoyutu.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_SelectedIndexChanged);
+            this.toolStripComboBoxYaziBoyutu.Click += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_Click);
+            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -817,5 +843,7 @@ namespace Not_Defteri
 		private ToolStripSeparator toolStripSeparator16;
         private ToolStripMenuItem biçimToolStripMenuItem;
         private ToolStripMenuItem yazimBicimiToolStripMenuItem;
+        private ToolStripComboBox toolStripComboBoxYaziTipi;
+        private ToolStripComboBox toolStripComboBoxYaziBoyutu;
     }
 }

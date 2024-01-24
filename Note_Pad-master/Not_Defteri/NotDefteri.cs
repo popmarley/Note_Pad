@@ -374,7 +374,11 @@ namespace Not_Defteri
 		private bool promptShown = false;
 		private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!promptShown && richTextBox.Modified && !isFileSaved)
+            Properties.Settings.Default.FontName = toolStripComboBoxYaziTipi.SelectedItem.ToString();
+            Properties.Settings.Default.FontSize = float.Parse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString());
+            Properties.Settings.Default.Save();
+
+            if (!promptShown && richTextBox.Modified && !isFileSaved)
 			{
 				var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
@@ -464,11 +468,35 @@ namespace Not_Defteri
 
 		private void NotDefteri_Load(object sender, EventArgs e)
 		{
-			savedContent = richTextBox.Text;
-			UpdateFormTitle();
-		}
+            foreach (var fontFamily in FontFamily.Families)
+            {
+                toolStripComboBoxYaziTipi.Items.Add(fontFamily.Name);
+            }
 
-		private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
+            for (int i = 8; i <= 72; i++)
+            {
+                toolStripComboBoxYaziBoyutu.Items.Add(i.ToString());
+            }
+
+            // En son kullanılan fontu ve boyutu yükle
+            YükleFontAyarları();
+            savedContent = richTextBox.Text;
+            UpdateFormTitle();
+        }
+
+        private void YükleFontAyarları()
+        {
+            string kaydedilenFontAdı = Properties.Settings.Default.FontName;
+            float kaydedilenFontBoyutu = Properties.Settings.Default.FontSize;
+
+            if (!string.IsNullOrEmpty(kaydedilenFontAdı) && kaydedilenFontBoyutu > 0)
+            {
+                toolStripComboBoxYaziTipi.SelectedItem = kaydedilenFontAdı;
+                toolStripComboBoxYaziBoyutu.SelectedItem = kaydedilenFontBoyutu.ToString();
+            }
+        }
+
+        private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Control && e.KeyCode == Keys.S)
 			{
@@ -691,6 +719,33 @@ namespace Not_Defteri
             else
             {
                 richTextBox.Font = newFont;
+            }
+        }
+
+        private void toolStripComboBoxYaziTipi_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void toolStripComboBoxYaziBoyutu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBoxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBoxYaziTipi.SelectedItem != null)
+            {
+                richTextBox.Font = new Font(toolStripComboBoxYaziTipi.SelectedItem.ToString(), richTextBox.Font.Size, richTextBox.Font.Style);
+            }
+        }
+
+        private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBoxYaziBoyutu.SelectedItem != null)
+            {
+                richTextBox.Font = new Font(richTextBox.Font.FontFamily, float.Parse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString()), richTextBox.Font.Style);
             }
         }
     }
