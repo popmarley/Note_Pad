@@ -85,15 +85,35 @@ namespace Not_Defteri
 
         private void txtboxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Mevcut stil seçimini sakla
+            var currentStyleSelection = txtboxYaziTipiStili.SelectedItem?.ToString();
+
             txtboxYaziTipiStili.Items.Clear();
             var selectedFontFamily = new FontFamily(txtboxYaziTipi.SelectedItem.ToString());
+            bool currentStyleAvailable = false;
             foreach (FontStyle style in Enum.GetValues(typeof(FontStyle)))
             {
                 if (selectedFontFamily.IsStyleAvailable(style))
                 {
                     txtboxYaziTipiStili.Items.Add(style.ToString());
+                    if (style.ToString() == currentStyleSelection)
+                    {
+                        currentStyleAvailable = true;
+                    }
                 }
             }
+
+            // Eğer mevcut stil yeni yazı tipi için uygunsa, seçimi koru
+            if (currentStyleAvailable)
+            {
+                txtboxYaziTipiStili.SelectedItem = currentStyleSelection;
+            }
+            else if (txtboxYaziTipiStili.Items.Count > 0)
+            {
+                // Yoksa, ilk stili seç
+                txtboxYaziTipiStili.SelectedIndex = 0;
+            }
+
             GuncelleSecilenYaziTipi();
         }
 
