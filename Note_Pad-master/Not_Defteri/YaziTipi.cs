@@ -147,9 +147,18 @@ namespace Not_Defteri
             }
         }
 
+        public delegate void FontChangedDelegate(Font newFont);
+        public event FontChangedDelegate FontChanged;
+
         private void btnTamam_Click(object sender, EventArgs e)
         {
-            // Bu formu kapat
+            FontChanged?.Invoke(SecilenYaziTipi);
+
+            Properties.Settings.Default.FontName = SecilenYaziTipi.FontFamily.Name;
+            Properties.Settings.Default.FontSize = SecilenYaziTipi.Size;
+            Properties.Settings.Default.FontStyle = (int)SecilenYaziTipi.Style;
+            Properties.Settings.Default.Save();
+
             this.Close();
         }
 

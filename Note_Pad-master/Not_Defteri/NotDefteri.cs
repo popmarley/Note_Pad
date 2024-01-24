@@ -59,9 +59,23 @@ namespace Not_Defteri
 
 			// RichTextBox'ın ContextMenuStrip özelliğini ayarla
 			richTextBox.ContextMenuStrip = richtextBoxContextMenu;
-		}
 
-		public void OpenFile(string filePath)
+            LoadFontSettings();
+        }
+
+
+        private void LoadFontSettings()
+        {
+            string fontName = Properties.Settings.Default.FontName;
+            float fontSize = Properties.Settings.Default.FontSize;
+            FontStyle fontStyle = (FontStyle)Properties.Settings.Default.FontStyle;
+
+            if (!string.IsNullOrEmpty(fontName) && fontSize > 0)
+            {
+                richTextBox.Font = new Font(fontName, fontSize, fontStyle);
+            }
+        }
+        public void OpenFile(string filePath)
 		{
 			if (File.Exists(filePath))
 			{
@@ -662,9 +676,21 @@ namespace Not_Defteri
 
         private void yazimBicimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Font mevcutFont = this.Font; // 
-            YaziTipi yaziTipiFormu = new YaziTipi(mevcutFont);
+            YaziTipi yaziTipiFormu = new YaziTipi(richTextBox.Font);
+            yaziTipiFormu.FontChanged += ApplySelectedFont;
             yaziTipiFormu.Show();
+        }
+
+        public void ApplySelectedFont(Font newFont)
+        {
+            if (richTextBox.SelectionLength > 0)
+            {
+                richTextBox.SelectionFont = newFont;
+            }
+            else
+            {
+                richTextBox.Font = newFont;
+            }
         }
     }
 
