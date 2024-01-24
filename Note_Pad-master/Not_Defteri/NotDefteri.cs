@@ -187,8 +187,8 @@ namespace Not_Defteri
 		private void notDefteriHakkindaToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Hakkinda hakkinda = new Hakkinda();
-			hakkinda.Show();
-		}
+            hakkinda.ShowDialog();
+        }
 
 		private void geriAlToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -340,10 +340,11 @@ namespace Not_Defteri
 			{
 				bulForm = new Bul();
 				bulForm.TextBoxReferans = this.richTextBox; // richTextBox referansını geçir
-			}
+                this.FormClosed += (s, args) => bulForm.Close(); // Ana form kapatıldığında Bul formunu kapat
+            }
 
-			// Bul formunu modaless olarak göster
-			bulForm.Show();
+            // Bul formunu modaless olarak göster
+            bulForm.Show();
 			bulForm.Focus(); // Bul formuna odaklan
 		}
 
@@ -678,7 +679,7 @@ namespace Not_Defteri
         {
             YaziTipi yaziTipiFormu = new YaziTipi(richTextBox.Font);
             yaziTipiFormu.FontChanged += ApplySelectedFont;
-            yaziTipiFormu.Show();
+            yaziTipiFormu.ShowDialog();
         }
 
         public void ApplySelectedFont(Font newFont)

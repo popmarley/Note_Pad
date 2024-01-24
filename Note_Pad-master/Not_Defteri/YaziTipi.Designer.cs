@@ -88,7 +88,7 @@
             // 
             // btnTamam
             // 
-            this.btnTamam.Location = new System.Drawing.Point(261, 284);
+            this.btnTamam.Location = new System.Drawing.Point(261, 298);
             this.btnTamam.Name = "btnTamam";
             this.btnTamam.Size = new System.Drawing.Size(75, 23);
             this.btnTamam.TabIndex = 4;
@@ -98,7 +98,7 @@
             // 
             // btnIptal
             // 
-            this.btnIptal.Location = new System.Drawing.Point(342, 284);
+            this.btnIptal.Location = new System.Drawing.Point(342, 298);
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(75, 23);
             this.btnIptal.TabIndex = 5;
@@ -168,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 319);
+            this.ClientSize = new System.Drawing.Size(429, 333);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
