@@ -662,8 +662,9 @@ namespace Not_Defteri
 
         private void yazimBicimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            YaziTipi yaziTipi = new YaziTipi();
-            yaziTipi.Show();
+            Font mevcutFont = this.Font; // 
+            YaziTipi yaziTipiFormu = new YaziTipi(mevcutFont);
+            yaziTipiFormu.Show();
         }
     }
 

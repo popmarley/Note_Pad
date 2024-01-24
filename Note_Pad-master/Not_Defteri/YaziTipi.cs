@@ -14,11 +14,13 @@ namespace Not_Defteri
     {
         public Font SecilenYaziTipi { get; private set; }
 
-        public YaziTipi()
+        public YaziTipi(Font mevcutYaziTipi)
         {
             InitializeComponent();
+            SecilenYaziTipi = mevcutYaziTipi;
             ListeleYaziTipleri();
             ListeleYaziTipiBoyutlari();
+            SetInitialFontSelections();
         }
 
         private void ListeleYaziTipleri()
@@ -34,6 +36,26 @@ namespace Not_Defteri
             for (int i = 8; i <= 72; i += 2)
             {
                 txtboxYaziTipiBoyutu.Items.Add(i.ToString());
+            }
+        }
+
+        private void SetInitialFontSelections()
+        {
+            // Yazı tipini seç
+            txtboxYaziTipi.SelectedItem = SecilenYaziTipi.FontFamily.Name;
+
+            // Yazı tipi stilini seç
+            txtboxYaziTipiStili.SelectedItem = SecilenYaziTipi.Style.ToString();
+
+            // Yazı tipi boyutunu seç
+            var yaziTipiBoyutuStr = SecilenYaziTipi.Size.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var enYakinBoyut = txtboxYaziTipiBoyutu.Items.Cast<string>()
+                .OrderBy(item => Math.Abs(float.Parse(item) - SecilenYaziTipi.Size))
+                .FirstOrDefault();
+
+            if (enYakinBoyut != null)
+            {
+                txtboxYaziTipiBoyutu.SelectedItem = enYakinBoyut;
             }
         }
 

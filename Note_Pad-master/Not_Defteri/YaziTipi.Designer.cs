@@ -48,7 +48,6 @@
             this.txtboxsecilenYaziTipi.Name = "txtboxsecilenYaziTipi";
             this.txtboxsecilenYaziTipi.Size = new System.Drawing.Size(140, 20);
             this.txtboxsecilenYaziTipi.TabIndex = 0;
-       
             // 
             // txtboxsecilenYaziTipiStili
             // 
