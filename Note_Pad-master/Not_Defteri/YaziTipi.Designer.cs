@@ -104,22 +104,26 @@
             // 
             // txtboxYaziTipi
             // 
+            this.txtboxYaziTipi.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.txtboxYaziTipi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtboxYaziTipi.FormattingEnabled = true;
             this.txtboxYaziTipi.Location = new System.Drawing.Point(12, 51);
             this.txtboxYaziTipi.Name = "txtboxYaziTipi";
             this.txtboxYaziTipi.Size = new System.Drawing.Size(140, 21);
             this.txtboxYaziTipi.TabIndex = 5;
+            this.txtboxYaziTipi.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.txtboxYaziTipi_DrawItem);
             this.txtboxYaziTipi.SelectedIndexChanged += new System.EventHandler(this.txtboxYaziTipi_SelectedIndexChanged);
             // 
             // txtboxYaziTipiStili
             // 
+            this.txtboxYaziTipiStili.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.txtboxYaziTipiStili.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtboxYaziTipiStili.FormattingEnabled = true;
             this.txtboxYaziTipiStili.Location = new System.Drawing.Point(168, 51);
             this.txtboxYaziTipiStili.Name = "txtboxYaziTipiStili";
             this.txtboxYaziTipiStili.Size = new System.Drawing.Size(111, 21);
             this.txtboxYaziTipiStili.TabIndex = 5;
+            this.txtboxYaziTipiStili.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.txtboxYaziTipiStili_DrawItem);
             this.txtboxYaziTipiStili.SelectedIndexChanged += new System.EventHandler(this.txtboxYaziTipiStili_SelectedIndexChanged);
             // 
             // txtboxYaziTipiBoyutu

@@ -59,6 +59,30 @@ namespace Not_Defteri
             }
         }
 
+        private void txtboxYaziTipi_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                string fontName = txtboxYaziTipi.Items[e.Index].ToString();
+                Font font = new Font(fontName, txtboxYaziTipi.Font.Size);
+                e.Graphics.DrawString(fontName, font, new SolidBrush(e.ForeColor), e.Bounds);
+            }
+            e.DrawFocusRectangle();
+        }
+
+        private void txtboxYaziTipiStili_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.Index >= 0)
+            {
+                FontStyle fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), txtboxYaziTipiStili.Items[e.Index].ToString());
+                Font font = new Font(txtboxYaziTipi.SelectedItem.ToString(), txtboxYaziTipi.Font.Size, fontStyle);
+                e.Graphics.DrawString(txtboxYaziTipiStili.Items[e.Index].ToString(), font, new SolidBrush(e.ForeColor), e.Bounds);
+            }
+            e.DrawFocusRectangle();
+        }
+
         private void txtboxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtboxYaziTipiStili.Items.Clear();
@@ -115,5 +139,7 @@ namespace Not_Defteri
             // Bu formu kapat
             this.Close();
         }
+
+
     }
 }
