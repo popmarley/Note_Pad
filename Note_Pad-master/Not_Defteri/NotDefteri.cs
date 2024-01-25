@@ -709,6 +709,36 @@ namespace Not_Defteri
             MetinKarsilastirici karakterSayaci = new MetinKarsilastirici();
             karakterSayaci.Show();
         }
+
+        private void yeniStripButton_Click(object sender, EventArgs e)
+        {
+            yeniToolStripMenuItem_Click(sender, e);
+        }
+
+        private void yeniPencereStripButton_Click(object sender, EventArgs e)
+        {
+            yeniPencereToolStripMenuItem_Click(sender, e);
+        }
+
+        private void AcStripButton_Click(object sender, EventArgs e)
+        {
+            acToolStripMenuItem_Click(sender, e);
+        }
+
+        private void kaydetStripButton_Click(object sender, EventArgs e)
+        {
+            kaydetToolStripMenuItem_Click(sender, e);
+        }
+
+        private void farkliKaydetStripButton_Click(object sender, EventArgs e)
+        {
+            farkliKaydetToolStripMenuItem_Click(sender, e);
+        }
+
+        private void yazdirStripButton_Click(object sender, EventArgs e)
+        {
+            yazdırToolStripMenuItem_Click(sender, e);
+        }
     }
 
 }
