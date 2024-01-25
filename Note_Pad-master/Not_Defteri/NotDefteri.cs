@@ -703,6 +703,12 @@ namespace Not_Defteri
         {
 
         }
+
+        private void metinKarsilastiriciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MetinKarsilastirici karakterSayaci = new MetinKarsilastirici();
+            karakterSayaci.Show();
+        }
     }
 
 }

@@ -39,6 +39,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiffPlex, Version=1.7.2.0, Culture=neutral, PublicKeyToken=1d35e91d1bd7bc0f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiffPlex.1.7.2\lib\net40\DiffPlex.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,6 +68,12 @@
     <Compile Include="Hakkinda.Designer.cs">
       <DependentUpon>Hakkinda.cs</DependentUpon>
     </Compile>
+    <Compile Include="MetinKarsilastirici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MetinKarsilastirici.Designer.cs">
+      <DependentUpon>MetinKarsilastirici.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotDefteri.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Hakkinda.resx">
       <DependentUpon>Hakkinda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetinKarsilastirici.resx">
+      <DependentUpon>MetinKarsilastirici.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotDefteri.resx">
       <DependentUpon>NotDefteri.cs</DependentUpon>

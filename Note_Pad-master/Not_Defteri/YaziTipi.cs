@@ -13,6 +13,8 @@ namespace Not_Defteri
     public partial class YaziTipi : Form
     {
         public Font SecilenYaziTipi { get; private set; }
+        public delegate void FontChangedDelegate(Font newFont);
+        public event FontChangedDelegate FontChanged;
 
         public YaziTipi(Font mevcutYaziTipi)
         {
@@ -147,8 +149,7 @@ namespace Not_Defteri
             }
         }
 
-        public delegate void FontChangedDelegate(Font newFont);
-        public event FontChangedDelegate FontChanged;
+        
 
         private void btnTamam_Click(object sender, EventArgs e)
         {

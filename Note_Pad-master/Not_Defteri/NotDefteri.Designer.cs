@@ -59,6 +59,8 @@ namespace Not_Defteri
             this.uzaklastirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.varsayilanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.durumcubuguToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uygulamalarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metinKarsilastiriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -80,6 +82,7 @@ namespace Not_Defteri
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxYaziTipi = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxYaziBoyutu = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.KalinStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.İtalicStripButton7 = new System.Windows.Forms.ToolStripButton();
@@ -104,7 +107,6 @@ namespace Not_Defteri
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.sayfaAsagiStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -131,6 +133,7 @@ namespace Not_Defteri
             this.düzenToolStripMenuItem,
             this.biçimToolStripMenuItem,
             this.görünümToolStripMenuItem,
+            this.uygulamalarToolStripMenuItem,
             this.yardımToolStripMenuItem});
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -364,6 +367,21 @@ namespace Not_Defteri
             this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
             this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
             // 
+            // uygulamalarToolStripMenuItem
+            // 
+            this.uygulamalarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.metinKarsilastiriciToolStripMenuItem});
+            this.uygulamalarToolStripMenuItem.Name = "uygulamalarToolStripMenuItem";
+            this.uygulamalarToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.uygulamalarToolStripMenuItem.Text = "Uygulamalar";
+            // 
+            // metinKarsilastiriciToolStripMenuItem
+            // 
+            this.metinKarsilastiriciToolStripMenuItem.Name = "metinKarsilastiriciToolStripMenuItem";
+            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
+            this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
+            // 
             // yardımToolStripMenuItem
             // 
             this.yardımToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -549,7 +567,6 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziTipi.IntegralHeight = false;
             this.toolStripComboBoxYaziTipi.Name = "toolStripComboBoxYaziTipi";
             this.toolStripComboBoxYaziTipi.Size = new System.Drawing.Size(95, 25);
-          
             this.toolStripComboBoxYaziTipi.Click += new System.EventHandler(this.toolStripComboBoxYaziTipi_Click);
             // 
             // toolStripComboBoxYaziBoyutu
@@ -560,8 +577,12 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziBoyutu.IntegralHeight = false;
             this.toolStripComboBoxYaziBoyutu.Name = "toolStripComboBoxYaziBoyutu";
             this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(75, 25);
-         
             this.toolStripComboBoxYaziBoyutu.Click += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
             // KalinStripButton6
             // 
@@ -745,11 +766,6 @@ namespace Not_Defteri
             this.toolStripSeparator10.Name = "toolStripSeparator10";
             this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
-            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -759,6 +775,7 @@ namespace Not_Defteri
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "NotDefteri";
@@ -853,5 +870,7 @@ namespace Not_Defteri
         private ToolStripComboBox toolStripComboBoxYaziTipi;
         private ToolStripComboBox toolStripComboBoxYaziBoyutu;
         private ToolStripSeparator toolStripSeparator17;
+        private ToolStripMenuItem uygulamalarToolStripMenuItem;
+        private ToolStripMenuItem metinKarsilastiriciToolStripMenuItem;
     }
 }
