@@ -61,7 +61,7 @@ namespace Not_Defteri
 
             if (!isDifferentFound)
             {
-                resultBox.AppendText("\nHerhangi bir değişiklik bulunamadı.");
+                AppendColoredText(resultBox, "\nHerhangi bir değişiklik bulunamadı.", Color.Firebrick);
             }
         }
 
