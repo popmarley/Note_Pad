@@ -739,6 +739,21 @@ namespace Not_Defteri
         {
             yazdırToolStripMenuItem_Click(sender, e);
         }
+
+        private void bulStripButton_Click(object sender, EventArgs e)
+        {
+            bulToolStripMenuItem_Click(sender, e);
+        }
+
+        private void saatZamanStripButton_Click(object sender, EventArgs e)
+        {
+            saatTarihToolStripMenuItem_Click(sender, e);
+        }
+
+        private void metinKarsilastiriciStripButton_Click(object sender, EventArgs e)
+        {
+            metinKarsilastiriciToolStripMenuItem_Click(sender, e);
+        }
     }
 
 }

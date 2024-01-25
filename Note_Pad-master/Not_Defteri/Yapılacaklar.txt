@@ -11,10 +11,8 @@ Yapılacaklar
 -örnek yazı stili anlık herhangi birine göre değişsin
 -yazı fontunu arama yapılsin
 -bul eventi daha stabilize olacak
--değiştir eventi eklenecek
+-değiştir eventi bula eklenecek
 -yazıcılar eventi güncellenecek
--yeni, yeni pencere,aç,kaydet,farklı kaydet ve yazdır simgeleri toll simgeleri eklenecek kısayol
--düzen menüleri kısayolları eklenecek
 -uygulamalar kısa yolu eklenecek 
 -durum cubugu kapalıysa kayıtlı kalsın tekrar acılınca
 -kısayol menüleri içinde göster kapat olsun
@@ -22,3 +20,6 @@ Yapılacaklar
 
 
 Yapılanlar
+
++ Dosya menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
++ Düzen menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
