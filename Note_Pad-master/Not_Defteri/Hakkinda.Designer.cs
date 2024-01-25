@@ -94,6 +94,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Hakkinda";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Not Defteri Hakkında";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

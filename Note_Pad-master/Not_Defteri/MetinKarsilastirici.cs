@@ -20,9 +20,11 @@ namespace Not_Defteri
             InitializeComponent();
 
 
-          
 
+            this.AcceptButton = compareButton;
+            this.AcceptButton = btnTemizle;
             compareButton.Click += CompareTexts;
+           
 
             Controls.Add(textBox1);
             Controls.Add(textBox2);
@@ -117,6 +119,13 @@ namespace Not_Defteri
             box.SelectionColor = color;
             box.AppendText(text + Environment.NewLine);
             box.SelectionColor = box.ForeColor;
+        }
+
+        private void btnTemizle_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            resultBox.Clear();
         }
     }
 

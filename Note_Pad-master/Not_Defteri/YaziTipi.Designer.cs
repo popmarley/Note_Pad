@@ -186,6 +186,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "YaziTipi";
+            this.ShowIcon = false;
             this.Text = "YaziTipi";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
