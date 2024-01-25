@@ -1,0 +1,24 @@
+﻿
+Versiyon 1.7(is Derlemesi 240125,1159)
+
+Yapılacaklar
+
+-yumuşak kaydırma kapatma
+-hesap makinası eventi
+-todo list
+-seçilen yazının boyutunu ve yazı stilini göstersin
+-yazı tipi stilindeki yazılar türkçe olsun
+-örnek yazı stili anlık herhangi birine göre değişsin
+-yazı fontunu arama yapılsin
+-bul eventi daha stabilize olacak
+-değiştir eventi eklenecek
+-yazıcılar eventi güncellenecek
+-yeni, yeni pencere,aç,kaydet,farklı kaydet ve yazdır simgeleri toll simgeleri eklenecek kısayol
+-düzen menüleri kısayolları eklenecek
+-uygulamalar kısa yolu eklenecek 
+-durum cubugu kapalıysa kayıtlı kalsın tekrar acılınca
+-kısayol menüleri içinde göster kapat olsun
+-hakkında kısmını her güncellemeye göre metnin değişmesini sagla
+
+
+Yapılanlar

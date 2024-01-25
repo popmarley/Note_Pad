@@ -107,6 +107,7 @@ namespace Not_Defteri
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.sayfaAsagiStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -117,9 +118,9 @@ namespace Not_Defteri
             this.richTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox.Location = new System.Drawing.Point(0, 49);
+            this.richTextBox.Location = new System.Drawing.Point(0, 74);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(784, 418);
+            this.richTextBox.Size = new System.Drawing.Size(784, 393);
             this.richTextBox.TabIndex = 0;
             this.richTextBox.Text = "";
             this.richTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox_LinkClicked);
@@ -378,7 +379,7 @@ namespace Not_Defteri
             // metinKarsilastiriciToolStripMenuItem
             // 
             this.metinKarsilastiriciToolStripMenuItem.Name = "metinKarsilastiriciToolStripMenuItem";
-            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
             // 
@@ -478,7 +479,7 @@ namespace Not_Defteri
             this.toolStripSeparator16,
             this.sayfaAsagiStripButton2,
             this.toolStripSeparator10});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 49);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(784, 25);
             this.toolStrip1.TabIndex = 3;
@@ -766,6 +767,14 @@ namespace Not_Defteri
             this.toolStripSeparator10.Name = "toolStripSeparator10";
             this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(784, 25);
+            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -774,6 +783,7 @@ namespace Not_Defteri
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -872,5 +882,6 @@ namespace Not_Defteri
         private ToolStripSeparator toolStripSeparator17;
         private ToolStripMenuItem uygulamalarToolStripMenuItem;
         private ToolStripMenuItem metinKarsilastiriciToolStripMenuItem;
+        private ToolStrip toolStrip2;
     }
 }
