@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hakkinda));
             this.label1 = new System.Windows.Forms.Label();
             this.btnTamam = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbPopMarley = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPopMarley)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,16 +59,17 @@
             this.btnTamam.UseVisualStyleBackColor = true;
             this.btnTamam.Click += new System.EventHandler(this.btnTamam_Click);
             // 
-            // pictureBox2
+            // pbPopMarley
             // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox2.Image = global::Not_Defteri.Properties.Resources.hakkımızda;
-            this.pictureBox2.Location = new System.Drawing.Point(107, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(361, 53);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
+            this.pbPopMarley.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbPopMarley.Image = global::Not_Defteri.Properties.Resources.hakkımızda;
+            this.pbPopMarley.Location = new System.Drawing.Point(107, 12);
+            this.pbPopMarley.Name = "pbPopMarley";
+            this.pbPopMarley.Size = new System.Drawing.Size(361, 53);
+            this.pbPopMarley.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPopMarley.TabIndex = 2;
+            this.pbPopMarley.TabStop = false;
+            this.pbPopMarley.Click += new System.EventHandler(this.pbPopMarley_Click);
             // 
             // pictureBox1
             // 
@@ -86,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(554, 325);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pbPopMarley);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnTamam);
             this.Controls.Add(this.label1);
@@ -97,7 +98,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Not Defteri Hakkında";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPopMarley)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,6 +110,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnTamam;
 		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.PictureBox pbPopMarley;
 	}
 }

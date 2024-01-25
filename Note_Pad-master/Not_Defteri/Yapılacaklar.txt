@@ -1,5 +1,5 @@
 ﻿
-Versiyon 1.7(is Derlemesi 240125,1159)
+Versiyon 1.8(is Derlemesi 240125,1517)
 
 Yapılacaklar
 
@@ -23,3 +23,4 @@ Yapılanlar
 
 + Dosya menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
 + Düzen menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
++ Hakkında resim eventi eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
