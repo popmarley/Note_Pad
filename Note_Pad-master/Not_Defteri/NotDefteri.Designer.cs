@@ -121,11 +121,12 @@ namespace Not_Defteri
             this.yazdirStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.bulStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.saatZamanStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.metinKarsilastiriciStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.hesapMakinesiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -390,7 +391,8 @@ namespace Not_Defteri
             // uygulamalarToolStripMenuItem
             // 
             this.uygulamalarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metinKarsilastiriciToolStripMenuItem});
+            this.metinKarsilastiriciToolStripMenuItem,
+            this.hesapMakinesiToolStripMenuItem});
             this.uygulamalarToolStripMenuItem.Name = "uygulamalarToolStripMenuItem";
             this.uygulamalarToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.uygulamalarToolStripMenuItem.Text = "Uygulamalar";
@@ -398,7 +400,7 @@ namespace Not_Defteri
             // metinKarsilastiriciToolStripMenuItem
             // 
             this.metinKarsilastiriciToolStripMenuItem.Name = "metinKarsilastiriciToolStripMenuItem";
-            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
             // 
@@ -913,6 +915,11 @@ namespace Not_Defteri
             this.bulStripButton.Text = "Bul";
             this.bulStripButton.Click += new System.EventHandler(this.bulStripButton_Click);
             // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(6, 25);
+            // 
             // saatZamanStripButton
             // 
             this.saatZamanStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -928,11 +935,6 @@ namespace Not_Defteri
             this.toolStripSeparator24.Name = "toolStripSeparator24";
             this.toolStripSeparator24.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator25
-            // 
-            this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(6, 25);
-            // 
             // metinKarsilastiriciStripButton
             // 
             this.metinKarsilastiriciStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -947,6 +949,13 @@ namespace Not_Defteri
             // 
             this.toolStripSeparator26.Name = "toolStripSeparator26";
             this.toolStripSeparator26.Size = new System.Drawing.Size(6, 25);
+            // 
+            // hesapMakinesiToolStripMenuItem
+            // 
+            this.hesapMakinesiToolStripMenuItem.Name = "hesapMakinesiToolStripMenuItem";
+            this.hesapMakinesiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hesapMakinesiToolStripMenuItem.Text = "Hesap Makinesi";
+            this.hesapMakinesiToolStripMenuItem.Click += new System.EventHandler(this.hesapMakinesiToolStripMenuItem_Click);
             // 
             // NotDefteri
             // 
@@ -1076,5 +1085,6 @@ namespace Not_Defteri
         private ToolStripSeparator toolStripSeparator24;
         private ToolStripButton metinKarsilastiriciStripButton;
         private ToolStripSeparator toolStripSeparator26;
+        private ToolStripMenuItem hesapMakinesiToolStripMenuItem;
     }
 }

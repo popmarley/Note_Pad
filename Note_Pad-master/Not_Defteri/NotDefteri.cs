@@ -754,6 +754,12 @@ namespace Not_Defteri
         {
             metinKarsilastiriciToolStripMenuItem_Click(sender, e);
         }
+
+        private void hesapMakinesiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HesapMakinasi hesapMakinasi = new HesapMakinasi();
+            hesapMakinasi.Show();
+        }
     }
 
 }
