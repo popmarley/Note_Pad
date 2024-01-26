@@ -38,6 +38,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.yukariRadioButton = new System.Windows.Forms.RadioButton();
+            this.btnDegistir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.arananTextBox.Name = "arananTextBox";
             this.arananTextBox.Size = new System.Drawing.Size(231, 20);
             this.arananTextBox.TabIndex = 1;
+            this.arananTextBox.TextChanged += new System.EventHandler(this.arananTextBox_TextChanged);
             // 
             // sonrakiniBulButton
             // 
@@ -139,6 +141,17 @@
             this.yukariRadioButton.Text = "Yukarı";
             this.yukariRadioButton.UseVisualStyleBackColor = true;
             // 
+            // btnDegistir
+            // 
+            this.btnDegistir.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDegistir.Location = new System.Drawing.Point(299, 77);
+            this.btnDegistir.Name = "btnDegistir";
+            this.btnDegistir.Size = new System.Drawing.Size(80, 23);
+            this.btnDegistir.TabIndex = 3;
+            this.btnDegistir.Text = "Değiştir";
+            this.btnDegistir.UseVisualStyleBackColor = true;
+            this.btnDegistir.Click += new System.EventHandler(this.btnDegistir_Click);
+            // 
             // Bul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -147,6 +160,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.buyukKucukHarfCheckBox);
+            this.Controls.Add(this.btnDegistir);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.sonrakiniBulButton);
             this.Controls.Add(this.arananTextBox);
@@ -156,6 +170,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bul";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bul_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -174,5 +189,6 @@
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.RadioButton radioButton2;
 		private System.Windows.Forms.RadioButton yukariRadioButton;
-	}
+        private System.Windows.Forms.Button btnDegistir;
+    }
 }

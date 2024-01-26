@@ -10,20 +10,29 @@ using System.Windows.Forms;
 
 namespace Not_Defteri
 {
-	public partial class Bul : Form
-	{
-
-		public RichTextBox TextBoxReferans { get; set; }
-        public Bul()
-		{
-			InitializeComponent();
-            this.FormClosing += new FormClosingEventHandler(Bul_FormClosing);
+    public partial class Degistir : Form
+    {
+        public RichTextBox TextBoxReferans { get; set; }
+        public Degistir()
+        {
+            InitializeComponent();
+            this.FormClosing += new FormClosingEventHandler(Degistir_FormClosing);
             sonrakiniBulButton.Enabled = false;
 
         }
 
-		private void sonrakiniBulButton_Click(object sender, EventArgs e)
-		{
+        private void btnIptal_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Degistir_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ResetHighlight(); // Form kapatılırken renklendirmeleri sıfırla.
+        }
+
+        private void sonrakiniBulButton_Click(object sender, EventArgs e)
+        {
             string arananMetin = arananTextBox.Text;
             bool buyukKucukHarfEslestir = buyukKucukHarfCheckBox.Checked;
             RichTextBoxFinds options = buyukKucukHarfEslestir ? RichTextBoxFinds.MatchCase : RichTextBoxFinds.None;
@@ -68,12 +77,6 @@ namespace Not_Defteri
                 }
             }
         }
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
         private void ResetHighlight()
         {
             TextBoxReferans.SelectAll();
@@ -82,21 +85,9 @@ namespace Not_Defteri
             TextBoxReferans.DeselectAll();
         }
 
-        private void Bul_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ResetHighlight(); // Form kapatılırken renklendirmeleri sıfırla.
-        }
-
         private void arananTextBox_TextChanged(object sender, EventArgs e)
         {
             sonrakiniBulButton.Enabled = !string.IsNullOrEmpty(arananTextBox.Text);
-        }
-
-        private void btnDegistir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Degistir degistir = new Degistir();
-            degistir.Show();
         }
     }
 }

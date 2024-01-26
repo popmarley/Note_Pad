@@ -20,6 +20,7 @@ namespace Not_Defteri
         private bool isFileSaved = true;
 
         private Bul bulForm = null;
+        private Degistir degistirForm = null;
 
         public NotDefteri()
         {
@@ -350,12 +351,17 @@ namespace Not_Defteri
 
         private void degistirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string arananMetin = Microsoft.VisualBasic.Interaction.InputBox("Değiştirilecek metni girin:", "Bul", "", -1, -1);
-            if (!string.IsNullOrEmpty(arananMetin))
+            // Eğer Bul formu daha önce oluşturulmadıysa veya kapandıysa, yeni bir örnek oluştur
+            if (degistirForm == null || degistirForm.IsDisposed)
             {
-                string yeniMetin = Microsoft.VisualBasic.Interaction.InputBox("Yeni metni girin:", "Değiştir", "", -1, -1);
-                richTextBox.Text = richTextBox.Text.Replace(arananMetin, yeniMetin);
+                degistirForm = new Degistir();
+                degistirForm.TextBoxReferans = this.richTextBox; // richTextBox referansını geçir
+                this.FormClosed += (s, args) => degistirForm.Close(); // Ana form kapatıldığında Bul formunu kapat
             }
+
+            // Degistir formunu modaless olarak göster
+            degistirForm.Show();
+            degistirForm.Focus(); // Degistir formuna odaklan
         }
 
         private void tumunuSecToolStripMenuItem_Click(object sender, EventArgs e)

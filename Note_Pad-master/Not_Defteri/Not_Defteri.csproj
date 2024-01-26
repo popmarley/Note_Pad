@@ -62,6 +62,12 @@
     <Compile Include="Bul.Designer.cs">
       <DependentUpon>Bul.cs</DependentUpon>
     </Compile>
+    <Compile Include="Degistir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Degistir.Designer.cs">
+      <DependentUpon>Degistir.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hakkinda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="Bul.resx">
       <DependentUpon>Bul.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Degistir.resx">
+      <DependentUpon>Degistir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hakkinda.resx">
       <DependentUpon>Hakkinda.cs</DependentUpon>
