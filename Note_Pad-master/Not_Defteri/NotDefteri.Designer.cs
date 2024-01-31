@@ -127,6 +127,7 @@ namespace Not_Defteri
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.metinKarsilastiriciStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.menulerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -145,6 +146,7 @@ namespace Not_Defteri
             this.richTextBox.Text = "";
             this.richTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox_LinkClicked);
             this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+            this.richTextBox.FontChanged += new System.EventHandler(this.richTextBox_FontChanged);
             this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
             // 
             // menuStrip
@@ -344,7 +346,8 @@ namespace Not_Defteri
             // 
             this.görünümToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.yakınlaştırToolStripMenuItem,
-            this.durumcubuguToolStripMenuItem});
+            this.durumcubuguToolStripMenuItem,
+            this.menulerToolStripMenuItem});
             this.görünümToolStripMenuItem.Name = "görünümToolStripMenuItem";
             this.görünümToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.görünümToolStripMenuItem.Text = "Görünüm";
@@ -356,7 +359,7 @@ namespace Not_Defteri
             this.uzaklastirToolStripMenuItem,
             this.varsayilanToolStripMenuItem});
             this.yakınlaştırToolStripMenuItem.Name = "yakınlaştırToolStripMenuItem";
-            this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.yakınlaştırToolStripMenuItem.Text = "Yakınlaştır";
             // 
             // yakınlastirToolStripMenuItem1
@@ -385,7 +388,7 @@ namespace Not_Defteri
             this.durumcubuguToolStripMenuItem.Checked = true;
             this.durumcubuguToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.durumcubuguToolStripMenuItem.Name = "durumcubuguToolStripMenuItem";
-            this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
             this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
             // 
@@ -592,7 +595,6 @@ namespace Not_Defteri
             // toolStripComboBoxYaziTipi
             // 
             this.toolStripComboBoxYaziTipi.DropDownHeight = 85;
-            this.toolStripComboBoxYaziTipi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxYaziTipi.DropDownWidth = 105;
             this.toolStripComboBoxYaziTipi.IntegralHeight = false;
             this.toolStripComboBoxYaziTipi.Name = "toolStripComboBoxYaziTipi";
@@ -603,12 +605,12 @@ namespace Not_Defteri
             // toolStripComboBoxYaziBoyutu
             // 
             this.toolStripComboBoxYaziBoyutu.DropDownHeight = 85;
-            this.toolStripComboBoxYaziBoyutu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxYaziBoyutu.DropDownWidth = 25;
             this.toolStripComboBoxYaziBoyutu.IntegralHeight = false;
             this.toolStripComboBoxYaziBoyutu.Name = "toolStripComboBoxYaziBoyutu";
             this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(75, 25);
             this.toolStripComboBoxYaziBoyutu.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_SelectedIndexChanged);
+            this.toolStripComboBoxYaziBoyutu.Validating += new System.ComponentModel.CancelEventHandler(this.toolStripComboBoxYaziBoyutu_Validating);
             this.toolStripComboBoxYaziBoyutu.Click += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_Click);
             // 
             // toolStripSeparator17
@@ -960,6 +962,15 @@ namespace Not_Defteri
             this.toolStripSeparator26.Name = "toolStripSeparator26";
             this.toolStripSeparator26.Size = new System.Drawing.Size(6, 25);
             // 
+            // menulerToolStripMenuItem
+            // 
+            this.menulerToolStripMenuItem.Checked = true;
+            this.menulerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menulerToolStripMenuItem.Name = "menulerToolStripMenuItem";
+            this.menulerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.menulerToolStripMenuItem.Text = "Menüler";
+            this.menulerToolStripMenuItem.Click += new System.EventHandler(this.menulerToolStripMenuItem_Click);
+            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1089,5 +1100,6 @@ namespace Not_Defteri
         private ToolStripButton metinKarsilastiriciStripButton;
         private ToolStripSeparator toolStripSeparator26;
         private ToolStripMenuItem hesapMakinesiToolStripMenuItem;
+        private ToolStripMenuItem menulerToolStripMenuItem;
     }
 }

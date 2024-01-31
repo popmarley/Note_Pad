@@ -58,5 +58,29 @@ namespace Not_Defteri.Properties {
                 this["FontStyle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MenulerVisible {
+            get {
+                return ((bool)(this["MenulerVisible"]));
+            }
+            set {
+                this["MenulerVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DurumCubuguVisible {
+            get {
+                return ((bool)(this["DurumCubuguVisible"]));
+            }
+            set {
+                this["DurumCubuguVisible"] = value;
+            }
+        }
     }
 }

@@ -1,27 +1,25 @@
 ﻿
 Versiyon 2.0(is Derlemesi 240131,1037)
 
-Yapılacaklar
+Bilenen hatalar ve eklenecekler
 
 -yumuşak kaydırma kapatma
 -hesap makinası eventi
 -todo list    
--seçilen yazının boyutunu ve yazı stilini göstersin
 -yazı tipi stilindeki yazılar türkçe olsun
--örnek yazı stili anlık herhangi birine göre değişsin
 -yazı fontunu arama yapılsin
 -bul eventi daha stabilize olacak
 -yazıcılar eventi güncellenecek
--uygulamalar kısayolu eklenecek 
--durum cubugu kapalıysa kayıtlı kalsın tekrar acılınca
 -kısayol menüleri içinde göster kapat olsun
 -hakkında kısmını her güncellemeye göre metnin değişmesini sagla
 -metin karşılaştırıcı form boyutu
 -metin karşılastırıcı text fon yazı biçimine bagla
--metin font boyutu arttırma kaldırılacak (A)
 -kısayollar da programı aç kapa yapınca kalıcılıgı sagla
 -sadece seçilen metinin yazı fontu ve boyutunu ayarlama
 -değiştir formunda değiştire basınca harfle eşleşmiyor hatası var
+-yazı tipi formundan yazı fontunu elle girilebilme eklenecek
+-Font boyut azaltma arttırma kısayoluna basıldıgında boyutu da azalttıgını gösterecek
+-değiştir yaptıktan sonra devamında renkli yazmaya devam ediyor
 
 
 Yapılanlar
@@ -35,3 +33,8 @@ Yapılanlar
 + Delete tuşuna basınca komple textboxun silinme hatası giderildi (Versiyon 1.9(is Derlemesi 240131,0914))
 + Exe oluşturulduğunda dosya konumunun açılması eklendi (Versiyon 1.9(is Derlemesi 240131,0914))
 + Ana ekranda yazı fontu ve boyutu ayarlayabilme eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
++ Uygulamalar kısayolu eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
++ Yazı tipi ekranında ki örnek yazı stili alanı anlık yazı fontuna göre değişmesi eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
++ Metin font boyutu arttırma/azaltma da yazı boyutunu gösteren label kaldırıldı (Versiyon 2.0(is Derlemesi 240131,1037))
++ Ana ekranda metin boyutunu elle girilebilme eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
++ Menüler ve durum çubugu görünürlüğü kapalı/açık durumunun kayıtlı kalması işlevi eklendi (Versiyon 2.0(is Derlemesi 240131,1037))

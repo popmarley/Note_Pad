@@ -91,7 +91,21 @@ namespace Not_Defteri
         #region Kısayollar
 
         private void yeniToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {// Mevcut pencerede yapılan değişiklikleri kontrol et
+            if (richTextBox.Modified && !isFileSaved)
+            {
+                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    SaveFile(); // Kaydetme işlemi
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return; // Kullanıcı iptal ederse, yeni pencere açmayı durdur
+                }
+                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan yeni pencere aç
+            }
             // Mevcut not defterinin içeriğini temizle
             richTextBox.Clear();
             currentFilePath = null; // Dosya yolu sıfırlanıyor
@@ -162,8 +176,10 @@ namespace Not_Defteri
                 }
                 else if (result == DialogResult.Cancel)
                 {
+
                     return; // Kullanıcı iptal ederse, yeni pencere açmayı durdur
                 }
+
                 // Kullanıcı "Hayır" derse, hiçbir şey yapmadan yeni pencere aç
             }
 
@@ -393,32 +409,57 @@ namespace Not_Defteri
         {
             if (!promptShown && richTextBox.Modified && !isFileSaved)
             {
+                promptShown = true; // Uyarı gösterilmeden önce true olarak ayarla
+
                 var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    // Kaydetme işlemi
                     SaveFile();
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    // Kapatmayı iptal et
-                    e.Cancel = true;
+                    e.Cancel = true; // Kapatmayı iptal et
+                    promptShown = false; // İptal edildiğinde promptShown'ı tekrar false yap
+                    return; // Döngüden çık
                 }
-                promptShown = true; // Set the flag after showing the prompt
+                else if (result == DialogResult.No)
+                {
+                    // "Hayır" seçeneği için ekstra işlem yapmaya gerek yok
+                    // Form kapatılacak ve değişiklikler kaydedilmeyecek
+                }
             }
 
-            // Yazı tipi ve boyutunu kaydet
-            Properties.Settings.Default.FontName = richTextBox.Font.FontFamily.Name;
-            Properties.Settings.Default.FontSize = richTextBox.Font.Size;
+            if (!e.Cancel) // Eğer form kapanmıyorsa, kaydetme işlemini yapma
+            {
+                // Yazı tipi ve boyutu ayarlarını kaydet
+                SaveFontSettings();
+
+                if (Application.OpenForms.Count == 1)
+                {
+                    Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
+                }
+            }
+
+            Properties.Settings.Default.MenulerVisible = menulerToolStripMenuItem.Checked;
             Properties.Settings.Default.Save();
 
-            if (Application.OpenForms.Count == 1)
+            Properties.Settings.Default.DurumCubuguVisible = durumcubuguToolStripMenuItem.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SaveFontSettings()
+        {
+            Properties.Settings.Default.FontName = toolStripComboBoxYaziTipi.Text;
+            if (float.TryParse(toolStripComboBoxYaziBoyutu.Text, out float fontSize))
             {
-                Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
+                Properties.Settings.Default.FontSize = fontSize;
             }
-
-
+            else
+            {
+                Properties.Settings.Default.FontSize = 12.0f; // Örnek varsayılan boyut
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void SaveFile()
@@ -507,20 +548,37 @@ namespace Not_Defteri
                 toolStripComboBoxYaziBoyutu.Items.Add(boyut.ToString());
             }
 
-            // Mevcut yazı boyutunu ayarla
-            toolStripComboBoxYaziBoyutu.SelectedItem = richTextBox.Font.Size.ToString();
-
-
             // Kaydedilen yazı tipi ve boyutunu yükle
             string fontName = Properties.Settings.Default.FontName;
-            float fontSize = Properties.Settings.Default.FontSize;
-            if (!string.IsNullOrEmpty(fontName) && fontSize > 0)
+            string fontSize = Properties.Settings.Default.FontSize.ToString();
+
+            if (!string.IsNullOrEmpty(fontName))
             {
-                richTextBox.Font = new Font(fontName, fontSize);
+                if (!toolStripComboBoxYaziTipi.Items.Contains(fontName))
+                {
+                    toolStripComboBoxYaziTipi.Items.Add(fontName);
+                }
                 toolStripComboBoxYaziTipi.SelectedItem = fontName;
-                toolStripComboBoxYaziBoyutu.SelectedItem = fontSize.ToString();
             }
 
+            if (!string.IsNullOrEmpty(fontSize))
+            {
+                if (!toolStripComboBoxYaziBoyutu.Items.Contains(fontSize))
+                {
+                    toolStripComboBoxYaziBoyutu.Items.Add(fontSize);
+                }
+                toolStripComboBoxYaziBoyutu.SelectedItem = fontSize;
+            }
+
+            // Kaydedilen menü görünürlüğünü yükle ve uygula
+            menulerToolStripMenuItem.Checked = Properties.Settings.Default.MenulerVisible;
+            toolStrip1.Visible = menulerToolStripMenuItem.Checked;
+            toolStrip2.Visible = menulerToolStripMenuItem.Checked;
+
+
+            // Kaydedilen durum cubugu görünürlüğünü yükle ve uygula
+            durumcubuguToolStripMenuItem.Checked = Properties.Settings.Default.MenulerVisible;
+            statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
         }
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
@@ -706,14 +764,7 @@ namespace Not_Defteri
                 float newSize = richTextBox.SelectionFont.Size + change;
                 newSize = Math.Max(1, newSize); // Font boyutunu 1'den küçük olmamasını sağlar
                 richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, newSize, richTextBox.SelectionFont.Style);
-                UpdateFontSizeLabel(newSize); // Font boyutu etiketini güncelle
             }
-        }
-
-        private void UpdateFontSizeLabel(float newSize)
-        {
-            BoyutStripLabel1.Text = $"{newSize}";
-
         }
 
         class NativeMethods
@@ -818,22 +869,53 @@ namespace Not_Defteri
 
         private void toolStripComboBoxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Seçili yazı tipini uygula
+            // Seçili yazı tipini ve mevcut boyutu kullanarak yeni Font nesnesi oluştur
             string seciliYaziTipi = toolStripComboBoxYaziTipi.SelectedItem.ToString();
             float mevcutBoyut = richTextBox.Font.Size;
-            FontStyle mevcutStil = richTextBox.Font.Style;
-
-            richTextBox.Font = new Font(seciliYaziTipi, mevcutBoyut, mevcutStil);
+            richTextBox.Font = new Font(seciliYaziTipi, mevcutBoyut, richTextBox.Font.Style);
         }
 
         private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Seçili yazı boyutunu uygula
-            float seciliBoyut = float.Parse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString());
-            string mevcutYaziTipi = richTextBox.Font.FontFamily.Name;
-            FontStyle mevcutStil = richTextBox.Font.Style;
+            // Seçili yazı boyutunu ve mevcut yazı tipini kullanarak yeni Font nesnesi oluştur
+            if (float.TryParse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString(), out float seciliBoyut))
+            {
+                richTextBox.Font = new Font(richTextBox.Font.FontFamily, seciliBoyut, richTextBox.Font.Style);
+            }
+        }
 
-            richTextBox.Font = new Font(mevcutYaziTipi, seciliBoyut, mevcutStil);
+        private void toolStripComboBoxYaziBoyutu_Validating(object sender, CancelEventArgs e)
+        {
+            // Kullanıcının girdiği değeri doğrula
+            if (!float.TryParse(toolStripComboBoxYaziBoyutu.Text, out float newSize))
+            {
+                MessageBox.Show("Geçersiz yazı boyutu girdiniz. Lütfen geçerli bir sayı girin.");
+                e.Cancel = true; // Geçersiz girişi kabul etme
+            }
+            else
+            {
+                // Geçerli ise, yazı boyutunu ayarla
+                string mevcutYaziTipi = richTextBox.Font.FontFamily.Name;
+                FontStyle mevcutStil = richTextBox.Font.Style;
+                richTextBox.Font = new Font(mevcutYaziTipi, newSize, mevcutStil);
+            }
+        }
+
+        private void richTextBox_FontChanged(object sender, EventArgs e)
+        {
+            // Yazı tipi değiştiğinde toolStripComboBoxYaziTipi ve toolStripComboBoxYaziBoyutu'nu güncelle
+            toolStripComboBoxYaziTipi.SelectedItem = richTextBox.Font.FontFamily.Name;
+            toolStripComboBoxYaziBoyutu.SelectedItem = richTextBox.Font.Size.ToString();
+        }
+
+        private void menulerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Menü öğesinin 'Checked' durumunu tersine çevir
+            menulerToolStripMenuItem.Checked = !menulerToolStripMenuItem.Checked;
+
+            // Durum çubuğunun görünürlüğünü menü öğesinin 'Checked' durumuna bağla
+            toolStrip1.Visible = menulerToolStripMenuItem.Checked;
+            toolStrip2.Visible = menulerToolStripMenuItem.Checked;
         }
     }
 

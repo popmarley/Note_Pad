@@ -21,7 +21,7 @@ namespace Not_Defteri
 
 
 
-            this.AcceptButton = compareButton;
+            
             compareButton.Click += CompareTexts;
            
 

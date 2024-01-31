@@ -51,6 +51,7 @@
             this.txtboxsecilenYaziTipi.Name = "txtboxsecilenYaziTipi";
             this.txtboxsecilenYaziTipi.Size = new System.Drawing.Size(160, 20);
             this.txtboxsecilenYaziTipi.TabIndex = 7;
+           
             // 
             // txtboxsecilenYaziTipiStili
             // 
@@ -65,6 +66,7 @@
             this.txtboxsecilenYaziTipiBoyutu.Name = "txtboxsecilenYaziTipiBoyutu";
             this.txtboxsecilenYaziTipiBoyutu.Size = new System.Drawing.Size(62, 20);
             this.txtboxsecilenYaziTipiBoyutu.TabIndex = 9;
+           
             // 
             // groupBox1
             // 
@@ -188,6 +190,7 @@
             this.Name = "YaziTipi";
             this.ShowIcon = false;
             this.Text = "YaziTipi";
+            
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
