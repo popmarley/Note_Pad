@@ -407,10 +407,18 @@ namespace Not_Defteri
                 }
                 promptShown = true; // Set the flag after showing the prompt
             }
-            else if (Application.OpenForms.Count == 1)
+
+            // Yazı tipi ve boyutunu kaydet
+            Properties.Settings.Default.FontName = richTextBox.Font.FontFamily.Name;
+            Properties.Settings.Default.FontSize = richTextBox.Font.Size;
+            Properties.Settings.Default.Save();
+
+            if (Application.OpenForms.Count == 1)
             {
                 Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
             }
+
+
         }
 
         private void SaveFile()
@@ -483,6 +491,36 @@ namespace Not_Defteri
         {
             savedContent = richTextBox.Text;
             UpdateFormTitle();
+
+            foreach (FontFamily font in FontFamily.Families)
+            {
+                toolStripComboBoxYaziTipi.Items.Add(font.Name);
+            }
+
+            // Mevcut yazı tipini ayarla
+            toolStripComboBoxYaziTipi.SelectedItem = richTextBox.Font.FontFamily.Name;
+
+            // Sık kullanılan yazı boyutlarını yükle
+            int[] boyutlar = { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            foreach (int boyut in boyutlar)
+            {
+                toolStripComboBoxYaziBoyutu.Items.Add(boyut.ToString());
+            }
+
+            // Mevcut yazı boyutunu ayarla
+            toolStripComboBoxYaziBoyutu.SelectedItem = richTextBox.Font.Size.ToString();
+
+
+            // Kaydedilen yazı tipi ve boyutunu yükle
+            string fontName = Properties.Settings.Default.FontName;
+            float fontSize = Properties.Settings.Default.FontSize;
+            if (!string.IsNullOrEmpty(fontName) && fontSize > 0)
+            {
+                richTextBox.Font = new Font(fontName, fontSize);
+                toolStripComboBoxYaziTipi.SelectedItem = fontName;
+                toolStripComboBoxYaziBoyutu.SelectedItem = fontSize.ToString();
+            }
+
         }
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
@@ -776,6 +814,26 @@ namespace Not_Defteri
         {
             HesapMakinasi hesapMakinasi = new HesapMakinasi();
             hesapMakinasi.Show();
+        }
+
+        private void toolStripComboBoxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Seçili yazı tipini uygula
+            string seciliYaziTipi = toolStripComboBoxYaziTipi.SelectedItem.ToString();
+            float mevcutBoyut = richTextBox.Font.Size;
+            FontStyle mevcutStil = richTextBox.Font.Style;
+
+            richTextBox.Font = new Font(seciliYaziTipi, mevcutBoyut, mevcutStil);
+        }
+
+        private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Seçili yazı boyutunu uygula
+            float seciliBoyut = float.Parse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString());
+            string mevcutYaziTipi = richTextBox.Font.FontFamily.Name;
+            FontStyle mevcutStil = richTextBox.Font.Style;
+
+            richTextBox.Font = new Font(mevcutYaziTipi, seciliBoyut, mevcutStil);
         }
     }
 

@@ -597,6 +597,7 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziTipi.IntegralHeight = false;
             this.toolStripComboBoxYaziTipi.Name = "toolStripComboBoxYaziTipi";
             this.toolStripComboBoxYaziTipi.Size = new System.Drawing.Size(95, 25);
+            this.toolStripComboBoxYaziTipi.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziTipi_SelectedIndexChanged);
             this.toolStripComboBoxYaziTipi.Click += new System.EventHandler(this.toolStripComboBoxYaziTipi_Click);
             // 
             // toolStripComboBoxYaziBoyutu
@@ -607,6 +608,7 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziBoyutu.IntegralHeight = false;
             this.toolStripComboBoxYaziBoyutu.Name = "toolStripComboBoxYaziBoyutu";
             this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(75, 25);
+            this.toolStripComboBoxYaziBoyutu.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_SelectedIndexChanged);
             this.toolStripComboBoxYaziBoyutu.Click += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_Click);
             // 
             // toolStripSeparator17

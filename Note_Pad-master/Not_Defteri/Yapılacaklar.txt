@@ -1,5 +1,5 @@
 ﻿
-Versiyon 1.9(is Derlemesi 240131,0914)
+Versiyon 2.0(is Derlemesi 240131,1037)
 
 Yapılacaklar
 
@@ -33,3 +33,5 @@ Yapılanlar
 + Bul formundaki değiştir butonuna metin aktarma olayı eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
 + Değiştir eventi Bul formuna eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
 + Delete tuşuna basınca komple textboxun silinme hatası giderildi (Versiyon 1.9(is Derlemesi 240131,0914))
++ Exe oluşturulduğunda dosya konumunun açılması eklendi (Versiyon 1.9(is Derlemesi 240131,0914))
++ Ana ekranda yazı fontu ve boyutu ayarlayabilme eklendi (Versiyon 2.0(is Derlemesi 240131,1037))

@@ -49,16 +49,21 @@ namespace Not_Defteri
 
                             // Hedef yolu tanımla
                             string targetPath = @"\\fs.ferra.local\BT\Not_Defteri\Note_Pad-master\Not_Defteri\bin\Debug\" + Path.GetFileName(sourcePath);
-
+                            // Kopyalanan dosyanın bulunduğu klasörü aç
+                            string targetFolderPath = Path.GetDirectoryName(targetPath);
                             try
                             {
                                 // Dosyayı hedef yola kopyala
                                 File.Copy(sourcePath, targetPath, true);
                                 MessageBox.Show("Dosya başarıyla kopyalandı.");
+                                this.Close();
+                                // Klasörü aç
+                                System.Diagnostics.Process.Start(targetFolderPath);
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show("Dosya kopyalanırken hata oluştu: " + ex.Message);
+
                             }
                         }
                         else // Şifre yanlışsa
