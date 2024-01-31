@@ -14,7 +14,7 @@ namespace Not_Defteri
     {
         public Font SecilenYaziTipi { get; private set; }
         public delegate void FontChangedDelegate(Font newFont);
-        public event FontChangedDelegate FontChanged;
+        public new event FontChangedDelegate FontChanged;
 
         public YaziTipi(Font mevcutYaziTipi)
         {

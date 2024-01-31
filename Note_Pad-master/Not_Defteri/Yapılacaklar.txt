@@ -20,6 +20,7 @@ Bilenen hatalar ve eklenecekler
 -yazı tipi formundan yazı fontunu elle girilebilme eklenecek
 -Font boyut azaltma arttırma kısayoluna basıldıgında boyutu da azalttıgını gösterecek
 -değiştir yaptıktan sonra devamında renkli yazmaya devam ediyor
+-mouse whell ile fon büyütme kalıcılık saglanacak
 
 
 Yapılanlar
