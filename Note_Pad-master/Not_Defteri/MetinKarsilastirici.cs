@@ -22,7 +22,6 @@ namespace Not_Defteri
 
 
             this.AcceptButton = compareButton;
-            this.AcceptButton = btnTemizle;
             compareButton.Click += CompareTexts;
            
 

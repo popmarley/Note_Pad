@@ -75,6 +75,7 @@
             this.degistirButton.TabIndex = 4;
             this.degistirButton.Text = "Değiştir";
             this.degistirButton.UseVisualStyleBackColor = true;
+            this.degistirButton.Click += new System.EventHandler(this.degistirButton_Click);
             // 
             // sonrakiniBulButton
             // 
@@ -115,6 +116,7 @@
             this.tumunuDegistirButton.TabIndex = 5;
             this.tumunuDegistirButton.Text = "Tümünü Değiştir";
             this.tumunuDegistirButton.UseVisualStyleBackColor = true;
+            this.tumunuDegistirButton.Click += new System.EventHandler(this.tumunuDegistirButton_Click);
             // 
             // label2
             // 

@@ -218,7 +218,18 @@ namespace Not_Defteri
 
         private void silToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox.Clear();
+            // İmlecin bulunduğu konumu al
+            int cursorPosition = richTextBox.SelectionStart;
+
+            // Eğer metin varsa ve imleç metnin sonunda değilse, bir karakter sil
+            if (richTextBox.Text.Length > 0 && cursorPosition < richTextBox.Text.Length)
+            {
+                // Metni, imleçten önceki ve sonraki kısmı birleştirerek güncelle
+                richTextBox.Text = richTextBox.Text.Substring(0, cursorPosition) + richTextBox.Text.Substring(cursorPosition + 1);
+
+                // İmleci eski konumuna geri getir
+                richTextBox.SelectionStart = cursorPosition;
+            }
         }
 
         private void richTextBox_LinkClicked(object sender, LinkClickedEventArgs e)

@@ -41,7 +41,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.Location = new System.Drawing.Point(12, 79);
+            this.textBox1.Location = new System.Drawing.Point(60, 108);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -52,7 +52,7 @@
             // textBox2
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox2.Location = new System.Drawing.Point(361, 79);
+            this.textBox2.Location = new System.Drawing.Point(409, 108);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -63,7 +63,7 @@
             // compareButton
             // 
             this.compareButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.compareButton.Location = new System.Drawing.Point(249, 291);
+            this.compareButton.Location = new System.Drawing.Point(297, 320);
             this.compareButton.Name = "compareButton";
             this.compareButton.Size = new System.Drawing.Size(86, 28);
             this.compareButton.TabIndex = 3;
@@ -73,7 +73,7 @@
             // resultBox
             // 
             this.resultBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.resultBox.Location = new System.Drawing.Point(10, 325);
+            this.resultBox.Location = new System.Drawing.Point(58, 354);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
             this.resultBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
@@ -85,7 +85,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 50);
+            this.label1.Location = new System.Drawing.Point(107, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 26);
             this.label1.TabIndex = 3;
@@ -95,7 +95,7 @@
             // btnTemizle
             // 
             this.btnTemizle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnTemizle.Location = new System.Drawing.Point(361, 291);
+            this.btnTemizle.Location = new System.Drawing.Point(409, 320);
             this.btnTemizle.Name = "btnTemizle";
             this.btnTemizle.Size = new System.Drawing.Size(98, 28);
             this.btnTemizle.TabIndex = 4;
@@ -107,7 +107,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(423, 50);
+            this.label2.Location = new System.Drawing.Point(471, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(200, 26);
             this.label2.TabIndex = 3;
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 511);
+            this.ClientSize = new System.Drawing.Size(781, 569);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -79,15 +80,84 @@ namespace Not_Defteri
         }
         private void ResetHighlight()
         {
-            TextBoxReferans.SelectAll();
-            TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
-            TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
-            TextBoxReferans.DeselectAll();
+            if (TextBoxReferans != null)
+            {
+                TextBoxReferans.SelectAll();
+                TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
+                TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
+                TextBoxReferans.DeselectAll();
+            }
         }
 
         private void arananTextBox_TextChanged(object sender, EventArgs e)
         {
             sonrakiniBulButton.Enabled = !string.IsNullOrEmpty(arananTextBox.Text);
+        }
+
+        private void degistirButton_Click(object sender, EventArgs e)
+        {
+            Degistirr();
+        }
+
+        private void tumunuDegistirButton_Click(object sender, EventArgs e)
+        {
+            TumunuDegistir();
+        }
+
+        // Tek bir eşleşmeyi değiştiren metod
+        private void Degistirr()
+        {// Aranan metin ve yeni metin alınıyor.
+            string yeniMetin = yeniDegerTextBox.Text;
+
+            // Seçili metnin başlangıç konumu ve uzunluğunu al
+            int selectionStart = TextBoxReferans.SelectionStart;
+            int selectionLength = TextBoxReferans.SelectionLength;
+
+            // Seçili metni, yeni metinle değiştir
+            TextBoxReferans.Select(selectionStart, selectionLength);
+            TextBoxReferans.SelectedText = yeniMetin;
+
+            // Yeni değiştirilen metni seç
+            TextBoxReferans.Select(selectionStart, yeniMetin.Length);
+        }
+
+       
+
+        // Tüm eşleşmeleri değiştiren metod
+        private void TumunuDegistir()
+        {
+            // RichTextBox içindeki tüm aranan metin örneklerini değiştirir
+            string arananMetin = arananTextBox.Text;
+            string yeniMetin = yeniDegerTextBox.Text;
+            RichTextBoxFinds options = GetOptions();
+
+            // Arama ve değiştirme işlemleri için geçici olarak olayları devre dışı bırak
+            TextBoxReferans.TextChanged -= new EventHandler(arananTextBox_TextChanged);
+
+            if (!string.IsNullOrEmpty(arananMetin))
+            {
+                int index = 0;
+                while ((index = TextBoxReferans.Find(arananMetin, index, options)) != -1)
+                {
+                    TextBoxReferans.Select(index, arananMetin.Length);
+                    TextBoxReferans.SelectedText = yeniMetin;
+                    index += yeniMetin.Length; // Değiştirilen metnin sonundan devam et
+                }
+            }
+
+            // Olay işleyicilerini tekrar bağla
+            TextBoxReferans.TextChanged += new EventHandler(arananTextBox_TextChanged);
+
+        }
+
+        private RichTextBoxFinds GetOptions()
+        {
+            RichTextBoxFinds options = RichTextBoxFinds.None;
+            if (buyukKucukHarfCheckBox.Checked)
+            {
+                options |= RichTextBoxFinds.MatchCase;
+            }
+            return options;
         }
     }
 }

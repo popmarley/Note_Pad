@@ -14,6 +14,8 @@ namespace Not_Defteri
 	{
 
 		public RichTextBox TextBoxReferans { get; set; }
+        private Degistir degistirForm = null;
+      
         public Bul()
 		{
 			InitializeComponent();
@@ -94,9 +96,16 @@ namespace Not_Defteri
 
         private void btnDegistir_Click(object sender, EventArgs e)
         {
-            this.Close();
-            Degistir degistir = new Degistir();
-            degistir.Show();
+            
+            if (degistirForm == null || degistirForm.IsDisposed)
+            {
+                degistirForm = new Degistir();
+                degistirForm.TextBoxReferans = this.TextBoxReferans; // richTextBox referansını geçir
+            }
+
+            degistirForm.Show();
+           this.Close();
+            
         }
     }
 }
