@@ -74,5 +74,22 @@ namespace Not_Defteri
                 }
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string email = "huseyinozguven@ferrafilter.com";
+            string subject = Uri.EscapeUriString("Not Defteri Uygulaması Görüş ve Öneri");
+            string url = $"mailto:{email}?subject={subject}";
+
+            try
+            {
+                System.Diagnostics.Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                // Hata durumunda kullanıcıya bilgi ver
+                MessageBox.Show("Mail uygulaması açılırken bir hata oluştu: " + ex.Message);
+            }
+        }
     }
 }

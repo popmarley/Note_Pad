@@ -33,6 +33,8 @@
             this.btnTamam = new System.Windows.Forms.Button();
             this.pbPopMarley = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbPopMarley)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,11 +84,33 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(68, 272);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(127, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Görüş ve Önerileriniz İçin:";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(192, 272);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(43, 13);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Tıklayın";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Hakkinda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(554, 325);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pbPopMarley);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnTamam);
@@ -111,5 +135,7 @@
 		private System.Windows.Forms.Button btnTamam;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pbPopMarley;
-	}
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+    }
 }
