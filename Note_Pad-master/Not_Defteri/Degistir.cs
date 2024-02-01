@@ -107,18 +107,36 @@ namespace Not_Defteri
         // Tek bir eşleşmeyi değiştiren metod
         private void Degistirr()
         {// Aranan metin ve yeni metin alınıyor.
+            string arananMetin = arananTextBox.Text;
             string yeniMetin = yeniDegerTextBox.Text;
 
-            // Seçili metnin başlangıç konumu ve uzunluğunu al
-            int selectionStart = TextBoxReferans.SelectionStart;
-            int selectionLength = TextBoxReferans.SelectionLength;
+            if (!string.IsNullOrEmpty(arananMetin) && TextBoxReferans.SelectionLength > 0)
+            {
+                int selectionStart = TextBoxReferans.SelectionStart;
 
-            // Seçili metni, yeni metinle değiştir
-            TextBoxReferans.Select(selectionStart, selectionLength);
-            TextBoxReferans.SelectedText = yeniMetin;
+                // Eğer seçim başlangıcı 0'dan büyükse, bir karakter geriye git
+                if (selectionStart > 0)
+                {
+                    selectionStart -= 1;
+                }
 
-            // Yeni değiştirilen metni seç
-            TextBoxReferans.Select(selectionStart, yeniMetin.Length);
+                string seciliMetin = TextBoxReferans.Text.Substring(selectionStart, arananMetin.Length);
+
+                if (seciliMetin.Equals(arananMetin))
+                {
+                    // Seçili metni, yeni metinle değiştir
+                    TextBoxReferans.Select(selectionStart, arananMetin.Length);
+                    TextBoxReferans.SelectedText = yeniMetin;
+                }
+                else
+                {
+                    MessageBox.Show("Seçili metin, aranan metinle eşleşmiyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen değiştirilecek metni seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
        
