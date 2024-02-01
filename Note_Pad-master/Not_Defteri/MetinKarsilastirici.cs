@@ -126,6 +126,11 @@ namespace Not_Defteri
             textBox2.Clear();
             resultBox.Clear();
         }
+
+        private void MetinKarsilastirici_Load(object sender, EventArgs e)
+        {
+            this.Size = new Size(710, 517);
+        }
     }
 
 }
