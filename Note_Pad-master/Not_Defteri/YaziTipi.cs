@@ -87,6 +87,7 @@ namespace Not_Defteri
 
         private void txtboxYaziTipi_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListeleYaziTipiStilleri();
             // Mevcut stil seçimini sakla
             var currentStyleSelection = txtboxYaziTipiStili.SelectedItem?.ToString();
 
@@ -170,6 +171,25 @@ namespace Not_Defteri
             this.Close();
         }
 
+        private void ListeleYaziTipiStilleri()
+        {
+            txtboxYaziTipiStili.Items.Clear();
+            string selectedFontName = txtboxYaziTipi.SelectedItem.ToString();
+            using (var fontCollection = new System.Drawing.Text.InstalledFontCollection())
+            {
+                var fontFamily = fontCollection.Families.FirstOrDefault(f => f.Name == selectedFontName);
+                if (fontFamily != null)
+                {
+                    foreach (FontStyle style in Enum.GetValues(typeof(FontStyle)))
+                    {
+                        if (fontFamily.IsStyleAvailable(style))
+                        {
+                            txtboxYaziTipiStili.Items.Add(style.ToString());
+                        }
+                    }
+                }
+            }
+        }
 
     }
 }

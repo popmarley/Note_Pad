@@ -37,3 +37,4 @@ Yapılanlar
 + Değiştir formunda değiştire basınca harfle eşleşmiyor hatası giderildi (Versiyon 2.1(is Derlemesi 240201,0855))
 + Bul ve değiştir eventlerinde iyileştirmeler yapıldı (Versiyon 2.1(is Derlemesi 240201,0855))
 + Metin karşılaştırıcı formunun boyutunun ayarlanmama hatası düzeltildi (Versiyon 2.1(is Derlemesi 240201,0855))
++ Yazı tiplerinde eksik olan stiller eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
