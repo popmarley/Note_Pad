@@ -399,7 +399,7 @@ namespace Not_Defteri
         private void saatTarihToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Saat/Tarih bilgisini metin kutusunun mevcut konumuna ekler.
-            richTextBox.SelectedText = DateTime.Now.ToString();
+            richTextBox.SelectedText = " "+DateTime.Now.ToString();
         }
 
         #endregion
@@ -761,9 +761,33 @@ namespace Not_Defteri
         {
             if (richTextBox.SelectionFont != null)
             {
-                float newSize = richTextBox.SelectionFont.Size + change;
+                // Mevcut boyutu al ve değişikliği uygula
+                float currentSize = richTextBox.SelectionFont.Size;
+                int newSize = (int)(currentSize + change);
                 newSize = Math.Max(1, newSize); // Font boyutunu 1'den küçük olmamasını sağlar
+
+                // Font boyutunu güncelle
                 richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, newSize, richTextBox.SelectionFont.Style);
+
+                // toolStripComboBoxYaziBoyutu'nu güncelle
+                UpdateComboBoxFontSize(newSize);
+            }
+        }
+
+        private void UpdateComboBoxFontSize(float newSize)
+        {
+            string newSizeString = newSize.ToString();
+
+            // Eğer yeni boyut zaten listede varsa, onu seç
+            if (toolStripComboBoxYaziBoyutu.Items.Contains(newSizeString))
+            {
+                toolStripComboBoxYaziBoyutu.SelectedItem = newSizeString;
+            }
+            else
+            {
+                // Değilse, yeni değeri listeye ekle ve seç
+                toolStripComboBoxYaziBoyutu.Items.Add(newSizeString);
+                toolStripComboBoxYaziBoyutu.SelectedItem = newSizeString;
             }
         }
 
@@ -878,9 +902,14 @@ namespace Not_Defteri
         private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Seçili yazı boyutunu ve mevcut yazı tipini kullanarak yeni Font nesnesi oluştur
-            if (float.TryParse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString(), out float seciliBoyut))
+            if (float.TryParse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString(), out float seciliBoyut) && seciliBoyut > 0)
             {
                 richTextBox.Font = new Font(richTextBox.Font.FontFamily, seciliBoyut, richTextBox.Font.Style);
+            }
+            else
+            {
+                // Başarısız parse işlemi için hata mesajı göster veya varsayılan bir değer kullan
+                richTextBox.Font = new Font(richTextBox.Font.FontFamily, 12.0f, richTextBox.Font.Style);
             }
         }
 
