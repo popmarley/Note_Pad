@@ -62,8 +62,20 @@ namespace Not_Defteri
             richTextBox.ContextMenuStrip = richtextBoxContextMenu;
 
             LoadFontSettings();
+            LoadTextStyleSettings();
         }
+        private void LoadTextStyleSettings()
+        {
+            isBoldActive = Properties.Settings.Default.isBoldActive;
+            isItalicActive = Properties.Settings.Default.isItalicActive;
+            isUnderlineActive = Properties.Settings.Default.isUnderlineActive;
+            UpdateFontStyle(); // Mevcut yazı stilini ayarlar
 
+            // Butonların Checked durumlarını güncelle
+            KalinStripButton6.Checked = isBoldActive;
+            İtalicStripButton7.Checked = isItalicActive;
+            AltiCizgiliStripButton8.Checked = isUnderlineActive;
+        }
 
         private void LoadFontSettings()
         {
@@ -288,18 +300,28 @@ namespace Not_Defteri
         {
             isBoldActive = !isBoldActive;
             UpdateFontStyle();
+            Properties.Settings.Default.isBoldActive = isBoldActive;
+            Properties.Settings.Default.Save();
+            KalinStripButton6.Checked = isBoldActive;
         }
 
         private void İtalicStripButton7_Click(object sender, EventArgs e)
         {
             isItalicActive = !isItalicActive;
             UpdateFontStyle();
+            Properties.Settings.Default.isItalicActive = isItalicActive;
+            Properties.Settings.Default.Save();
+            İtalicStripButton7.Checked = isItalicActive;
         }
 
         private void AltiCizgiliStripButton8_Click(object sender, EventArgs e)
         {
             isUnderlineActive = !isUnderlineActive;
             UpdateFontStyle();
+            Properties.Settings.Default.isUnderlineActive = isUnderlineActive;
+            Properties.Settings.Default.Save();
+            AltiCizgiliStripButton8.Checked = isUnderlineActive;
+
         }
 
         private void BuyutStripButton11_Click(object sender, EventArgs e)

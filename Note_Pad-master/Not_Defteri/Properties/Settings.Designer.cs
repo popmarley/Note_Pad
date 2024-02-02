@@ -82,5 +82,41 @@ namespace Not_Defteri.Properties {
                 this["DurumCubuguVisible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isBoldActive {
+            get {
+                return ((bool)(this["isBoldActive"]));
+            }
+            set {
+                this["isBoldActive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isItalicActive {
+            get {
+                return ((bool)(this["isItalicActive"]));
+            }
+            set {
+                this["isItalicActive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isUnderlineActive {
+            get {
+                return ((bool)(this["isUnderlineActive"]));
+            }
+            set {
+                this["isUnderlineActive"] = value;
+            }
+        }
     }
 }

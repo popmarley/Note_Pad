@@ -11,7 +11,7 @@ Bilenen hatalar ve eklenecekler
 -yazıcılar eventi güncellenecek
 -hakkında kısmını her güncellemeye göre metnin değişmesini sagla
 -metin karşılastırıcı text fon yazı biçimine bagla
--kısayollar da programı aç kapa yapınca kalıcılıgı sagla
+-kısayollarda ki değişiklik yazı tipi stilinde de işlenecek
 -sadece seçilen metinin yazı fontu ve boyutunu ayarlama
 -yazı tipi formundan yazı fontunu elle girilebilme eklenecek
 -değiştir/bul yaptıktan sonra devamında renkli yazmaya devam ediyor
@@ -39,3 +39,4 @@ Yapılanlar
 + Metin karşılaştırıcı formunun boyutunun ayarlanmama hatası düzeltildi (Versiyon 2.1(is Derlemesi 240201,0855))
 + Yazı tiplerinde eksik olan stiller eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
 + Hakkında formuna görüş ve öneri sunmak için link eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
++ Kısayollar da programı aç kapa yapınca kalıcılık sağlandı (Versiyon 2.2(is Derlemesi 240202,1006))
