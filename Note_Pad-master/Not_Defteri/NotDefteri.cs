@@ -968,6 +968,47 @@ namespace Not_Defteri
             toolStrip1.Visible = menulerToolStripMenuItem.Checked;
             toolStrip2.Visible = menulerToolStripMenuItem.Checked;
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // menulerToolStripMenuItem'nin Checked durumunu kontrol et
+            if (!menulerToolStripMenuItem.Checked)
+            {
+                // Eğer menüler etkin değilse, herhangi bir uyarı gösterme
+                pbUyari.Visible = false;
+                lblUyari.Visible = false;
+                return; // Ve metodu erken bitir
+            }
+            // CapsLock veya Insert tuşunun etkin olup olmadığını kontrol et
+            bool capsLockActive = Control.IsKeyLocked(Keys.CapsLock);
+            bool insertActive = Control.IsKeyLocked(Keys.Insert);
+
+            // Uyarıları ayarla
+            if (capsLockActive && insertActive)
+            {
+                lblUyari.Text = "CapsLock ve Insert AÇIK!";
+                pbUyari.Visible = true;
+                lblUyari.Visible = true;
+            }
+            else if (capsLockActive)
+            {
+                lblUyari.Text = "CapsLock AÇIK!";
+                pbUyari.Visible = true;
+                lblUyari.Visible = true;
+            }
+            else if (insertActive)
+            {
+                lblUyari.Text = "Insert AÇIK!";
+                pbUyari.Visible = true;
+                lblUyari.Visible = true;
+            }
+            else
+            {
+                // Eğer CapsLock ve Insert kapalıysa, uyarıyı gizle
+                pbUyari.Visible = false;
+                lblUyari.Visible = false;
+            }
+        }
     }
 
 }
