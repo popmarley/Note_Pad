@@ -624,6 +624,11 @@ namespace Not_Defteri
 
         private void DuplicateCurrentLineToNextLine()
         {
+            if (richTextBox.Text.Length == 0 || richTextBox.Lines.Length == 0)
+            {
+                // Metin kutusu boşsa veya satır yoksa, işlemi yapma ve metottan çık
+                return;
+            }
             int selectionStart = richTextBox.SelectionStart;
             int currentLineIndex = richTextBox.GetLineFromCharIndex(selectionStart); // Mevcut satır numarasını al
             int lineStart = richTextBox.GetFirstCharIndexOfCurrentLine(); // Mevcut satırın başlangıç indeksini al
