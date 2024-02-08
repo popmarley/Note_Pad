@@ -610,6 +610,33 @@ namespace Not_Defteri
                 SaveFile();
                 e.Handled = true; // Klavye olayını işlendi olarak işaretle
             }
+            else if (e.KeyCode == Keys.F12) // F12 tuşu kontrolü
+            {
+                SaveFileAs(); // Farklı Kaydet metodunu çağır
+                e.Handled = true; // Klavye olayını işlendi olarak işaretle
+            }
+            else if (e.Control && e.KeyCode == Keys.D) // Ctrl+D tuş kombinasyonunu kontrol et
+            {
+                DuplicateCurrentLine();
+                e.Handled = true; // Klavye olayını işlendi olarak işaretle
+            }
+        }
+
+        private void DuplicateCurrentLine()
+        {
+            int startLineIndex = richTextBox.GetFirstCharIndexOfCurrentLine(); // Mevcut satırın ilk karakterinin indeksini al
+            int currentLine = richTextBox.GetLineFromCharIndex(startLineIndex); // Mevcut satır numarasını al
+            int lineLength = currentLine < richTextBox.Lines.Length - 1 ? richTextBox.Lines[currentLine].Length + 1 : richTextBox.Lines[currentLine].Length; // Satır uzunluğunu al (+1 yeni satır karakteri için, son satır hariç)
+            string currentLineText = richTextBox.Text.Substring(startLineIndex, lineLength); // Mevcut satır metnini al
+
+            // Eğer mevcut satır son satırsa, yapıştırma işleminden önce yeni bir satır eklenir
+            if (currentLine >= richTextBox.Lines.Length - 1)
+            {
+                currentLineText += Environment.NewLine;
+            }
+
+            richTextBox.SelectionStart = startLineIndex + lineLength; // Yapıştırma konumunu mevcut satırın sonuna ayarla
+            richTextBox.SelectedText = currentLineText; // Kopyalanan satırı yapıştır
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.3(is Derlemesi 240205,1358)
+Versiyon 2.4(is Derlemesi 240208,1617)
 
 Bilenen hatalar ve eklenecekler
 
@@ -40,3 +40,4 @@ Yapılanlar
 + Hakkında formuna görüş ve öneri sunmak için link eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
 + Kısayollar da programı aç kapa yapınca kalıcılık sağlandı (Versiyon 2.2(is Derlemesi 240202,1006))
 + Capslock veya insert tuşu açıksa uyarı verme olayı eklendi (Versiyon 2.3(is Derlemesi 240205,1358))
++ Ctrl+D ve F12 (Farklı Kaydet) işlevleri eklendi (Versiyon 2.4(is Derlemesi 240208,1617))
