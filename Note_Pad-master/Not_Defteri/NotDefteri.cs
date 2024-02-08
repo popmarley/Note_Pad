@@ -617,27 +617,49 @@ namespace Not_Defteri
             }
             else if (e.Control && e.KeyCode == Keys.D) // Ctrl+D tuş kombinasyonunu kontrol et
             {
-                DuplicateCurrentLine();
+                DuplicateCurrentLineToNextLine();
                 e.Handled = true; // Klavye olayını işlendi olarak işaretle
             }
         }
 
-        private void DuplicateCurrentLine()
+        private void DuplicateCurrentLineToNextLine()
         {
-            int startLineIndex = richTextBox.GetFirstCharIndexOfCurrentLine(); // Mevcut satırın ilk karakterinin indeksini al
-            int currentLine = richTextBox.GetLineFromCharIndex(startLineIndex); // Mevcut satır numarasını al
-            int lineLength = currentLine < richTextBox.Lines.Length - 1 ? richTextBox.Lines[currentLine].Length + 1 : richTextBox.Lines[currentLine].Length; // Satır uzunluğunu al (+1 yeni satır karakteri için, son satır hariç)
-            string currentLineText = richTextBox.Text.Substring(startLineIndex, lineLength); // Mevcut satır metnini al
+            int selectionStart = richTextBox.SelectionStart;
+            int currentLineIndex = richTextBox.GetLineFromCharIndex(selectionStart); // Mevcut satır numarasını al
+            int lineStart = richTextBox.GetFirstCharIndexOfCurrentLine(); // Mevcut satırın başlangıç indeksini al
+            int lineLength = richTextBox.Lines[currentLineIndex].Length; // Mevcut satırın uzunluğunu al
 
-            // Eğer mevcut satır son satırsa, yapıştırma işleminden önce yeni bir satır eklenir
-            if (currentLine >= richTextBox.Lines.Length - 1)
+            string currentLineText = richTextBox.Lines[currentLineIndex] + Environment.NewLine; // Mevcut satır metni ve yeni satır karakteri
+
+            // Kopyalama yapılacak konum hesaplama
+            int insertPosition;
+            if (currentLineIndex < richTextBox.Lines.Length - 1)
             {
-                currentLineText += Environment.NewLine;
+                // Eğer mevcut satır son satır değilse, bir sonraki satırın başlangıcını hesapla
+                insertPosition = richTextBox.GetFirstCharIndexFromLine(currentLineIndex + 1);
+            }
+            else
+            {
+                // Eğer mevcut satır son satırsa, mevcut satırın sonuna yeni satır ekle
+                insertPosition = lineStart + lineLength;
+                currentLineText += Environment.NewLine; // Son satıra ekstra yeni satır eklenir
             }
 
-            richTextBox.SelectionStart = startLineIndex + lineLength; // Yapıştırma konumunu mevcut satırın sonuna ayarla
+            richTextBox.SelectionStart = insertPosition; // Yapıştırma konumunu ayarla
             richTextBox.SelectedText = currentLineText; // Kopyalanan satırı yapıştır
+
+            // İmleci kopyalanan içeriğin sonuna taşı
+            if (currentLineIndex < richTextBox.Lines.Length - 1)
+            {
+                richTextBox.SelectionStart = insertPosition + currentLineText.Length - Environment.NewLine.Length;
+            }
+            else
+            {
+                richTextBox.SelectionStart = insertPosition + currentLineText.Length;
+            }
         }
+
+
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
