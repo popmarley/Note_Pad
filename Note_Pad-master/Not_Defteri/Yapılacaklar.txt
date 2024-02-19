@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.5(is Derlemesi 240219,0948)
+Versiyon 2.5(is Derlemesi 240219,1751)
 
 Bilenen hatalar ve eklenecekler
 
@@ -42,3 +42,4 @@ Yapılanlar
 + Capslock veya insert tuşu açıksa uyarı verme olayı eklendi (Versiyon 2.3(is Derlemesi 240205,1358))
 + Ctrl+D ve F12 (Farklı Kaydet) işlevleri eklendi (Versiyon 2.4(is Derlemesi 240208,1617))
 + Dosyaları UTF-8 Encoding ile kaydetme ve okuma eklendi (Versiyon 2.5(is Derlemesi 240219,0948))
++ Açık/Kapalı tema işlevi eklendi (Versiyon 2.5(is Derlemesi 240219,1751))

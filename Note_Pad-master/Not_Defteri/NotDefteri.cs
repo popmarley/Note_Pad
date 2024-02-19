@@ -604,6 +604,16 @@ namespace Not_Defteri
             // Kaydedilen durum cubugu görünürlüğünü yükle ve uygula
             durumcubuguToolStripMenuItem.Checked = Properties.Settings.Default.MenulerVisible;
             statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
+
+            string themeMode = Properties.Settings.Default["ThemeMode"].ToString();
+            if (themeMode == "Dark")
+            {
+                ToggleDarkMode();
+            }
+            else
+            {
+                ToggleLightMode();
+            }
         } 
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
@@ -1065,6 +1075,98 @@ namespace Not_Defteri
                 pbUyari.Visible = false;
                 lblUyari.Visible = false;
             }
+        }
+
+        private bool isDarkModeEnabled = false; // Koyu mod durumunu takip eden değişken
+
+        private void ToggleDarkMode()
+        {
+            
+            
+                // Koyu modu etkinleştir
+                this.BackColor = Color.FromArgb(45, 45, 48); // Koyu arka plan rengi
+                richTextBox.BackColor = Color.FromArgb(30, 30, 30); // RichTextBox için koyu arka plan
+                richTextBox.ForeColor = Color.WhiteSmoke; // Açık metin rengi
+                menuStrip.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                menuStrip.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                toolStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                toolStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                toolStrip2.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                toolStrip2.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                statusStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                statusStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                toolStripMenuItem1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                toolStripMenuItem1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                düzenToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                düzenToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                biçimToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                biçimToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                görünümToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                görünümToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                uygulamalarToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                uygulamalarToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+                yardımToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+                yardımToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+
+
+            isDarkModeEnabled = true;
+
+            Properties.Settings.Default["ThemeMode"] = "Dark";
+            Properties.Settings.Default.Save(); // Ayarı kaydet
+            UpdateMenuChecks("Dark");
+        }
+        private void koyuModToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Koyu modu etkinleştir veya devre dışı bırak
+            ToggleDarkMode();
+        }
+
+        private void acikMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Açık modu etkinleştir
+            ToggleLightMode();
+        }
+
+        private void ToggleLightMode()
+        {
+            // Koyu modu devre dışı bırak
+            this.BackColor = SystemColors.Control; // Formun arka plan rengi
+            richTextBox.BackColor = Color.White; // RichTextBox'ın arka plan rengi
+            richTextBox.ForeColor = Color.Black; // RichTextBox'ın metin rengi
+            menuStrip.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            menuStrip.ForeColor = Color.Black; // Menü strip'in metin rengi
+            toolStrip1.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            toolStrip1.ForeColor = Color.Black; // Menü strip'in metin rengi
+            toolStrip2.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            toolStrip2.ForeColor = Color.Black; // Menü strip'in metin rengi
+            statusStrip1.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            statusStrip1.ForeColor = Color.Black; // Menü strip'in metin rengi
+            toolStripMenuItem1.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            toolStripMenuItem1.ForeColor = Color.Black; // Menü strip'in metin rengi
+            düzenToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            düzenToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
+            biçimToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            biçimToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
+            görünümToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            görünümToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
+            uygulamalarToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            uygulamalarToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
+            yardımToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
+            yardımToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
+
+            // Koyu mod durumunu false yap (açık mod aktif)
+            isDarkModeEnabled = false;
+
+            Properties.Settings.Default["ThemeMode"] = "Light";
+            Properties.Settings.Default.Save(); // Ayarı kaydet
+            UpdateMenuChecks("Light");
+        }
+
+        private void UpdateMenuChecks(string mode)
+        {
+            // Menü öğelerindeki işaretleri güncelle
+            acikMToolStripMenuItem.Checked = (mode == "Light");
+            koyuModToolStripMenuItem.Checked = (mode == "Dark");
         }
     }
 
