@@ -92,7 +92,8 @@ namespace Not_Defteri
         {
             if (File.Exists(filePath))
             {
-                richTextBox.Text = File.ReadAllText(filePath);
+                // Dosyayı UTF-8 encoding'i ile oku
+                richTextBox.Text = File.ReadAllText(filePath, Encoding.UTF8);
                 currentFilePath = filePath; // Dosya yolu güncelleme
                 savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
                 isFileSaved = true;
@@ -494,7 +495,8 @@ namespace Not_Defteri
             else
             {
                 // Dosya daha önce kaydedilmişse, mevcut dosya yoluna kaydet
-                File.WriteAllText(currentFilePath, richTextBox.Text);
+                // Dosyayı UTF-8 encoding'i ile kaydet
+                File.WriteAllText(currentFilePath, richTextBox.Text, Encoding.UTF8);
                 savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
                 isFileSaved = true;
                 UpdateFormTitle(); // Başlık güncelleme
@@ -515,7 +517,8 @@ namespace Not_Defteri
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
+                    // Dosyayı UTF-8 encoding'i ile kaydet
+                    File.WriteAllText(saveFileDialog.FileName, richTextBox.Text, Encoding.UTF8);
                     currentFilePath = saveFileDialog.FileName; // Yeni dosya yolu güncelleme
                     savedContent = richTextBox.Text;
                     isFileSaved = true;
@@ -601,7 +604,7 @@ namespace Not_Defteri
             // Kaydedilen durum cubugu görünürlüğünü yükle ve uygula
             durumcubuguToolStripMenuItem.Checked = Properties.Settings.Default.MenulerVisible;
             statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
-        }
+        } 
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
         {

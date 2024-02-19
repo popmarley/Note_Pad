@@ -132,6 +132,7 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -455,7 +456,8 @@ namespace Not_Defteri
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4});
+            this.toolStripStatusLabel4,
+            this.toolStripStatusLabel5});
             this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(835, 22);
@@ -1003,6 +1005,12 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(38, 17);
+            this.toolStripStatusLabel5.Text = "UTF-8";
+            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1139,5 +1147,6 @@ namespace Not_Defteri
         private PictureBox pbUyari;
         private Label lblUyari;
         private Timer timer1;
+        private ToolStripStatusLabel toolStripStatusLabel5;
     }
 }
