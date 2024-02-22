@@ -42,7 +42,7 @@ Projeye katkıda bulunmak isteyenler için katkıda bulunma rehberimiz [CONTRIBU
 
 ## İletişim
 
-Öneri, soru veya geri bildirimleriniz için [issues](https://github.com/{popmarley}/{repo}/issues) sayfasını kullanabilirsiniz.
+Öneri, soru veya geri bildirimleriniz için [issues](https://github.com/popmarley/Note_Pad/issues) sayfasını kullanabilirsiniz.
 
 ---
 
