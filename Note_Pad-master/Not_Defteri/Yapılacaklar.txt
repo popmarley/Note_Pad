@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.5(is Derlemesi 240219,1751)
+Versiyon 2.6(is Derlemesi 240227,1424)
 
 Bilenen hatalar ve eklenecekler
 
@@ -43,3 +43,4 @@ Yapılanlar
 + Ctrl+D ve F12 (Farklı Kaydet) işlevleri eklendi (Versiyon 2.4(is Derlemesi 240208,1617))
 + Dosyaları UTF-8 Encoding ile kaydetme ve okuma eklendi (Versiyon 2.5(is Derlemesi 240219,0948))
 + Açık/Kapalı tema işlevi eklendi (Versiyon 2.5(is Derlemesi 240219,1751))
++ Saat ve Tarih göstergesi eklendi (Versiyon 2.6(is Derlemesi 240227,1424))

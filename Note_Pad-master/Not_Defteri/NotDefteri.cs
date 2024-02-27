@@ -1075,6 +1075,9 @@ namespace Not_Defteri
                 pbUyari.Visible = false;
                 lblUyari.Visible = false;
             }
+
+            // Tarih ve saati ToolStripStatusLabel'a yaz
+            toolStripStatusLabel6.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
         }
 
         private bool isDarkModeEnabled = false; // Koyu mod durumunu takip eden değişken

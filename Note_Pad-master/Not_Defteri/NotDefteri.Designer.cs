@@ -61,6 +61,9 @@ namespace Not_Defteri
             this.varsayilanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.durumcubuguToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menulerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.koyuModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acikMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uygulamalarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metinKarsilastiriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hesapMakinesiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +75,7 @@ namespace Not_Defteri
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.GeriAlStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -132,10 +136,8 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.koyuModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acikMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -347,7 +349,7 @@ namespace Not_Defteri
             // yazimBicimiToolStripMenuItem
             // 
             this.yazimBicimiToolStripMenuItem.Name = "yazimBicimiToolStripMenuItem";
-            this.yazimBicimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.yazimBicimiToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.yazimBicimiToolStripMenuItem.Text = "Yazı Tipi...";
             this.yazimBicimiToolStripMenuItem.Click += new System.EventHandler(this.yazimBicimiToolStripMenuItem_Click);
             // 
@@ -369,7 +371,7 @@ namespace Not_Defteri
             this.uzaklastirToolStripMenuItem,
             this.varsayilanToolStripMenuItem});
             this.yakınlaştırToolStripMenuItem.Name = "yakınlaştırToolStripMenuItem";
-            this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.yakınlaştırToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.yakınlaştırToolStripMenuItem.Text = "Yakınlaştır";
             // 
             // yakınlastirToolStripMenuItem1
@@ -398,7 +400,7 @@ namespace Not_Defteri
             this.durumcubuguToolStripMenuItem.Checked = true;
             this.durumcubuguToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.durumcubuguToolStripMenuItem.Name = "durumcubuguToolStripMenuItem";
-            this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.durumcubuguToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.durumcubuguToolStripMenuItem.Text = "Durum Çubuğu";
             this.durumcubuguToolStripMenuItem.Click += new System.EventHandler(this.durumcubuguToolStripMenuItem_Click);
             // 
@@ -407,9 +409,32 @@ namespace Not_Defteri
             this.menulerToolStripMenuItem.Checked = true;
             this.menulerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menulerToolStripMenuItem.Name = "menulerToolStripMenuItem";
-            this.menulerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.menulerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.menulerToolStripMenuItem.Text = "Menüler";
             this.menulerToolStripMenuItem.Click += new System.EventHandler(this.menulerToolStripMenuItem_Click);
+            // 
+            // temaToolStripMenuItem
+            // 
+            this.temaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.koyuModToolStripMenuItem,
+            this.acikMToolStripMenuItem});
+            this.temaToolStripMenuItem.Name = "temaToolStripMenuItem";
+            this.temaToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.temaToolStripMenuItem.Text = "Temalar";
+            // 
+            // koyuModToolStripMenuItem
+            // 
+            this.koyuModToolStripMenuItem.Name = "koyuModToolStripMenuItem";
+            this.koyuModToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.koyuModToolStripMenuItem.Text = "Koyu Mod";
+            this.koyuModToolStripMenuItem.Click += new System.EventHandler(this.koyuModToolStripMenuItem_Click);
+            // 
+            // acikMToolStripMenuItem
+            // 
+            this.acikMToolStripMenuItem.Name = "acikMToolStripMenuItem";
+            this.acikMToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.acikMToolStripMenuItem.Text = "Açık Mod";
+            this.acikMToolStripMenuItem.Click += new System.EventHandler(this.acikMToolStripMenuItem_Click);
             // 
             // uygulamalarToolStripMenuItem
             // 
@@ -423,14 +448,14 @@ namespace Not_Defteri
             // metinKarsilastiriciToolStripMenuItem
             // 
             this.metinKarsilastiriciToolStripMenuItem.Name = "metinKarsilastiriciToolStripMenuItem";
-            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
             // 
             // hesapMakinesiToolStripMenuItem
             // 
             this.hesapMakinesiToolStripMenuItem.Name = "hesapMakinesiToolStripMenuItem";
-            this.hesapMakinesiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hesapMakinesiToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.hesapMakinesiToolStripMenuItem.Text = "Hesap Makinesi";
             this.hesapMakinesiToolStripMenuItem.Click += new System.EventHandler(this.hesapMakinesiToolStripMenuItem_Click);
             // 
@@ -461,7 +486,9 @@ namespace Not_Defteri
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
-            this.toolStripStatusLabel5});
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel7,
+            this.toolStripStatusLabel6});
             this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(835, 22);
@@ -490,6 +517,12 @@ namespace Not_Defteri
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(41, 17);
             this.toolStripStatusLabel4.Text = "Krktr S";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(38, 17);
+            this.toolStripStatusLabel5.Text = "UTF-8";
             // 
             // toolStrip1
             // 
@@ -1009,34 +1042,20 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // toolStripStatusLabel5
+            // toolStripStatusLabel6
             // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(38, 17);
-            this.toolStripStatusLabel5.Text = "UTF-8";
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(617, 17);
+            this.toolStripStatusLabel6.Spring = true;
+            this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
             // 
-            // temaToolStripMenuItem
+            // toolStripStatusLabel7
             // 
-            this.temaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.koyuModToolStripMenuItem,
-            this.acikMToolStripMenuItem});
-            this.temaToolStripMenuItem.Name = "temaToolStripMenuItem";
-            this.temaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.temaToolStripMenuItem.Text = "Temalar";
-            // 
-            // koyuModToolStripMenuItem
-            // 
-            this.koyuModToolStripMenuItem.Name = "koyuModToolStripMenuItem";
-            this.koyuModToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.koyuModToolStripMenuItem.Text = "Koyu Mod";
-            this.koyuModToolStripMenuItem.Click += new System.EventHandler(this.koyuModToolStripMenuItem_Click);
-            // 
-            // acikMToolStripMenuItem
-            // 
-            this.acikMToolStripMenuItem.Name = "acikMToolStripMenuItem";
-            this.acikMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.acikMToolStripMenuItem.Text = "Açık Mod";
-            this.acikMToolStripMenuItem.Click += new System.EventHandler(this.acikMToolStripMenuItem_Click);
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(523, 17);
+            this.toolStripStatusLabel7.Text = "‎‎‎‎‎‎‎‎‎                                                                        " +
+    "                                                                                " +
+    "                    ";
             // 
             // NotDefteri
             // 
@@ -1178,5 +1197,7 @@ namespace Not_Defteri
         private ToolStripMenuItem temaToolStripMenuItem;
         private ToolStripMenuItem koyuModToolStripMenuItem;
         private ToolStripMenuItem acikMToolStripMenuItem;
+        private ToolStripStatusLabel toolStripStatusLabel6;
+        private ToolStripStatusLabel toolStripStatusLabel7;
     }
 }
