@@ -1076,8 +1076,23 @@ namespace Not_Defteri
                 lblUyari.Visible = false;
             }
 
-            // Tarih ve saati ToolStripStatusLabel'a yaz
-            toolStripStatusLabel6.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+            // Tarih ve saati kontrol et
+            DateTime simdi = DateTime.Now;
+            DateTime mesaiBaslangic = new DateTime(simdi.Year, simdi.Month, simdi.Day, 8, 0, 0);
+            DateTime mesaiBitis = new DateTime(simdi.Year, simdi.Month, simdi.Day, 17, 31, 0);
+
+            if (simdi >= mesaiBaslangic && simdi <= mesaiBitis)
+            {
+                // Mesai bitimine kalan süreyi hesapla
+                TimeSpan kalanSure = mesaiBitis - simdi;
+                // Kalan süreyi "saat:dakika" formatında yazdır
+                toolStripStatusLabel6.Text = $"{kalanSure.Hours} saat {kalanSure.Minutes} dakika";
+            }
+            else
+            {
+                // Mesai dışı bir saat dilimindeyse, toolStripStatusLabel6'ya bir şey yazma
+                toolStripStatusLabel6.Text = "";
+            }
         }
 
         private bool isDarkModeEnabled = false; // Koyu mod durumunu takip eden değişken
