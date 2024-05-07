@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech.Recognition;
 
 namespace Not_Defteri
 {
@@ -63,6 +64,27 @@ namespace Not_Defteri
 
             LoadFontSettings();
             LoadTextStyleSettings();
+        }
+
+        private SpeechRecognitionEngine recognizer;
+
+        private void InitializeSpeechRecognition()
+        {
+            recognizer = new SpeechRecognitionEngine();
+
+            // Configure the recognizer
+            recognizer.SetInputToDefaultAudioDevice(); // Set the input to the default audio device
+            recognizer.LoadGrammar(new DictationGrammar()); // Load a dictation grammar
+
+            recognizer.SpeechRecognized += recognizer_SpeechRecognized; // Add an event handler for recognized speech
+            recognizer.RecognizeAsync(RecognizeMode.Multiple); // Start asynchronous recognition
+        }
+
+        private void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() => {
+                richTextBox.AppendText(e.Result.Text + " "); // Append recognized text to the richTextBox
+            }));
         }
         private void LoadTextStyleSettings()
         {
@@ -462,6 +484,12 @@ namespace Not_Defteri
                 {
                     Application.Exit(); // Eğer bu son form ise, uygulamayı kapat
                 }
+            }
+
+            if (recognizer != null)
+            {
+                recognizer.RecognizeAsyncStop();
+                recognizer.Dispose();
             }
 
             Properties.Settings.Default.MenulerVisible = menulerToolStripMenuItem.Checked;
@@ -1079,7 +1107,7 @@ namespace Not_Defteri
             // Tarih ve saati kontrol et
             DateTime simdi = DateTime.Now;
             DateTime mesaiBaslangic = new DateTime(simdi.Year, simdi.Month, simdi.Day, 8, 0, 0);
-            DateTime mesaiBitis = new DateTime(simdi.Year, simdi.Month, simdi.Day, 17, 31, 0);
+            DateTime mesaiBitis = new DateTime(simdi.Year, simdi.Month, simdi.Day, 18, 1, 0);
 
             if (simdi >= mesaiBaslangic && simdi <= mesaiBitis)
             {
@@ -1185,6 +1213,28 @@ namespace Not_Defteri
             // Menü öğelerindeki işaretleri güncelle
             acikMToolStripMenuItem.Checked = (mode == "Light");
             koyuModToolStripMenuItem.Checked = (mode == "Dark");
+        }
+
+        private void dikte_Click(object sender, EventArgs e)
+        {
+            if (!SpeechRecognitionEngine.InstalledRecognizers().Any())
+            {
+                MessageBox.Show("Sistemde tanımlı mikrofon görünmüyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var confirmResult = MessageBox.Show("Dikte özelliğini açmak istiyor musunuz?", "Dikte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmResult == DialogResult.Yes)
+            {
+                if (recognizer == null)
+                {
+                    InitializeSpeechRecognition();
+                }
+                else
+                {
+                    recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                }
+            }
         }
     }
 

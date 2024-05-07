@@ -66,7 +66,6 @@ namespace Not_Defteri
             this.acikMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uygulamalarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metinKarsilastiriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hesapMakinesiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -76,6 +75,8 @@ namespace Not_Defteri
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.GeriAlStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -136,8 +137,7 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dikte = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -439,8 +439,7 @@ namespace Not_Defteri
             // uygulamalarToolStripMenuItem
             // 
             this.uygulamalarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metinKarsilastiriciToolStripMenuItem,
-            this.hesapMakinesiToolStripMenuItem});
+            this.metinKarsilastiriciToolStripMenuItem});
             this.uygulamalarToolStripMenuItem.Name = "uygulamalarToolStripMenuItem";
             this.uygulamalarToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.uygulamalarToolStripMenuItem.Text = "Uygulamalar";
@@ -451,13 +450,6 @@ namespace Not_Defteri
             this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
-            // 
-            // hesapMakinesiToolStripMenuItem
-            // 
-            this.hesapMakinesiToolStripMenuItem.Name = "hesapMakinesiToolStripMenuItem";
-            this.hesapMakinesiToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.hesapMakinesiToolStripMenuItem.Text = "Hesap Makinesi";
-            this.hesapMakinesiToolStripMenuItem.Click += new System.EventHandler(this.hesapMakinesiToolStripMenuItem_Click);
             // 
             // yardımToolStripMenuItem
             // 
@@ -523,6 +515,21 @@ namespace Not_Defteri
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel5.Text = "UTF-8";
+            // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(523, 17);
+            this.toolStripStatusLabel7.Text = "‎‎‎‎‎‎‎‎‎                                                                        " +
+    "                                                                                " +
+    "                    ";
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(125, 17);
+            this.toolStripStatusLabel6.Spring = true;
+            this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
             // 
             // toolStrip1
             // 
@@ -873,7 +880,8 @@ namespace Not_Defteri
             this.saatZamanStripButton,
             this.toolStripSeparator24,
             this.metinKarsilastiriciStripButton,
-            this.toolStripSeparator26});
+            this.toolStripSeparator26,
+            this.dikte});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(835, 25);
@@ -1042,20 +1050,15 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // toolStripStatusLabel6
+            // dikte
             // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(617, 17);
-            this.toolStripStatusLabel6.Spring = true;
-            this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
-            // 
-            // toolStripStatusLabel7
-            // 
-            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(523, 17);
-            this.toolStripStatusLabel7.Text = "‎‎‎‎‎‎‎‎‎                                                                        " +
-    "                                                                                " +
-    "                    ";
+            this.dikte.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.dikte.Image = ((System.Drawing.Image)(resources.GetObject("dikte.Image")));
+            this.dikte.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dikte.Name = "dikte";
+            this.dikte.Size = new System.Drawing.Size(23, 22);
+            this.dikte.Text = "toolStripButton1";
+            this.dikte.Click += new System.EventHandler(this.dikte_Click);
             // 
             // NotDefteri
             // 
@@ -1188,7 +1191,6 @@ namespace Not_Defteri
         private ToolStripSeparator toolStripSeparator24;
         private ToolStripButton metinKarsilastiriciStripButton;
         private ToolStripSeparator toolStripSeparator26;
-        private ToolStripMenuItem hesapMakinesiToolStripMenuItem;
         private ToolStripMenuItem menulerToolStripMenuItem;
         private PictureBox pbUyari;
         private Label lblUyari;
@@ -1199,5 +1201,6 @@ namespace Not_Defteri
         private ToolStripMenuItem acikMToolStripMenuItem;
         private ToolStripStatusLabel toolStripStatusLabel6;
         private ToolStripStatusLabel toolStripStatusLabel7;
+        private ToolStripButton dikte;
     }
 }

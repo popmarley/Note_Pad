@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.7(is Derlemesi 240315,1448)
+Versiyon 2.9(is Derlemesi 240507,1354)
 
 Bilenen hatalar ve eklenecekler
 
@@ -13,6 +13,12 @@ Bilenen hatalar ve eklenecekler
 -metin karşılastırıcı text fon yazı biçimine bagla
 -sadece seçilen metinin yazı fontu ve boyutunu ayarlama
 -yazı tipi formundan yazı fontunu elle girilebilme eklenecek
+-iconların yanına görselleri eklenecek
+-dosya adını değiştirme eklenecek
+-yazılara renk verme eklenecek
+-crtl+d hatası giderilecek
+
+
 
 
 
@@ -45,3 +51,5 @@ Yapılanlar
 + Açık/Kapalı tema işlevi eklendi (Versiyon 2.5(is Derlemesi 240219,1751))
 + Saat ve Tarih göstergesi eklendi (Versiyon 2.6(is Derlemesi 240227,1424))
 + Mesai bitimine kaç dakika kaldığını gösterme eklendi (Versiyon 2.7(is Derlemesi 240315,1448))
++ Hesap makinesi uygulaması daha düzenli ve UI çalısması yapılmaıs adına belli bir süre kaldırıldı (Versiyon 2.8(is Derlemesi 240419,1124))
++ Dikte eklendi (Versiyon 2.9(is Derlemesi 240507,1354))
