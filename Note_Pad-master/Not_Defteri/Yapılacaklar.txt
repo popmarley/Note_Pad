@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.7(is Derlemesi 240315,1448)
+Versiyon 2.8(is Derlemesi 240823,1455)
 
 Bilenen hatalar ve eklenecekler
 
@@ -45,3 +45,4 @@ Yapılanlar
 + Açık/Kapalı tema işlevi eklendi (Versiyon 2.5(is Derlemesi 240219,1751))
 + Saat ve Tarih göstergesi eklendi (Versiyon 2.6(is Derlemesi 240227,1424))
 + Mesai bitimine kaç dakika kaldığını gösterme eklendi (Versiyon 2.7(is Derlemesi 240315,1448))
++ Notun kayıt durumunu gösterme eklendi (Versiyon 2.8(is Derlemesi 240823,1455))
