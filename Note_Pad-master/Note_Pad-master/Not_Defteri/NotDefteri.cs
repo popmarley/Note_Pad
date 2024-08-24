@@ -70,6 +70,7 @@ namespace Not_Defteri
 
         private void InitializeSpeechRecognition()
         {
+            // Yeni bir SpeechRecognitionEngine örneği oluşturuyoruz
             recognizer = new SpeechRecognitionEngine();
 
             // Configure the recognizer
@@ -77,12 +78,12 @@ namespace Not_Defteri
             recognizer.LoadGrammar(new DictationGrammar()); // Load a dictation grammar
 
             recognizer.SpeechRecognized += recognizer_SpeechRecognized; // Add an event handler for recognized speech
-            recognizer.RecognizeAsync(RecognizeMode.Multiple); // Start asynchronous recognition
         }
 
         private void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            this.Invoke(new MethodInvoker(() => {
+            this.Invoke(new MethodInvoker(() =>
+            {
                 richTextBox.AppendText(e.Result.Text + " "); // Append recognized text to the richTextBox
             }));
         }
@@ -444,7 +445,7 @@ namespace Not_Defteri
         private void saatTarihToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Saat/Tarih bilgisini metin kutusunun mevcut konumuna ekler.
-            richTextBox.SelectedText = " "+DateTime.Now.ToString();
+            richTextBox.SelectedText = " " + DateTime.Now.ToString();
         }
 
         #endregion
@@ -567,7 +568,7 @@ namespace Not_Defteri
             if (string.IsNullOrEmpty(richTextBox.Text))
             {
                 kayitEdildiMi.Text = "";
-               
+
             }
             else if (!isFileSaved)
             {
@@ -658,7 +659,7 @@ namespace Not_Defteri
             {
                 ToggleLightMode();
             }
-        } 
+        }
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1143,32 +1144,32 @@ namespace Not_Defteri
 
         private void ToggleDarkMode()
         {
-            
-            
-                // Koyu modu etkinleştir
-                this.BackColor = Color.FromArgb(45, 45, 48); // Koyu arka plan rengi
-                richTextBox.BackColor = Color.FromArgb(30, 30, 30); // RichTextBox için koyu arka plan
-                richTextBox.ForeColor = Color.WhiteSmoke; // Açık metin rengi
-                menuStrip.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                menuStrip.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                toolStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                toolStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                toolStrip2.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                toolStrip2.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                statusStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                statusStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                toolStripMenuItem1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                toolStripMenuItem1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                düzenToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                düzenToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                biçimToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                biçimToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                görünümToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                görünümToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                uygulamalarToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                uygulamalarToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
-                yardımToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
-                yardımToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+
+
+            // Koyu modu etkinleştir
+            this.BackColor = Color.FromArgb(45, 45, 48); // Koyu arka plan rengi
+            richTextBox.BackColor = Color.FromArgb(30, 30, 30); // RichTextBox için koyu arka plan
+            richTextBox.ForeColor = Color.WhiteSmoke; // Açık metin rengi
+            menuStrip.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            menuStrip.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            toolStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            toolStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            toolStrip2.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            toolStrip2.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            statusStrip1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            statusStrip1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            toolStripMenuItem1.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            toolStripMenuItem1.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            düzenToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            düzenToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            biçimToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            biçimToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            görünümToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            görünümToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            uygulamalarToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            uygulamalarToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
+            yardımToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
+            yardımToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
 
 
             isDarkModeEnabled = true;
@@ -1231,26 +1232,43 @@ namespace Not_Defteri
             koyuModToolStripMenuItem.Checked = (mode == "Dark");
         }
 
+        private bool isDikteActive = false; // Dikte özelliğinin durumunu izleyen değişken
+        
         private void dikte_Click(object sender, EventArgs e)
         {
-            if (!SpeechRecognitionEngine.InstalledRecognizers().Any())
             {
-                MessageBox.Show("Sistemde tanımlı mikrofon görünmüyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!SpeechRecognitionEngine.InstalledRecognizers().Any())
+                {
+                    MessageBox.Show("Sistemde tanımlı mikrofon görünmüyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (isDikteActive) // Eğer dikte aktifse, kapatmak isteyip istemediğini sor
+                {
+                    var confirmClose = MessageBox.Show("Dikte özelliğini kapatmak istiyor musunuz?", "Dikteyi Kapat", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (confirmClose == DialogResult.Yes)
+                    {
+                        recognizer.RecognizeAsyncStop(); // Dikteyi durdur
+                        recognizer.Dispose(); // Kaynakları serbest bırak
+                        isDikteActive = false; // Dikte durumu güncelle
+                        dikteAktifMi.Text = "";
+                        //dikteAktifMi.ForeColor = Color.Red;
+                    }
+                }
+                else // Eğer dikte aktif değilse, açmak isteyip istemediğini sor
+                {
+                    var confirmResult = MessageBox.Show("Dikte özelliğini açmak istiyor musunuz?", "Dikte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        InitializeSpeechRecognition(); // Her açılışta yeniden oluştur
+                        recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                        isDikteActive = true; // Dikte durumu güncelle
+                        dikteAktifMi.Text = "Dikte Aktif";
+                        dikteAktifMi.ForeColor = Color.Green;
+                    }
+                }
             }
 
-            var confirmResult = MessageBox.Show("Dikte özelliğini açmak istiyor musunuz?", "Dikte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirmResult == DialogResult.Yes)
-            {
-                if (recognizer == null)
-                {
-                    InitializeSpeechRecognition();
-                }
-                else
-                {
-                    recognizer.RecognizeAsync(RecognizeMode.Multiple);
-                }
-            }
         }
     }
 

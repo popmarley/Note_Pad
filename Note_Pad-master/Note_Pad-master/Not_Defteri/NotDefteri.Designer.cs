@@ -70,6 +70,7 @@ namespace Not_Defteri
             this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.kayitEdildiMi = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -77,7 +78,6 @@ namespace Not_Defteri
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.kayitEdildiMi = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.GeriAlStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -139,6 +139,7 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dikteAktifMi = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -484,6 +485,7 @@ namespace Not_Defteri
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5,
+            this.dikteAktifMi,
             this.toolStripStatusLabel7,
             this.toolStripStatusLabel6});
             this.statusStrip1.Location = new System.Drawing.Point(0, 583);
@@ -492,6 +494,11 @@ namespace Not_Defteri
             this.statusStrip1.Size = new System.Drawing.Size(1044, 28);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // kayitEdildiMi
+            // 
+            this.kayitEdildiMi.Name = "kayitEdildiMi";
+            this.kayitEdildiMi.Size = new System.Drawing.Size(0, 22);
             // 
             // toolStripStatusLabel2
             // 
@@ -537,11 +544,6 @@ namespace Not_Defteri
             this.toolStripStatusLabel6.Spring = true;
             this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
             this.toolStripStatusLabel6.Visible = false;
-            // 
-            // kayitEdildiMi
-            // 
-            this.kayitEdildiMi.Name = "kayitEdildiMi";
-            this.kayitEdildiMi.Size = new System.Drawing.Size(0, 22);
             // 
             // toolStrip1
             // 
@@ -1044,7 +1046,7 @@ namespace Not_Defteri
             this.dikte.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.dikte.Name = "dikte";
             this.dikte.Size = new System.Drawing.Size(29, 24);
-            this.dikte.Text = "toolStripButton1";
+            this.dikte.Text = "Dikte";
             this.dikte.Click += new System.EventHandler(this.dikte_Click);
             // 
             // pbUyari
@@ -1075,6 +1077,12 @@ namespace Not_Defteri
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // dikteAktifMi
+            // 
+            this.dikteAktifMi.ForeColor = System.Drawing.Color.Red;
+            this.dikteAktifMi.Name = "dikteAktifMi";
+            this.dikteAktifMi.Size = new System.Drawing.Size(0, 22);
             // 
             // NotDefteri
             // 
@@ -1220,5 +1228,6 @@ namespace Not_Defteri
         private ToolStripStatusLabel toolStripStatusLabel7;
         private ToolStripButton dikte;
         private ToolStripStatusLabel kayitEdildiMi;
+        private ToolStripStatusLabel dikteAktifMi;
     }
 }

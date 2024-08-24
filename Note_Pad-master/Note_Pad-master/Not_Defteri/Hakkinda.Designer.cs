@@ -55,7 +55,7 @@
             // 
             this.btnTamam.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnTamam.Location = new System.Drawing.Point(584, 362);
-            this.btnTamam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTamam.Margin = new System.Windows.Forms.Padding(4);
             this.btnTamam.Name = "btnTamam";
             this.btnTamam.Size = new System.Drawing.Size(94, 29);
             this.btnTamam.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.pbPopMarley.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbPopMarley.Image = global::Not_Defteri.Properties.Resources.hakkımızda;
             this.pbPopMarley.Location = new System.Drawing.Point(134, 15);
-            this.pbPopMarley.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbPopMarley.Margin = new System.Windows.Forms.Padding(4);
             this.pbPopMarley.Name = "pbPopMarley";
             this.pbPopMarley.Size = new System.Drawing.Size(451, 66);
             this.pbPopMarley.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -81,7 +81,7 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = global::Not_Defteri.Properties.Resources.hakkımızda3;
             this.pictureBox1.Location = new System.Drawing.Point(15, 99);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(62, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -124,7 +124,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Hakkinda";
