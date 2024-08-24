@@ -1,5 +1,5 @@
 ﻿
-Versiyon 2.9(is Derlemesi 240507,1354)
+Versiyon 3.0(is Derlemesi 240824,1015)
 
 Bilenen hatalar ve eklenecekler
 
@@ -17,6 +17,8 @@ Bilenen hatalar ve eklenecekler
 -dosya adını değiştirme eklenecek
 -yazılara renk verme eklenecek
 -crtl+d hatası giderilecek
+-Dikte açma kapama eklenecek
+-Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
 
 
 
@@ -53,3 +55,4 @@ Yapılanlar
 + Mesai bitimine kaç dakika kaldığını gösterme eklendi (Versiyon 2.7(is Derlemesi 240315,1448))
 + Hesap makinesi uygulaması daha düzenli ve UI çalısması yapılmaıs adına belli bir süre kaldırıldı (Versiyon 2.8(is Derlemesi 240419,1124))
 + Dikte eklendi (Versiyon 2.9(is Derlemesi 240507,1354))
++ Kayıt bilgisini gösterme eklendi (Versiyon 3.0(is Derlemesi 240824,1015))

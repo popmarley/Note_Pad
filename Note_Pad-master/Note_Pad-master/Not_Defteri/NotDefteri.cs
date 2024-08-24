@@ -563,23 +563,23 @@ namespace Not_Defteri
                 fileName = Path.GetFileNameWithoutExtension(currentFilePath);
             }
             this.Text = $"{fileName}{(isFileSaved ? "" : " *")} - Not Defteri";
-
             // Kaydedilme durumu için toolStripStatusLabel'ı güncelle
             if (string.IsNullOrEmpty(richTextBox.Text))
             {
-                kayitedildiMİ.Text = " ";
-                
+                kayitEdildiMi.Text = "";
+               
             }
             else if (!isFileSaved)
             {
-                kayitedildiMİ.Text = "Kaydedilmedi";
-                kayitedildiMİ.ForeColor = Color.Red; // Kaydedilmedi ise kırmızı
+                kayitEdildiMi.Text = "Kaydedilmedi";
+                kayitEdildiMi.ForeColor = Color.Red; // Kaydedilmedi ise kırmızı
             }
             else
             {
-                kayitedildiMİ.Text = "Kayıtlı";
-                kayitedildiMİ.ForeColor = Color.Black; 
+                kayitEdildiMi.Text = "Kayıtlı";
+                kayitEdildiMi.ForeColor = Color.Black;
             }
+
         }
 
         private void richTextBox_TextChanged(object sender, EventArgs e)
@@ -1130,8 +1130,7 @@ namespace Not_Defteri
                 // Mesai bitimine kalan süreyi hesapla
                 TimeSpan kalanSure = mesaiBitis - simdi;
                 // Kalan süreyi "saat:dakika" formatında yazdır
-                //toolStripStatusLabel6.Text = $"{kalanSure.Hours} saat {kalanSure.Minutes} dakika";// mesai saati gerekirse yorum satırını kaldır
-                toolStripStatusLabel6.Text = "";
+                toolStripStatusLabel6.Text = $"{kalanSure.Hours} saat {kalanSure.Minutes} dakika";
             }
             else
             {
