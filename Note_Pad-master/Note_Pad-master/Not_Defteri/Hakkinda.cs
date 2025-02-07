@@ -77,7 +77,7 @@ namespace Not_Defteri
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string email = "huseyinozguven@ferrafilter.com";
+            string email = "hsynozguven@hotmail.com";
             string subject = Uri.EscapeUriString("Not Defteri Uygulaması Görüş ve Öneri");
             string url = $"mailto:{email}?subject={subject}";
 

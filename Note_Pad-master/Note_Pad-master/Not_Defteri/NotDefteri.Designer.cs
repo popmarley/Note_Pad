@@ -41,6 +41,7 @@ namespace Not_Defteri
             this.kaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.farkliKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yazdırToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donusturToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.düzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ileriAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +77,7 @@ namespace Not_Defteri
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dikteAktifMi = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -139,7 +141,6 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dikteAktifMi = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -188,7 +189,8 @@ namespace Not_Defteri
             this.acToolStripMenuItem,
             this.kaydetToolStripMenuItem,
             this.farkliKaydetToolStripMenuItem,
-            this.yazdırToolStripMenuItem});
+            this.yazdırToolStripMenuItem,
+            this.donusturToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 24);
             this.toolStripMenuItem1.Text = "Dosya";
@@ -242,6 +244,14 @@ namespace Not_Defteri
             this.yazdırToolStripMenuItem.Size = new System.Drawing.Size(267, 26);
             this.yazdırToolStripMenuItem.Text = "Yazdır";
             this.yazdırToolStripMenuItem.Click += new System.EventHandler(this.yazdırToolStripMenuItem_Click);
+            // 
+            // donusturToolStripMenuItem
+            // 
+            this.donusturToolStripMenuItem.Name = "donusturToolStripMenuItem";
+            this.donusturToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.donusturToolStripMenuItem.Size = new System.Drawing.Size(267, 26);
+            this.donusturToolStripMenuItem.Text = "Dönüştür";
+            this.donusturToolStripMenuItem.Click += new System.EventHandler(this.donusturToolStripMenuItem_Click);
             // 
             // düzenToolStripMenuItem
             // 
@@ -528,6 +538,12 @@ namespace Not_Defteri
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(48, 22);
             this.toolStripStatusLabel5.Text = "UTF-8";
+            // 
+            // dikteAktifMi
+            // 
+            this.dikteAktifMi.ForeColor = System.Drawing.Color.Red;
+            this.dikteAktifMi.Name = "dikteAktifMi";
+            this.dikteAktifMi.Size = new System.Drawing.Size(0, 22);
             // 
             // toolStripStatusLabel7
             // 
@@ -1078,12 +1094,6 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // dikteAktifMi
-            // 
-            this.dikteAktifMi.ForeColor = System.Drawing.Color.Red;
-            this.dikteAktifMi.Name = "dikteAktifMi";
-            this.dikteAktifMi.Size = new System.Drawing.Size(0, 22);
-            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1229,5 +1239,6 @@ namespace Not_Defteri
         private ToolStripButton dikte;
         private ToolStripStatusLabel kayitEdildiMi;
         private ToolStripStatusLabel dikteAktifMi;
+        private ToolStripMenuItem donusturToolStripMenuItem;
     }
 }

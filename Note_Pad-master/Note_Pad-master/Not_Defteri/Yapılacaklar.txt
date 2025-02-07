@@ -18,7 +18,7 @@ Bilenen hatalar ve eklenecekler
 -yazılara renk verme eklenecek
 -crtl+d hatası giderilecek
 -Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
-
+- versiyonunu githubdan kontrol edip güncelleme var mı diye denetleme menüsünden denetleyecek varsa yenisini kuracak
 
 
 
@@ -56,3 +56,4 @@ Yapılanlar
 + Dikte eklendi (Versiyon 2.9(is Derlemesi 240507,1354))
 + Kayıt bilgisini gösterme eklendi (Versiyon 3.0(is Derlemesi 240824,1015))
 + Dikteyi açma/kapatma eklendi (Versiyon 3.1(is Derlemesi 240824,1557))
++ Pdf, excel, word gibi dosya formatlarına dönüştürme eklendi (Versiyon 3.2(is Derlemesi 250207,1309))

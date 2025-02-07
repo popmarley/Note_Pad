@@ -11,6 +11,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using System.Drawing.Imaging;
+using System.Security.Policy;
+using System.Xml.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.Office.Interop.Word;
+using ClosedXML.Excel;
+using Microsoft.Office.Interop.PowerPoint;
+using Application = System.Windows.Forms.Application;
+using Document = iTextSharp.text.Document;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+
+
 
 namespace Not_Defteri
 {
@@ -108,7 +121,7 @@ namespace Not_Defteri
 
             if (!string.IsNullOrEmpty(fontName) && fontSize > 0)
             {
-                richTextBox.Font = new Font(fontName, fontSize, fontStyle);
+                richTextBox.Font = new System.Drawing.Font(fontName, fontSize, fontStyle);
             }
         }
         public void OpenFile(string filePath)
@@ -727,7 +740,7 @@ namespace Not_Defteri
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             // richTextBox'ın içeriğini yazdır
-            e.Graphics.DrawString(richTextBox.Text, new Font("Arial", 12), Brushes.Black, 25, 25);
+            e.Graphics.DrawString(richTextBox.Text, new System.Drawing.Font("Arial", 12), Brushes.Black, 25, 25);
         }
 
         private void richTextBox_SelectionChanged(object sender, EventArgs e)
@@ -865,7 +878,7 @@ namespace Not_Defteri
             if (isUnderlineActive)
                 style |= FontStyle.Underline;
 
-            richTextBox.SelectionFont = new Font(richTextBox.Font, style);
+            richTextBox.SelectionFont = new System.Drawing.Font(richTextBox.Font, style);
         }
 
         private void ApplyNumbering()
@@ -901,7 +914,7 @@ namespace Not_Defteri
                 newSize = Math.Max(1, newSize); // Font boyutunu 1'den küçük olmamasını sağlar
 
                 // Font boyutunu güncelle
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, newSize, richTextBox.SelectionFont.Style);
+                richTextBox.SelectionFont = new System.Drawing.Font(richTextBox.SelectionFont.FontFamily, newSize, richTextBox.SelectionFont.Style);
 
                 // toolStripComboBoxYaziBoyutu'nu güncelle
                 UpdateComboBoxFontSize(newSize);
@@ -946,7 +959,7 @@ namespace Not_Defteri
             yaziTipiFormu.ShowDialog();
         }
 
-        public void ApplySelectedFont(Font newFont)
+        public void ApplySelectedFont(System.Drawing.Font newFont)
         {
             if (richTextBox.SelectionLength > 0)
             {
@@ -1030,7 +1043,7 @@ namespace Not_Defteri
             // Seçili yazı tipini ve mevcut boyutu kullanarak yeni Font nesnesi oluştur
             string seciliYaziTipi = toolStripComboBoxYaziTipi.SelectedItem.ToString();
             float mevcutBoyut = richTextBox.Font.Size;
-            richTextBox.Font = new Font(seciliYaziTipi, mevcutBoyut, richTextBox.Font.Style);
+            richTextBox.Font = new System.Drawing.Font(seciliYaziTipi, mevcutBoyut, richTextBox.Font.Style);
         }
 
         private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
@@ -1038,12 +1051,12 @@ namespace Not_Defteri
             // Seçili yazı boyutunu ve mevcut yazı tipini kullanarak yeni Font nesnesi oluştur
             if (float.TryParse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString(), out float seciliBoyut) && seciliBoyut > 0)
             {
-                richTextBox.Font = new Font(richTextBox.Font.FontFamily, seciliBoyut, richTextBox.Font.Style);
+                richTextBox.Font = new System.Drawing.Font(richTextBox.Font.FontFamily, seciliBoyut, richTextBox.Font.Style);
             }
             else
             {
                 // Başarısız parse işlemi için hata mesajı göster veya varsayılan bir değer kullan
-                richTextBox.Font = new Font(richTextBox.Font.FontFamily, 12.0f, richTextBox.Font.Style);
+                richTextBox.Font = new System.Drawing.Font(richTextBox.Font.FontFamily, 12.0f, richTextBox.Font.Style);
             }
         }
 
@@ -1060,7 +1073,7 @@ namespace Not_Defteri
                 // Geçerli ise, yazı boyutunu ayarla
                 string mevcutYaziTipi = richTextBox.Font.FontFamily.Name;
                 FontStyle mevcutStil = richTextBox.Font.Style;
-                richTextBox.Font = new Font(mevcutYaziTipi, newSize, mevcutStil);
+                richTextBox.Font = new System.Drawing.Font(mevcutYaziTipi, newSize, mevcutStil);
             }
         }
 
@@ -1269,6 +1282,192 @@ namespace Not_Defteri
                 }
             }
 
+        }
+
+        private void donusturToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            {
+                if (string.IsNullOrWhiteSpace(richTextBox.Text))
+                {
+                    MessageBox.Show("Lütfen dönüştürülecek metni girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "PDF (*.pdf)|*.pdf|Word Document (*.docx)|*.docx|Excel Workbook (*.xlsx)|*.xlsx|PowerPoint (*.pptx)|*.pptx|JPEG Image (*.jpg)|*.jpg|PNG Image (*.png)|*.png",
+                    Title = "Dosyayı Kaydet",
+                    FileName = "Dosyam"
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedPath = saveFileDialog.FileName;
+                    string extension = Path.GetExtension(selectedPath).ToLower();
+
+                    switch (extension)
+                    {
+                        case ".pdf":
+                            ExportToPDF(selectedPath);
+                            break;
+                        case ".docx":
+                            ExportToWord(selectedPath);
+                            break;
+                        case ".xlsx":
+                            ExportToExcel(selectedPath);
+                            break;
+                        case ".pptx":
+                            ExportToPowerPoint(selectedPath);
+                            break;
+                        case ".jpg":
+                        case ".png":
+                            ExportToImage(selectedPath, extension);
+                            break;
+                        default:
+                            MessageBox.Show("Geçersiz dosya formatı seçildi.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
+                }
+            }
+        }
+        private void ExportToPDF(string filePath)
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+            {
+                Document pdfDoc = new Document();
+                PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                pdfDoc.Add(new iTextSharp.text.Paragraph(richTextBox.Text));
+                pdfDoc.Close();
+            }
+            MessageBox.Show("PDF dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ExportToWord(string filePath)
+        {
+            try
+            {
+                // Word uygulamasını başlat
+                Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document wordDoc = wordApp.Documents.Add();
+
+                // Paragraf ekleyip içeriği yazdır
+                Microsoft.Office.Interop.Word.Paragraph paragraph = wordDoc.Paragraphs.Add();
+                paragraph.Range.Text = richTextBox.Text;
+
+                // Word dosyasını kaydet
+                wordDoc.SaveAs2(filePath);
+                wordDoc.Close();
+                wordApp.Quit();
+
+                MessageBox.Show("Word dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void ExportToExcel(string filePath)
+        {
+            try
+            {
+                // Kullanıcıya çıktı formatını sor
+                DialogResult result = MessageBox.Show(
+                    "Çıktı tek satırda mı yazılsın, yoksa satır satır mı yazılsın?\n\n'Evet' için: Tek satır\n'Hayır' için: Satır satır",
+                    "Çıktı Formatı Seçimi",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question
+                );
+
+                // Kullanıcı iptal ederse işlemi sonlandır
+                if (result == DialogResult.Cancel)
+                {
+                    MessageBox.Show("İşlem iptal edildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                using (var workbook = new XLWorkbook())
+                {
+                    // Yeni bir çalışma sayfası ekle
+                    var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // RichTextBox içeriğini al ve Excel hücresine yaz
+                        string content = richTextBox.Text; // RichTextBox'ın tüm metni
+                        worksheet.Cell(1, 1).Value = content;
+
+                        // Hücrenin metin kaydırma özelliğini etkinleştir
+                        worksheet.Cell(1, 1).Style.Alignment.WrapText = true;
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        // Satır satır yaz
+                        string[] lines = richTextBox.Lines; // RichTextBox içeriğini satır satır al
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            worksheet.Cell(i + 1, 1).Value = lines[i];
+                        }
+                    }
+
+                    // Satır ve sütun genişliğini içeriğe göre ayarla
+                    worksheet.Columns().AdjustToContents();
+                    worksheet.Rows().AdjustToContents();
+
+                    // Çalışma kitabını kaydet
+                    workbook.SaveAs(filePath);
+                }
+
+                MessageBox.Show("Excel dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void ExportToPowerPoint(string filePath)
+        {
+            Microsoft.Office.Interop.PowerPoint.Application pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
+            Presentation presentation = pptApp.Presentations.Add();
+            Slide slide = presentation.Slides.Add(1, PpSlideLayout.ppLayoutText);
+            slide.Shapes[1].TextFrame.TextRange.Text = richTextBox.Text;
+            presentation.SaveAs(filePath);
+            presentation.Close();
+            pptApp.Quit();
+            MessageBox.Show("PowerPoint dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ExportToImage(string filePath, string extension)
+        {
+            try
+            {
+                // RichTextBox içeriğini ölçmek için Graphics nesnesi oluştur
+                using (Graphics g = richTextBox.CreateGraphics())
+                {
+                    SizeF stringSize = g.MeasureString(richTextBox.Text, richTextBox.Font, richTextBox.ClientSize.Width);
+
+                    // Yeni bir Bitmap oluştur (içeriğe göre boyutlandırılmış)
+                    using (Bitmap bmp = new Bitmap((int)stringSize.Width + 10, (int)stringSize.Height + 10))
+                    {
+                        richTextBox.DrawToBitmap(bmp, new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height));
+
+                        // Dosya formatını belirle ve kaydet
+                        ImageFormat format = extension == ".jpg" ? ImageFormat.Jpeg : ImageFormat.Png;
+                        bmp.Save(filePath, format);
+
+                        MessageBox.Show("Resim dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
