@@ -20,7 +20,7 @@ Bilenen hatalar ve eklenecekler
 -Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
 - versiyonunu githubdan kontrol edip güncelleme var mı diye denetleme menüsünden denetleyecek varsa yenisini kuracak
 
-
+fg
 
 
 Yapılanlar
