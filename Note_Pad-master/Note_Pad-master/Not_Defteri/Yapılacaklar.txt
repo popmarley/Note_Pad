@@ -19,6 +19,11 @@ Bilenen hatalar ve eklenecekler
 -crtl+d hatası giderilecek
 -Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
 - versiyonunu githubdan kontrol edip güncelleme var mı diye denetleme menüsünden denetleyecek varsa yenisini kuracak
+-arka plana resim koyma veya boyama eklenecek. dönüştürme yapılırken bunlar olmayacak
+-güncelleme yapılırken yüzdelik dolma ekle
+-eğer pc nete bağlıysa her not defterini açmaya güncellemeyi otomatik olarak denetlesin varsa yapılsın mı diye sorsun
+-indirme yaparken komple projeyi indirmeyecek sadece bin klasöründeki uygulamayı indirip kuracak
+
 
 
 

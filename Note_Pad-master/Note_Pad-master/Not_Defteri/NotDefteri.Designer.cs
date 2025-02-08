@@ -141,6 +141,7 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.guncellemeleriDenetleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -468,6 +469,7 @@ namespace Not_Defteri
             // yardımToolStripMenuItem
             // 
             this.yardımToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guncellemeleriDenetleToolStripMenuItem,
             this.notDefteriHakkindaToolStripMenuItem});
             this.yardımToolStripMenuItem.Name = "yardımToolStripMenuItem";
             this.yardımToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
@@ -476,7 +478,7 @@ namespace Not_Defteri
             // notDefteriHakkindaToolStripMenuItem
             // 
             this.notDefteriHakkindaToolStripMenuItem.Name = "notDefteriHakkindaToolStripMenuItem";
-            this.notDefteriHakkindaToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.notDefteriHakkindaToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.notDefteriHakkindaToolStripMenuItem.Text = "Not Defteri Hakkında";
             this.notDefteriHakkindaToolStripMenuItem.Click += new System.EventHandler(this.notDefteriHakkindaToolStripMenuItem_Click);
             // 
@@ -1094,6 +1096,13 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // guncellemeleriDenetleToolStripMenuItem
+            // 
+            this.guncellemeleriDenetleToolStripMenuItem.Name = "guncellemeleriDenetleToolStripMenuItem";
+            this.guncellemeleriDenetleToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+            this.guncellemeleriDenetleToolStripMenuItem.Text = "Güncellemeleri Denetle";
+            this.guncellemeleriDenetleToolStripMenuItem.Click += new System.EventHandler(this.guncellemeleriDenetleToolStripMenuItem_Click);
+            // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1240,5 +1249,6 @@ namespace Not_Defteri
         private ToolStripStatusLabel kayitEdildiMi;
         private ToolStripStatusLabel dikteAktifMi;
         private ToolStripMenuItem donusturToolStripMenuItem;
+        private ToolStripMenuItem guncellemeleriDenetleToolStripMenuItem;
     }
 }

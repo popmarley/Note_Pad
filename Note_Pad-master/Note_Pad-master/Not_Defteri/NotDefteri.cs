@@ -22,7 +22,8 @@ using Microsoft.Office.Interop.PowerPoint;
 using Application = System.Windows.Forms.Application;
 using Document = iTextSharp.text.Document;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-
+using System.Net.Http;
+using System.IO.Compression;
 
 
 namespace Not_Defteri
@@ -1290,7 +1291,7 @@ namespace Not_Defteri
             {
                 if (string.IsNullOrWhiteSpace(richTextBox.Text))
                 {
-                    MessageBox.Show("Lütfen dönüştürülecek metni girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Boş sayfa dönüştürülemez lütfen veri girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -1469,6 +1470,89 @@ namespace Not_Defteri
                 MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void guncellemeleriDenetleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string localVersionFile = Path.Combine(Application.StartupPath, "version.txt");
+            string repoVersionUrl = "https://raw.githubusercontent.com/popmarley/Note_Pad/master/version.txt";
+            string repoZipUrl = "https://github.com/popmarley/Note_Pad/archive/refs/heads/master.zip";
+            string tempDownloadPath = Path.Combine(Path.GetTempPath(), "Note_Pad_Update.zip");
+            string extractPath = Path.Combine(Path.GetTempPath(), "Note_Pad_Update");
+
+            // Eğer yerel dosya yoksa, varsayılan bir sürüm numarası yaz
+            if (!File.Exists(localVersionFile))
+            {
+                File.WriteAllText(localVersionFile, "1.0.0");
+            }
+
+            // Yerel sürüm numarasını oku
+            string localVersion = File.ReadAllText(localVersionFile).Trim();
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // GitHub'dan güncel sürüm numarasını al
+                    string onlineVersion = await client.GetStringAsync(repoVersionUrl);
+                    onlineVersion = onlineVersion.Trim();
+
+                    // Eğer sürümler aynıysa güncelleme yapma
+                    if (localVersion == onlineVersion)
+                    {
+                        MessageBox.Show("Uygulamanız güncel!", "Güncelleme Kontrolü", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    // Yeni sürüm varsa kullanıcıya bilgi ver
+                    DialogResult result = MessageBox.Show($"Yeni sürüm bulundu! ({onlineVersion})\nGüncellemek istiyor musunuz?", "Güncelleme Mevcut", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                        return;
+
+                    // Güncellemeyi indir
+                    byte[] fileBytes = await client.GetByteArrayAsync(repoZipUrl);
+                    File.WriteAllBytes(tempDownloadPath, fileBytes);
+
+                    // Var olan güncelleme klasörünü temizle
+                    if (Directory.Exists(extractPath))
+                        Directory.Delete(extractPath, true);
+
+                    // Zip dosyasını çıkar
+                    ZipFile.ExtractToDirectory(tempDownloadPath, extractPath);
+
+                    // Güncellenmiş dosyaları uygulama dizinine taşı (Eski dosyaları değiştirerek)
+                    string extractedFolder = Directory.GetDirectories(extractPath).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(extractedFolder))
+                    {
+                        foreach (string file in Directory.GetFiles(extractedFolder, "*", SearchOption.AllDirectories))
+                        {
+                            string relativePath = file.Substring(extractedFolder.Length + 1);
+                            string destinationPath = Path.Combine(Application.StartupPath, relativePath);
+
+                            // Klasörü oluştur
+                            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
+
+                            // Dosyayı taşı
+                            File.Copy(file, destinationPath, true);
+                        }
+                    }
+
+                    // Yeni sürüm numarasını kaydet
+                    File.WriteAllText(localVersionFile, onlineVersion);
+
+                    MessageBox.Show("Güncelleme tamamlandı! Uygulama yeniden başlatılacak.", "Güncelleme Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Uygulamayı yeniden başlat
+                    Application.Restart();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Güncelleme sırasında bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        
     }
 
 }
