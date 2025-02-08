@@ -1,0 +1,50 @@
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\Not Defteri.exe.config
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\Not Defteri.exe
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\Not Defteri.pdb
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\BouncyCastle.Cryptography.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ClosedXML.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ClosedXML.Parser.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DiffPlex.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DocumentFormat.OpenXml.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ExcelNumberFormat.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\iTextSharp.LGPLv2.Core.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\Microsoft.Bcl.HashCode.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\RBush.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\SixLabors.Fonts.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\SkiaSharp.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Buffers.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Memory.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Numerics.Vectors.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\BouncyCastle.Cryptography.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ClosedXML.pdb
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ClosedXML.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ClosedXML.Parser.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DiffPlex.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DocumentFormat.OpenXml.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\ExcelNumberFormat.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\iTextSharp.LGPLv2.Core.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\Microsoft.Bcl.HashCode.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\RBush.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\SixLabors.Fonts.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\SkiaSharp.pdb
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Buffers.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Memory.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Numerics.Vectors.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.csproj.AssemblyReference.cache
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.Bul.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.Degistir.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.Hakkinda.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.MetinKarsilastirici.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.NotDefteri.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.Password.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.Properties.Resources.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.YaziTipi.resources
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.csproj.GenerateResource.cache
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Defteri.csproj.CoreCompileInputs.cache
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not_Deft.220C547F.Up2Date
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not Defteri.exe
+E:\Visual Studio Projelerim\Note_Pad-master\Note_Pad-master\Not_Defteri\obj\Debug\Not Defteri.pdb
