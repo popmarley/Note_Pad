@@ -1,5 +1,5 @@
 ﻿
-Versiyon 3.1(is Derlemesi 240824,1557)
+Versiyon 3.4 (is Derlemesi 250625,1105)
 
 Bilenen hatalar ve eklenecekler
 
@@ -16,14 +16,13 @@ Bilenen hatalar ve eklenecekler
 -iconların yanına görselleri eklenecek
 -dosya adını değiştirme eklenecek
 -yazılara renk verme eklenecek
--crtl+d hatası giderilecek
 -Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
 - versiyonunu githubdan kontrol edip güncelleme var mı diye denetleme menüsünden denetleyecek varsa yenisini kuracak
 -arka plana resim koyma veya boyama eklenecek. dönüştürme yapılırken bunlar olmayacak
 -güncelleme yapılırken yüzdelik dolma ekle
 -eğer pc nete bağlıysa her not defterini açmaya güncellemeyi otomatik olarak denetlesin varsa yapılsın mı diye sorsun
 -indirme yaparken komple projeyi indirmeyecek sadece bin klasöründeki uygulamayı indirip kuracak
-
+-sayfa işk açıldıgında beyaz oluyor aşagı kaydırınca yazılar geliyor
 
 
 
@@ -62,3 +61,7 @@ Yapılanlar
 + Kayıt bilgisini gösterme eklendi (Versiyon 3.0(is Derlemesi 240824,1015))
 + Dikteyi açma/kapatma eklendi (Versiyon 3.1(is Derlemesi 240824,1557))
 + Pdf, excel, word gibi dosya formatlarına dönüştürme eklendi (Versiyon 3.2(is Derlemesi 250207,1309))
++ Ctrl + D işlevi güçlendirildi (Versiyon 3.3(is Derlemesi 250624,1313))
++ Sayfa satırları işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
++ Görünmez boşluk kopyalama işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
+

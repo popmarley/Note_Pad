@@ -599,6 +599,7 @@ namespace Not_Defteri
 
         private void richTextBox_TextChanged(object sender, EventArgs e)
         {
+            panelLineNumbers.Invalidate();
             if (richTextBox.Text == savedContent)
             {
                 richTextBox.Modified = false;
@@ -673,6 +674,8 @@ namespace Not_Defteri
             {
                 ToggleLightMode();
             }
+            AdjustRichTextBoxMarginForLineNumbers();
+
         }
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
@@ -696,45 +699,47 @@ namespace Not_Defteri
 
         private void DuplicateCurrentLineToNextLine()
         {
-            if (richTextBox.Text.Length == 0 || richTextBox.Lines.Length == 0)
-            {
-                // Metin kutusu boşsa veya satır yoksa, işlemi yapma ve metottan çık
+            if (richTextBox.TextLength == 0 || richTextBox.Lines.Length == 0)
                 return;
-            }
+
             int selectionStart = richTextBox.SelectionStart;
-            int currentLineIndex = richTextBox.GetLineFromCharIndex(selectionStart); // Mevcut satır numarasını al
-            int lineStart = richTextBox.GetFirstCharIndexOfCurrentLine(); // Mevcut satırın başlangıç indeksini al
-            int lineLength = richTextBox.Lines[currentLineIndex].Length; // Mevcut satırın uzunluğunu al
+            int currentLineIndex = richTextBox.GetLineFromCharIndex(selectionStart);
 
-            string currentLineText = richTextBox.Lines[currentLineIndex] + Environment.NewLine; // Mevcut satır metni ve yeni satır karakteri
+            string currentLineTextRaw = richTextBox.Lines[currentLineIndex];
 
-            // Kopyalama yapılacak konum hesaplama
-            int insertPosition;
-            if (currentLineIndex < richTextBox.Lines.Length - 1)
+            // 🔍 Satır sadece boşluklardan veya tamamen boşsa işlem yapma
+            if (string.IsNullOrWhiteSpace(currentLineTextRaw))
+                return;
+
+            // Satırın sonuna \n yoksa ekle (Lines[] senkronizasyonu için)
+            if (!richTextBox.Text.EndsWith(Environment.NewLine))
             {
-                // Eğer mevcut satır son satır değilse, bir sonraki satırın başlangıcını hesapla
-                insertPosition = richTextBox.GetFirstCharIndexFromLine(currentLineIndex + 1);
-            }
-            else
-            {
-                // Eğer mevcut satır son satırsa, mevcut satırın sonuna yeni satır ekle
-                insertPosition = lineStart + lineLength;
-                currentLineText += Environment.NewLine; // Son satıra ekstra yeni satır eklenir
+                richTextBox.AppendText(Environment.NewLine);
             }
 
-            richTextBox.SelectionStart = insertPosition; // Yapıştırma konumunu ayarla
-            richTextBox.SelectedText = currentLineText; // Kopyalanan satırı yapıştır
+            string currentLineText = currentLineTextRaw;
 
-            // İmleci kopyalanan içeriğin sonuna taşı
-            if (currentLineIndex < richTextBox.Lines.Length - 1)
-            {
-                richTextBox.SelectionStart = insertPosition + currentLineText.Length - Environment.NewLine.Length;
-            }
-            else
-            {
-                richTextBox.SelectionStart = insertPosition + currentLineText.Length;
-            }
+            int insertLineIndex = currentLineIndex + 1;
+            int insertPos = richTextBox.GetFirstCharIndexFromLine(insertLineIndex);
+
+            string textToInsert = currentLineText + Environment.NewLine;
+
+            // Yapıştır
+            richTextBox.SelectionStart = insertPos;
+            richTextBox.SelectionLength = 0;
+            richTextBox.SelectedText = textToInsert;
+
+            // İmleci yeni satırın sonuna taşı
+            int newCursorPos = insertPos + currentLineText.Length;
+            richTextBox.SelectionStart = newCursorPos;
+            richTextBox.SelectionLength = 0;
         }
+
+
+
+
+
+
 
 
 
@@ -1247,7 +1252,7 @@ namespace Not_Defteri
         }
 
         private bool isDikteActive = false; // Dikte özelliğinin durumunu izleyen değişken
-        
+
         private void dikte_Click(object sender, EventArgs e)
         {
             {
@@ -1552,7 +1557,92 @@ namespace Not_Defteri
 
         }
 
-        
+        private void panelLineNumbers_Paint(object sender, PaintEventArgs e)
+        {
+            int firstCharIndex = richTextBox.GetCharIndexFromPosition(new System.Drawing.Point(0, 0));
+            int firstLine = richTextBox.GetLineFromCharIndex(firstCharIndex);
+
+            System.Drawing.Point pos = richTextBox.GetPositionFromCharIndex(firstCharIndex);
+            int lineHeight = richTextBox.Font.Height;
+            int visibleLines = panelLineNumbers.Height / lineHeight + 1;
+
+            using (System.Drawing.Brush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Gray))
+            using (System.Drawing.Font font = new System.Drawing.Font("Consolas", 9))
+            {
+                for (int i = 0; i < visibleLines; i++)
+                {
+                    int lineNumber = firstLine + i + 1;
+                    float y = i * lineHeight + pos.Y;
+                    e.Graphics.DrawString(lineNumber.ToString(), font, brush, new System.Drawing.PointF(0, y));
+                }
+            }
+        }
+
+        private void richTextBox_VScroll(object sender, EventArgs e)
+        {
+            panelLineNumbers.Invalidate();
+        }
+
+        private void richTextBox_Resize(object sender, EventArgs e)
+        {
+            panelLineNumbers.Invalidate();
+        }
+
+        private void satirNumaralariToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panelLineNumbers.Visible = !panelLineNumbers.Visible;
+            satirNumaralariToolStripMenuItem.Checked = panelLineNumbers.Visible;
+            AdjustRichTextBoxMarginForLineNumbers();
+
+
+        }
+
+        private void AdjustRichTextBoxMarginForLineNumbers()
+        {
+            if (panelLineNumbers.Visible)
+            {
+                // Satır numarası panelinin genişliğine göre içerik sola kaydırılıyor
+                richTextBox.SelectionIndent = panelLineNumbers.Width + 5; // 5 px boşluk
+            }
+            else
+            {
+                richTextBox.SelectionIndent = 0;
+            }
+        }
+
+     
+        private void gorunmezBoslukKopyalatoolStripLabel1_Click(object sender, EventArgs e)
+        {
+            // Görünmez boşluk karakteri
+            string invisibleSpace = "\u3164";  // ya da "\u200B"
+
+            // Panoya kopyala
+            Clipboard.SetText(invisibleSpace);
+
+            // ToolStripLabel öğesini al
+            ToolStripLabel label = sender as ToolStripLabel;
+
+            // Mevcut metin ve rengi sakla
+            string originalText = label.Text;
+            Color originalColor = label.ForeColor;
+
+            // Yeni metin ve kırmızı renk ata
+            label.Text = "Görünmez Boşluk Kopyalandı!";
+            label.ForeColor = Color.Red;
+
+            // 2 saniye sonra geri almak için timer
+            Timer timer = new Timer();
+            timer.Interval = 2000;
+            timer.Tick += (s, args) =>
+            {
+                // Eski metin ve rengi geri yükle
+                label.Text = originalText;
+                label.ForeColor = originalColor;
+                timer.Stop();
+                timer.Dispose();
+            };
+            timer.Start();
+        }
     }
 
 }

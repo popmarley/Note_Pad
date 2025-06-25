@@ -65,9 +65,11 @@ namespace Not_Defteri
             this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.koyuModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acikMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satirNumaralariToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uygulamalarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metinKarsilastiriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yardımToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guncellemeleriDenetleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notDefteriHakkindaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -141,7 +143,8 @@ namespace Not_Defteri
             this.pbUyari = new System.Windows.Forms.PictureBox();
             this.lblUyari = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.guncellemeleriDenetleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelLineNumbers = new System.Windows.Forms.Panel();
+            this.gorunmezBoslukKopyalatoolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -154,16 +157,18 @@ namespace Not_Defteri
             this.richTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox.Location = new System.Drawing.Point(0, 83);
+            this.richTextBox.Location = new System.Drawing.Point(0, 92);
             this.richTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(1044, 500);
+            this.richTextBox.Size = new System.Drawing.Size(1044, 491);
             this.richTextBox.TabIndex = 0;
             this.richTextBox.Text = "";
             this.richTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox_LinkClicked);
             this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+            this.richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
             this.richTextBox.FontChanged += new System.EventHandler(this.richTextBox_FontChanged);
             this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
+            this.richTextBox.Resize += new System.EventHandler(this.richTextBox_Resize);
             // 
             // menuStrip
             // 
@@ -178,7 +183,7 @@ namespace Not_Defteri
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1044, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1044, 30);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -193,7 +198,7 @@ namespace Not_Defteri
             this.yazdırToolStripMenuItem,
             this.donusturToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(64, 26);
             this.toolStripMenuItem1.Text = "Dosya";
             // 
             // yeniToolStripMenuItem
@@ -268,7 +273,7 @@ namespace Not_Defteri
             this.tumunuSecToolStripMenuItem,
             this.saatTarihToolStripMenuItem});
             this.düzenToolStripMenuItem.Name = "düzenToolStripMenuItem";
-            this.düzenToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.düzenToolStripMenuItem.Size = new System.Drawing.Size(65, 26);
             this.düzenToolStripMenuItem.Text = "Düzen";
             // 
             // geriAlToolStripMenuItem
@@ -358,7 +363,7 @@ namespace Not_Defteri
             this.biçimToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.yazimBicimiToolStripMenuItem});
             this.biçimToolStripMenuItem.Name = "biçimToolStripMenuItem";
-            this.biçimToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
+            this.biçimToolStripMenuItem.Size = new System.Drawing.Size(60, 26);
             this.biçimToolStripMenuItem.Text = "Biçim";
             // 
             // yazimBicimiToolStripMenuItem
@@ -374,9 +379,10 @@ namespace Not_Defteri
             this.yakınlaştırToolStripMenuItem,
             this.durumcubuguToolStripMenuItem,
             this.menulerToolStripMenuItem,
-            this.temaToolStripMenuItem});
+            this.temaToolStripMenuItem,
+            this.satirNumaralariToolStripMenuItem});
             this.görünümToolStripMenuItem.Name = "görünümToolStripMenuItem";
-            this.görünümToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
+            this.görünümToolStripMenuItem.Size = new System.Drawing.Size(84, 26);
             this.görünümToolStripMenuItem.Text = "Görünüm";
             // 
             // yakınlaştırToolStripMenuItem
@@ -451,18 +457,27 @@ namespace Not_Defteri
             this.acikMToolStripMenuItem.Text = "Açık Mod";
             this.acikMToolStripMenuItem.Click += new System.EventHandler(this.acikMToolStripMenuItem_Click);
             // 
+            // satirNumaralariToolStripMenuItem
+            // 
+            this.satirNumaralariToolStripMenuItem.Checked = true;
+            this.satirNumaralariToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.satirNumaralariToolStripMenuItem.Name = "satirNumaralariToolStripMenuItem";
+            this.satirNumaralariToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.satirNumaralariToolStripMenuItem.Text = "Satır Numarası";
+            this.satirNumaralariToolStripMenuItem.Click += new System.EventHandler(this.satirNumaralariToolStripMenuItem_Click);
+            // 
             // uygulamalarToolStripMenuItem
             // 
             this.uygulamalarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.metinKarsilastiriciToolStripMenuItem});
             this.uygulamalarToolStripMenuItem.Name = "uygulamalarToolStripMenuItem";
-            this.uygulamalarToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.uygulamalarToolStripMenuItem.Size = new System.Drawing.Size(107, 26);
             this.uygulamalarToolStripMenuItem.Text = "Uygulamalar";
             // 
             // metinKarsilastiriciToolStripMenuItem
             // 
             this.metinKarsilastiriciToolStripMenuItem.Name = "metinKarsilastiriciToolStripMenuItem";
-            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.metinKarsilastiriciToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.metinKarsilastiriciToolStripMenuItem.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciToolStripMenuItem.Click += new System.EventHandler(this.metinKarsilastiriciToolStripMenuItem_Click);
             // 
@@ -472,8 +487,15 @@ namespace Not_Defteri
             this.guncellemeleriDenetleToolStripMenuItem,
             this.notDefteriHakkindaToolStripMenuItem});
             this.yardımToolStripMenuItem.Name = "yardımToolStripMenuItem";
-            this.yardımToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
+            this.yardımToolStripMenuItem.Size = new System.Drawing.Size(69, 26);
             this.yardımToolStripMenuItem.Text = "Yardım";
+            // 
+            // guncellemeleriDenetleToolStripMenuItem
+            // 
+            this.guncellemeleriDenetleToolStripMenuItem.Name = "guncellemeleriDenetleToolStripMenuItem";
+            this.guncellemeleriDenetleToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+            this.guncellemeleriDenetleToolStripMenuItem.Text = "Güncellemeleri Denetle";
+            this.guncellemeleriDenetleToolStripMenuItem.Click += new System.EventHandler(this.guncellemeleriDenetleToolStripMenuItem_Click);
             // 
             // notDefteriHakkindaToolStripMenuItem
             // 
@@ -604,9 +626,9 @@ namespace Not_Defteri
             this.toolStripSeparator16,
             this.sayfaAsagiStripButton2,
             this.toolStripSeparator10});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 55);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 61);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1044, 28);
+            this.toolStrip1.Size = new System.Drawing.Size(1044, 31);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -616,14 +638,14 @@ namespace Not_Defteri
             this.GeriAlStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("GeriAlStripButton1.Image")));
             this.GeriAlStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GeriAlStripButton1.Name = "GeriAlStripButton1";
-            this.GeriAlStripButton1.Size = new System.Drawing.Size(29, 25);
+            this.GeriAlStripButton1.Size = new System.Drawing.Size(29, 28);
             this.GeriAlStripButton1.Text = "Geri Al";
             this.GeriAlStripButton1.Click += new System.EventHandler(this.GeriAlStripButton1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // İleriAlStripButton2
             // 
@@ -631,14 +653,14 @@ namespace Not_Defteri
             this.İleriAlStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("İleriAlStripButton2.Image")));
             this.İleriAlStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.İleriAlStripButton2.Name = "İleriAlStripButton2";
-            this.İleriAlStripButton2.Size = new System.Drawing.Size(29, 25);
+            this.İleriAlStripButton2.Size = new System.Drawing.Size(29, 28);
             this.İleriAlStripButton2.Text = "İleri Al";
             this.İleriAlStripButton2.Click += new System.EventHandler(this.İleriAlStripButton2_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // KesStripButton3
             // 
@@ -646,14 +668,14 @@ namespace Not_Defteri
             this.KesStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("KesStripButton3.Image")));
             this.KesStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.KesStripButton3.Name = "KesStripButton3";
-            this.KesStripButton3.Size = new System.Drawing.Size(29, 25);
+            this.KesStripButton3.Size = new System.Drawing.Size(29, 28);
             this.KesStripButton3.Text = "Kes";
             this.KesStripButton3.Click += new System.EventHandler(this.KesStripButton3_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // KopyalaStripButton4
             // 
@@ -661,14 +683,14 @@ namespace Not_Defteri
             this.KopyalaStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("KopyalaStripButton4.Image")));
             this.KopyalaStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.KopyalaStripButton4.Name = "KopyalaStripButton4";
-            this.KopyalaStripButton4.Size = new System.Drawing.Size(29, 25);
+            this.KopyalaStripButton4.Size = new System.Drawing.Size(29, 28);
             this.KopyalaStripButton4.Text = "Kopyala";
             this.KopyalaStripButton4.Click += new System.EventHandler(this.KopyalaStripButton4_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
             // 
             // YapistirStripButton5
             // 
@@ -676,14 +698,14 @@ namespace Not_Defteri
             this.YapistirStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("YapistirStripButton5.Image")));
             this.YapistirStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.YapistirStripButton5.Name = "YapistirStripButton5";
-            this.YapistirStripButton5.Size = new System.Drawing.Size(29, 25);
+            this.YapistirStripButton5.Size = new System.Drawing.Size(29, 28);
             this.YapistirStripButton5.Text = "Yapıştır";
             this.YapistirStripButton5.Click += new System.EventHandler(this.YapistirStripButton5_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripComboBoxYaziTipi
             // 
@@ -691,7 +713,7 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziTipi.DropDownWidth = 105;
             this.toolStripComboBoxYaziTipi.IntegralHeight = false;
             this.toolStripComboBoxYaziTipi.Name = "toolStripComboBoxYaziTipi";
-            this.toolStripComboBoxYaziTipi.Size = new System.Drawing.Size(118, 28);
+            this.toolStripComboBoxYaziTipi.Size = new System.Drawing.Size(118, 31);
             this.toolStripComboBoxYaziTipi.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziTipi_SelectedIndexChanged);
             this.toolStripComboBoxYaziTipi.Click += new System.EventHandler(this.toolStripComboBoxYaziTipi_Click);
             // 
@@ -701,7 +723,7 @@ namespace Not_Defteri
             this.toolStripComboBoxYaziBoyutu.DropDownWidth = 25;
             this.toolStripComboBoxYaziBoyutu.IntegralHeight = false;
             this.toolStripComboBoxYaziBoyutu.Name = "toolStripComboBoxYaziBoyutu";
-            this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(93, 28);
+            this.toolStripComboBoxYaziBoyutu.Size = new System.Drawing.Size(93, 31);
             this.toolStripComboBoxYaziBoyutu.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_SelectedIndexChanged);
             this.toolStripComboBoxYaziBoyutu.Validating += new System.ComponentModel.CancelEventHandler(this.toolStripComboBoxYaziBoyutu_Validating);
             this.toolStripComboBoxYaziBoyutu.Click += new System.EventHandler(this.toolStripComboBoxYaziBoyutu_Click);
@@ -709,7 +731,7 @@ namespace Not_Defteri
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 31);
             // 
             // KalinStripButton6
             // 
@@ -717,14 +739,14 @@ namespace Not_Defteri
             this.KalinStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("KalinStripButton6.Image")));
             this.KalinStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.KalinStripButton6.Name = "KalinStripButton6";
-            this.KalinStripButton6.Size = new System.Drawing.Size(29, 25);
+            this.KalinStripButton6.Size = new System.Drawing.Size(29, 28);
             this.KalinStripButton6.Text = "Kalın";
             this.KalinStripButton6.Click += new System.EventHandler(this.KalinStripButton6_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
             // 
             // İtalicStripButton7
             // 
@@ -732,14 +754,14 @@ namespace Not_Defteri
             this.İtalicStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("İtalicStripButton7.Image")));
             this.İtalicStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.İtalicStripButton7.Name = "İtalicStripButton7";
-            this.İtalicStripButton7.Size = new System.Drawing.Size(29, 25);
+            this.İtalicStripButton7.Size = new System.Drawing.Size(29, 28);
             this.İtalicStripButton7.Text = "İtalik";
             this.İtalicStripButton7.Click += new System.EventHandler(this.İtalicStripButton7_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 31);
             // 
             // AltiCizgiliStripButton8
             // 
@@ -747,14 +769,14 @@ namespace Not_Defteri
             this.AltiCizgiliStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("AltiCizgiliStripButton8.Image")));
             this.AltiCizgiliStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AltiCizgiliStripButton8.Name = "AltiCizgiliStripButton8";
-            this.AltiCizgiliStripButton8.Size = new System.Drawing.Size(29, 25);
+            this.AltiCizgiliStripButton8.Size = new System.Drawing.Size(29, 28);
             this.AltiCizgiliStripButton8.Text = "Altı Çizili";
             this.AltiCizgiliStripButton8.Click += new System.EventHandler(this.AltiCizgiliStripButton8_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 31);
             // 
             // BuyutStripButton11
             // 
@@ -762,7 +784,7 @@ namespace Not_Defteri
             this.BuyutStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("BuyutStripButton11.Image")));
             this.BuyutStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BuyutStripButton11.Name = "BuyutStripButton11";
-            this.BuyutStripButton11.Size = new System.Drawing.Size(29, 25);
+            this.BuyutStripButton11.Size = new System.Drawing.Size(29, 28);
             this.BuyutStripButton11.Text = "Büyüt";
             this.BuyutStripButton11.Click += new System.EventHandler(this.BuyutStripButton11_Click);
             // 
@@ -772,7 +794,7 @@ namespace Not_Defteri
             this.KucultStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("KucultStripButton12.Image")));
             this.KucultStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.KucultStripButton12.Name = "KucultStripButton12";
-            this.KucultStripButton12.Size = new System.Drawing.Size(29, 25);
+            this.KucultStripButton12.Size = new System.Drawing.Size(29, 28);
             this.KucultStripButton12.Text = "Küçült";
             this.KucultStripButton12.Click += new System.EventHandler(this.KucultStripButton12_Click);
             // 
@@ -781,12 +803,12 @@ namespace Not_Defteri
             this.BoyutStripLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.BoyutStripLabel1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BoyutStripLabel1.Name = "BoyutStripLabel1";
-            this.BoyutStripLabel1.Size = new System.Drawing.Size(0, 25);
+            this.BoyutStripLabel1.Size = new System.Drawing.Size(0, 28);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 31);
             // 
             // MaddeleStripButton9
             // 
@@ -794,14 +816,14 @@ namespace Not_Defteri
             this.MaddeleStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("MaddeleStripButton9.Image")));
             this.MaddeleStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MaddeleStripButton9.Name = "MaddeleStripButton9";
-            this.MaddeleStripButton9.Size = new System.Drawing.Size(29, 25);
+            this.MaddeleStripButton9.Size = new System.Drawing.Size(29, 28);
             this.MaddeleStripButton9.Text = "Maddele";
             this.MaddeleStripButton9.Click += new System.EventHandler(this.MaddeleStripButton9_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 31);
             // 
             // SiralaStripButton10
             // 
@@ -809,14 +831,14 @@ namespace Not_Defteri
             this.SiralaStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("SiralaStripButton10.Image")));
             this.SiralaStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SiralaStripButton10.Name = "SiralaStripButton10";
-            this.SiralaStripButton10.Size = new System.Drawing.Size(29, 25);
+            this.SiralaStripButton10.Size = new System.Drawing.Size(29, 28);
             this.SiralaStripButton10.Text = "Sırala";
             this.SiralaStripButton10.Click += new System.EventHandler(this.SiralaStripButton10_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 31);
             // 
             // SolaHizalaStripButton13
             // 
@@ -824,14 +846,14 @@ namespace Not_Defteri
             this.SolaHizalaStripButton13.Image = ((System.Drawing.Image)(resources.GetObject("SolaHizalaStripButton13.Image")));
             this.SolaHizalaStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SolaHizalaStripButton13.Name = "SolaHizalaStripButton13";
-            this.SolaHizalaStripButton13.Size = new System.Drawing.Size(29, 25);
+            this.SolaHizalaStripButton13.Size = new System.Drawing.Size(29, 28);
             this.SolaHizalaStripButton13.Text = "Sola Hizala";
             this.SolaHizalaStripButton13.Click += new System.EventHandler(this.SolaHizalaStripButton13_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 31);
             // 
             // OrtalaStripButton14
             // 
@@ -839,14 +861,14 @@ namespace Not_Defteri
             this.OrtalaStripButton14.Image = ((System.Drawing.Image)(resources.GetObject("OrtalaStripButton14.Image")));
             this.OrtalaStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OrtalaStripButton14.Name = "OrtalaStripButton14";
-            this.OrtalaStripButton14.Size = new System.Drawing.Size(29, 25);
+            this.OrtalaStripButton14.Size = new System.Drawing.Size(29, 28);
             this.OrtalaStripButton14.Text = "Ortala";
             this.OrtalaStripButton14.Click += new System.EventHandler(this.OrtalaStripButton14_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 31);
             // 
             // SagaHizalaStripButton15
             // 
@@ -854,14 +876,14 @@ namespace Not_Defteri
             this.SagaHizalaStripButton15.Image = ((System.Drawing.Image)(resources.GetObject("SagaHizalaStripButton15.Image")));
             this.SagaHizalaStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SagaHizalaStripButton15.Name = "SagaHizalaStripButton15";
-            this.SagaHizalaStripButton15.Size = new System.Drawing.Size(29, 25);
+            this.SagaHizalaStripButton15.Size = new System.Drawing.Size(29, 28);
             this.SagaHizalaStripButton15.Text = "Sağa Hizala";
             this.SagaHizalaStripButton15.Click += new System.EventHandler(this.SagaHizalaStripButton15_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 31);
             // 
             // sayfaYukariStripButton1
             // 
@@ -869,14 +891,14 @@ namespace Not_Defteri
             this.sayfaYukariStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("sayfaYukariStripButton1.Image")));
             this.sayfaYukariStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.sayfaYukariStripButton1.Name = "sayfaYukariStripButton1";
-            this.sayfaYukariStripButton1.Size = new System.Drawing.Size(29, 25);
+            this.sayfaYukariStripButton1.Size = new System.Drawing.Size(29, 28);
             this.sayfaYukariStripButton1.Text = "Aşağı";
             this.sayfaYukariStripButton1.Click += new System.EventHandler(this.sayfaYukariStripButton1_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 31);
             // 
             // sayfaAsagiStripButton2
             // 
@@ -884,14 +906,14 @@ namespace Not_Defteri
             this.sayfaAsagiStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("sayfaAsagiStripButton2.Image")));
             this.sayfaAsagiStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.sayfaAsagiStripButton2.Name = "sayfaAsagiStripButton2";
-            this.sayfaAsagiStripButton2.Size = new System.Drawing.Size(29, 25);
+            this.sayfaAsagiStripButton2.Size = new System.Drawing.Size(29, 28);
             this.sayfaAsagiStripButton2.Text = "Yukarı";
             this.sayfaAsagiStripButton2.Click += new System.EventHandler(this.sayfaAsagiStripButton2_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStrip2
             // 
@@ -915,10 +937,11 @@ namespace Not_Defteri
             this.toolStripSeparator24,
             this.metinKarsilastiriciStripButton,
             this.toolStripSeparator26,
-            this.dikte});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 28);
+            this.dikte,
+            this.gorunmezBoslukKopyalatoolStripLabel1});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 30);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1044, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(1044, 31);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -928,14 +951,14 @@ namespace Not_Defteri
             this.yeniStripButton.Image = ((System.Drawing.Image)(resources.GetObject("yeniStripButton.Image")));
             this.yeniStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.yeniStripButton.Name = "yeniStripButton";
-            this.yeniStripButton.Size = new System.Drawing.Size(29, 24);
+            this.yeniStripButton.Size = new System.Drawing.Size(29, 28);
             this.yeniStripButton.Text = "Yeni";
             this.yeniStripButton.Click += new System.EventHandler(this.yeniStripButton_Click);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 31);
             // 
             // yeniPencereStripButton
             // 
@@ -943,14 +966,14 @@ namespace Not_Defteri
             this.yeniPencereStripButton.Image = ((System.Drawing.Image)(resources.GetObject("yeniPencereStripButton.Image")));
             this.yeniPencereStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.yeniPencereStripButton.Name = "yeniPencereStripButton";
-            this.yeniPencereStripButton.Size = new System.Drawing.Size(29, 24);
+            this.yeniPencereStripButton.Size = new System.Drawing.Size(29, 28);
             this.yeniPencereStripButton.Text = "Yeni Pencere";
             this.yeniPencereStripButton.Click += new System.EventHandler(this.yeniPencereStripButton_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 31);
             // 
             // AcStripButton
             // 
@@ -958,14 +981,14 @@ namespace Not_Defteri
             this.AcStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AcStripButton.Image")));
             this.AcStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AcStripButton.Name = "AcStripButton";
-            this.AcStripButton.Size = new System.Drawing.Size(29, 24);
+            this.AcStripButton.Size = new System.Drawing.Size(29, 28);
             this.AcStripButton.Text = "Aç";
             this.AcStripButton.Click += new System.EventHandler(this.AcStripButton_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 31);
             // 
             // kaydetStripButton
             // 
@@ -973,14 +996,14 @@ namespace Not_Defteri
             this.kaydetStripButton.Image = ((System.Drawing.Image)(resources.GetObject("kaydetStripButton.Image")));
             this.kaydetStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.kaydetStripButton.Name = "kaydetStripButton";
-            this.kaydetStripButton.Size = new System.Drawing.Size(29, 24);
+            this.kaydetStripButton.Size = new System.Drawing.Size(29, 28);
             this.kaydetStripButton.Text = "Kaydet";
             this.kaydetStripButton.Click += new System.EventHandler(this.kaydetStripButton_Click);
             // 
             // toolStripSeparator21
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 31);
             // 
             // farkliKaydetStripButton
             // 
@@ -988,14 +1011,14 @@ namespace Not_Defteri
             this.farkliKaydetStripButton.Image = ((System.Drawing.Image)(resources.GetObject("farkliKaydetStripButton.Image")));
             this.farkliKaydetStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.farkliKaydetStripButton.Name = "farkliKaydetStripButton";
-            this.farkliKaydetStripButton.Size = new System.Drawing.Size(29, 24);
+            this.farkliKaydetStripButton.Size = new System.Drawing.Size(29, 28);
             this.farkliKaydetStripButton.Text = "Farklı Kaydet";
             this.farkliKaydetStripButton.Click += new System.EventHandler(this.farkliKaydetStripButton_Click);
             // 
             // toolStripSeparator22
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 31);
             // 
             // yazdirStripButton
             // 
@@ -1003,14 +1026,14 @@ namespace Not_Defteri
             this.yazdirStripButton.Image = ((System.Drawing.Image)(resources.GetObject("yazdirStripButton.Image")));
             this.yazdirStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.yazdirStripButton.Name = "yazdirStripButton";
-            this.yazdirStripButton.Size = new System.Drawing.Size(29, 24);
+            this.yazdirStripButton.Size = new System.Drawing.Size(29, 28);
             this.yazdirStripButton.Text = "Yazdır";
             this.yazdirStripButton.Click += new System.EventHandler(this.yazdirStripButton_Click);
             // 
             // toolStripSeparator23
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator23.Size = new System.Drawing.Size(6, 31);
             // 
             // bulStripButton
             // 
@@ -1018,14 +1041,14 @@ namespace Not_Defteri
             this.bulStripButton.Image = ((System.Drawing.Image)(resources.GetObject("bulStripButton.Image")));
             this.bulStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bulStripButton.Name = "bulStripButton";
-            this.bulStripButton.Size = new System.Drawing.Size(29, 24);
+            this.bulStripButton.Size = new System.Drawing.Size(29, 28);
             this.bulStripButton.Text = "Bul";
             this.bulStripButton.Click += new System.EventHandler(this.bulStripButton_Click);
             // 
             // toolStripSeparator25
             // 
             this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator25.Size = new System.Drawing.Size(6, 31);
             // 
             // saatZamanStripButton
             // 
@@ -1033,14 +1056,14 @@ namespace Not_Defteri
             this.saatZamanStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saatZamanStripButton.Image")));
             this.saatZamanStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saatZamanStripButton.Name = "saatZamanStripButton";
-            this.saatZamanStripButton.Size = new System.Drawing.Size(29, 24);
+            this.saatZamanStripButton.Size = new System.Drawing.Size(29, 28);
             this.saatZamanStripButton.Text = "Saat/Zaman";
             this.saatZamanStripButton.Click += new System.EventHandler(this.saatZamanStripButton_Click);
             // 
             // toolStripSeparator24
             // 
             this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator24.Size = new System.Drawing.Size(6, 31);
             // 
             // metinKarsilastiriciStripButton
             // 
@@ -1048,14 +1071,14 @@ namespace Not_Defteri
             this.metinKarsilastiriciStripButton.Image = ((System.Drawing.Image)(resources.GetObject("metinKarsilastiriciStripButton.Image")));
             this.metinKarsilastiriciStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.metinKarsilastiriciStripButton.Name = "metinKarsilastiriciStripButton";
-            this.metinKarsilastiriciStripButton.Size = new System.Drawing.Size(29, 24);
+            this.metinKarsilastiriciStripButton.Size = new System.Drawing.Size(29, 28);
             this.metinKarsilastiriciStripButton.Text = "Metin Karşılaştırıcı";
             this.metinKarsilastiriciStripButton.Click += new System.EventHandler(this.metinKarsilastiriciStripButton_Click);
             // 
             // toolStripSeparator26
             // 
             this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator26.Size = new System.Drawing.Size(6, 31);
             // 
             // dikte
             // 
@@ -1063,7 +1086,7 @@ namespace Not_Defteri
             this.dikte.Image = ((System.Drawing.Image)(resources.GetObject("dikte.Image")));
             this.dikte.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.dikte.Name = "dikte";
-            this.dikte.Size = new System.Drawing.Size(29, 24);
+            this.dikte.Size = new System.Drawing.Size(29, 28);
             this.dikte.Text = "Dikte";
             this.dikte.Click += new System.EventHandler(this.dikte_Click);
             // 
@@ -1096,18 +1119,28 @@ namespace Not_Defteri
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // guncellemeleriDenetleToolStripMenuItem
+            // panelLineNumbers
             // 
-            this.guncellemeleriDenetleToolStripMenuItem.Name = "guncellemeleriDenetleToolStripMenuItem";
-            this.guncellemeleriDenetleToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-            this.guncellemeleriDenetleToolStripMenuItem.Text = "Güncellemeleri Denetle";
-            this.guncellemeleriDenetleToolStripMenuItem.Click += new System.EventHandler(this.guncellemeleriDenetleToolStripMenuItem_Click);
+            this.panelLineNumbers.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelLineNumbers.Location = new System.Drawing.Point(0, 92);
+            this.panelLineNumbers.Name = "panelLineNumbers";
+            this.panelLineNumbers.Size = new System.Drawing.Size(33, 491);
+            this.panelLineNumbers.TabIndex = 7;
+            this.panelLineNumbers.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLineNumbers_Paint);
+            // 
+            // gorunmezBoslukKopyalatoolStripLabel1
+            // 
+            this.gorunmezBoslukKopyalatoolStripLabel1.Name = "gorunmezBoslukKopyalatoolStripLabel1";
+            this.gorunmezBoslukKopyalatoolStripLabel1.Size = new System.Drawing.Size(182, 28);
+            this.gorunmezBoslukKopyalatoolStripLabel1.Text = "Görünmez Boşluk Kopyala";
+            this.gorunmezBoslukKopyalatoolStripLabel1.Click += new System.EventHandler(this.gorunmezBoslukKopyalatoolStripLabel1_Click);
             // 
             // NotDefteri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1044, 611);
+            this.Controls.Add(this.panelLineNumbers);
             this.Controls.Add(this.lblUyari);
             this.Controls.Add(this.pbUyari);
             this.Controls.Add(this.richTextBox);
@@ -1250,5 +1283,8 @@ namespace Not_Defteri
         private ToolStripStatusLabel dikteAktifMi;
         private ToolStripMenuItem donusturToolStripMenuItem;
         private ToolStripMenuItem guncellemeleriDenetleToolStripMenuItem;
+        private Panel panelLineNumbers;
+        private ToolStripMenuItem satirNumaralariToolStripMenuItem;
+        private ToolStripLabel gorunmezBoslukKopyalatoolStripLabel1;
     }
 }
