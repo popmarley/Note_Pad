@@ -135,6 +135,8 @@ namespace Not_Defteri
                 savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
                 isFileSaved = true;
                 UpdateFormTitle(); // Başlık güncelleme
+
+                AdjustRichTextBoxMarginForLineNumbers();
             }
         }
 
@@ -674,8 +676,11 @@ namespace Not_Defteri
             {
                 ToggleLightMode();
             }
+            // Satır numarası görünürlüğünü ayarlardan yükle
+            panelLineNumbers.Visible = Properties.Settings.Default.SatirNumarasiVisible;
+            satirNumaralariToolStripMenuItem.Checked = panelLineNumbers.Visible;
             AdjustRichTextBoxMarginForLineNumbers();
-
+            
         }
 
         private void NotDefteri_KeyDown(object sender, KeyEventArgs e)
@@ -734,14 +739,6 @@ namespace Not_Defteri
             richTextBox.SelectionStart = newCursorPos;
             richTextBox.SelectionLength = 0;
         }
-
-
-
-
-
-
-
-
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -1593,21 +1590,24 @@ namespace Not_Defteri
             panelLineNumbers.Visible = !panelLineNumbers.Visible;
             satirNumaralariToolStripMenuItem.Checked = panelLineNumbers.Visible;
             AdjustRichTextBoxMarginForLineNumbers();
+            Properties.Settings.Default.SatirNumarasiVisible = panelLineNumbers.Visible;
+            Properties.Settings.Default.Save();
 
 
         }
 
         private void AdjustRichTextBoxMarginForLineNumbers()
         {
+            richTextBox.SelectAll(); // Tüm metni seç
             if (panelLineNumbers.Visible)
             {
-                // Satır numarası panelinin genişliğine göre içerik sola kaydırılıyor
-                richTextBox.SelectionIndent = panelLineNumbers.Width + 5; // 5 px boşluk
+                richTextBox.SelectionIndent = panelLineNumbers.Width + 5;
             }
             else
             {
                 richTextBox.SelectionIndent = 0;
             }
+            richTextBox.DeselectAll(); // Seçimi kaldır
         }
 
      

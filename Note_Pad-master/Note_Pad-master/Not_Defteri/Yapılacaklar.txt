@@ -1,5 +1,5 @@
 ﻿
-Versiyon 3.4 (is Derlemesi 250625,1105)
+Versiyon 3.5(is Derlemesi 250717,1601)
 
 Bilenen hatalar ve eklenecekler
 
@@ -22,7 +22,7 @@ Bilenen hatalar ve eklenecekler
 -güncelleme yapılırken yüzdelik dolma ekle
 -eğer pc nete bağlıysa her not defterini açmaya güncellemeyi otomatik olarak denetlesin varsa yapılsın mı diye sorsun
 -indirme yaparken komple projeyi indirmeyecek sadece bin klasöründeki uygulamayı indirip kuracak
--sayfa işk açıldıgında beyaz oluyor aşagı kaydırınca yazılar geliyor
+-sayfa ilk açıldıgında beyaz oluyor aşagı kaydırınca yazılar geliyor (?)
 
 
 
@@ -64,4 +64,6 @@ Yapılanlar
 + Ctrl + D işlevi güçlendirildi (Versiyon 3.3(is Derlemesi 250624,1313))
 + Sayfa satırları işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
 + Görünmez boşluk kopyalama işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
++ Satır numaralarının kapalı kalma işlevi eklendi (Versiyon 3.5 (is Derlemesi 250717,1601))
++ Satır numaralarının yazının üstünde kalma sorunu düzeltildi (Versiyon 3.5 (is Derlemesi 250717,1601))
 
