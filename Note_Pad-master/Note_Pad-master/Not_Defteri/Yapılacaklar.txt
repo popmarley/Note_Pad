@@ -1,4 +1,4 @@
-Versiyon 3.6 (is Derlemesi 260422,1047)
+Versiyon 3.7 (is Derlemesi 260422,1143)
 
 Bilinen hatalar ve eklenecekler
 
@@ -18,6 +18,11 @@ Bilinen hatalar ve eklenecekler
 - Proje SDK-style yapıya ve daha modern .NET Windows Forms sürümüne geçiş için ayrıca değerlendirilecek.
 
 Yapılanlar
+
+Versiyon 3.7 (is Derlemesi 260422,1143)
+
++ Büyük dosyalarda mouse wheel kaydırması daha net satır adımlarıyla çalışacak şekilde iyileştirildi.
++ Arama vurgusu ve programatik biçimlendirme işlemlerinin dosyayı değişmiş gibi göstermesi engellendi.
 
 Versiyon 3.6 (is Derlemesi 260422,1047)
 

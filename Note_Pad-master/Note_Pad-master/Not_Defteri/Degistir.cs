@@ -14,6 +14,7 @@ namespace Not_Defteri
     public partial class Degistir : Form
     {
         public RichTextBox TextBoxReferans { get; set; }
+        public Action<Action> PreserveEditorState { get; set; }
         private int highlightedStart = -1;
         private int highlightedLength = 0;
 
@@ -70,45 +71,63 @@ namespace Not_Defteri
         }
         private void ResetHighlight()
         {
-            if (TextBoxReferans == null || highlightedStart < 0)
+            RunWithoutDirty(() =>
             {
-                return;
-            }
+                if (TextBoxReferans == null || highlightedStart < 0)
+                {
+                    return;
+                }
 
-            bool wasModified = TextBoxReferans.Modified;
-            int selectionStart = TextBoxReferans.SelectionStart;
-            int selectionLength = TextBoxReferans.SelectionLength;
+                bool wasModified = TextBoxReferans.Modified;
+                int selectionStart = TextBoxReferans.SelectionStart;
+                int selectionLength = TextBoxReferans.SelectionLength;
 
-            if (highlightedStart < TextBoxReferans.TextLength)
-            {
-                int safeLength = Math.Min(highlightedLength, TextBoxReferans.TextLength - highlightedStart);
-                TextBoxReferans.Select(highlightedStart, safeLength);
-                TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
-                TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
-            }
+                if (highlightedStart < TextBoxReferans.TextLength)
+                {
+                    int safeLength = Math.Min(highlightedLength, TextBoxReferans.TextLength - highlightedStart);
+                    TextBoxReferans.Select(highlightedStart, safeLength);
+                    TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
+                    TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
+                }
 
-            TextBoxReferans.Select(
-                Math.Min(selectionStart, TextBoxReferans.TextLength),
-                Math.Min(selectionLength, Math.Max(0, TextBoxReferans.TextLength - selectionStart)));
-            TextBoxReferans.Modified = wasModified;
-            highlightedStart = -1;
-            highlightedLength = 0;
+                TextBoxReferans.Select(
+                    Math.Min(selectionStart, TextBoxReferans.TextLength),
+                    Math.Min(selectionLength, Math.Max(0, TextBoxReferans.TextLength - selectionStart)));
+                TextBoxReferans.Modified = wasModified;
+                highlightedStart = -1;
+                highlightedLength = 0;
+            });
         }
 
         private void HighlightMatch(int start, int length)
         {
-            ResetHighlight();
+            RunWithoutDirty(() =>
+            {
+                ResetHighlight();
 
-            bool wasModified = TextBoxReferans.Modified;
-            TextBoxReferans.Select(start, length);
-            TextBoxReferans.SelectionBackColor = Color.BlueViolet;
-            TextBoxReferans.SelectionColor = Color.White;
-            TextBoxReferans.ScrollToCaret();
-            TextBoxReferans.Select(start, length);
-            TextBoxReferans.Modified = wasModified;
+                bool wasModified = TextBoxReferans.Modified;
+                TextBoxReferans.Select(start, length);
+                TextBoxReferans.SelectionBackColor = Color.BlueViolet;
+                TextBoxReferans.SelectionColor = Color.White;
+                TextBoxReferans.ScrollToCaret();
+                TextBoxReferans.Select(start, length);
+                TextBoxReferans.Modified = wasModified;
 
-            highlightedStart = start;
-            highlightedLength = length;
+                highlightedStart = start;
+                highlightedLength = length;
+            });
+        }
+
+        private void RunWithoutDirty(Action action)
+        {
+            if (PreserveEditorState != null)
+            {
+                PreserveEditorState(action);
+            }
+            else
+            {
+                action();
+            }
         }
 
         private void arananTextBox_TextChanged(object sender, EventArgs e)

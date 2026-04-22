@@ -32,6 +32,7 @@ namespace Not_Defteri
     {
         private string currentFilePath = null;
         private Encoding currentFileEncoding = TextFileService.DefaultEncoding;
+        private string savedPlainText = "";
         private bool isFileSaved = true;
         private bool isLoadingDocument = false;
         private readonly string recoverySessionId = Guid.NewGuid().ToString("N");
@@ -394,6 +395,7 @@ namespace Not_Defteri
             {
                 bulForm = new Bul();
                 bulForm.TextBoxReferans = this.richTextBox; // richTextBox referansını geçir
+                bulForm.PreserveEditorState = PreserveEditorState;
                 this.FormClosed += (s, args) => bulForm.Close(); // Ana form kapatıldığında Bul formunu kapat
             }
 
@@ -409,6 +411,7 @@ namespace Not_Defteri
             {
                 degistirForm = new Degistir();
                 degistirForm.TextBoxReferans = this.richTextBox; // richTextBox referansını geçir
+                degistirForm.PreserveEditorState = PreserveEditorState;
                 this.FormClosed += (s, args) => degistirForm.Close(); // Ana form kapatıldığında Bul formunu kapat
             }
 
@@ -527,9 +530,37 @@ namespace Not_Defteri
 
         private void MarkFileSaved()
         {
+            savedPlainText = richTextBox.Text;
             richTextBox.Modified = false;
             isFileSaved = true;
             UpdateFormTitle();
+        }
+
+        public void PreserveEditorState(Action action)
+        {
+            if (action == null)
+            {
+                return;
+            }
+
+            bool previousLoadingState = isLoadingDocument;
+            bool previousSavedState = isFileSaved;
+            bool previousModifiedState = richTextBox.Modified;
+            string previousSavedText = savedPlainText;
+
+            isLoadingDocument = true;
+            try
+            {
+                action();
+            }
+            finally
+            {
+                isLoadingDocument = previousLoadingState;
+                isFileSaved = previousSavedState;
+                savedPlainText = previousSavedText;
+                richTextBox.Modified = previousModifiedState;
+                UpdateFormTitle();
+            }
         }
 
         private void InitializeRecentFilesMenu()
@@ -767,7 +798,7 @@ namespace Not_Defteri
 
         private void richTextBox_TextChanged(object sender, EventArgs e)
         {
-            panelLineNumbers.Invalidate();
+            InvalidateLineNumbers();
             toolStripStatusLabel4.Text = $"Krktr S: {richTextBox.TextLength:N0}";
 
             if (isLoadingDocument)
@@ -775,6 +806,13 @@ namespace Not_Defteri
 
             if (isFileSaved)
             {
+                if (richTextBox.TextLength == savedPlainText.Length &&
+                    string.Equals(richTextBox.Text, savedPlainText, StringComparison.Ordinal))
+                {
+                    richTextBox.Modified = false;
+                    return;
+                }
+
                 richTextBox.Modified = true;
                 isFileSaved = false;
                 UpdateFormTitle();
@@ -932,7 +970,7 @@ namespace Not_Defteri
             toolStripStatusLabel1.Text = $"St: {line + 1:N0}, Stn: {column + 1:N0}";
 
             // Karakter sayısını formatlayarak gösterme
-            int textLength = richTextBox.Text.Length;
+            int textLength = richTextBox.TextLength;
             toolStripStatusLabel4.Text = $"Krktr S: {textLength:N0}";
         }
 
@@ -967,6 +1005,23 @@ namespace Not_Defteri
 
                 // Update status label
                 toolStripStatusLabel3.Text = $"{zoomLevel}%";
+                if (e is HandledMouseEventArgs handledZoomEvent)
+                {
+                    handledZoomEvent.Handled = true;
+                }
+            }
+            else if (richTextBox.TextLength > 50000)
+            {
+                int wheelDirection = e.Delta > 0 ? -1 : 1;
+                int baseLines = SystemInformation.MouseWheelScrollLines <= 0 ? 3 : SystemInformation.MouseWheelScrollLines;
+                int linesToScroll = Math.Max(6, baseLines * 2);
+                NativeMethods.SendMessage(richTextBox.Handle, NativeMethods.EM_LINESCROLL, 0, (IntPtr)(wheelDirection * linesToScroll));
+                InvalidateLineNumbers();
+
+                if (e is HandledMouseEventArgs handledScrollEvent)
+                {
+                    handledScrollEvent.Handled = true;
+                }
             }
         }
 
@@ -1124,6 +1179,7 @@ namespace Not_Defteri
             public const int SB_PAGEDOWN = 3;
             public const int EM_SETMARGINS = 0xD3;
             public const int EC_LEFTMARGIN = 0x1;
+            public const int EM_LINESCROLL = 0x00B6;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
             public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, IntPtr lParam);
@@ -1892,12 +1948,12 @@ namespace Not_Defteri
 
         private void richTextBox_VScroll(object sender, EventArgs e)
         {
-            panelLineNumbers.Invalidate();
+            InvalidateLineNumbers();
         }
 
         private void richTextBox_Resize(object sender, EventArgs e)
         {
-            panelLineNumbers.Invalidate();
+            InvalidateLineNumbers();
         }
 
         private void satirNumaralariToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1916,6 +1972,14 @@ namespace Not_Defteri
             int margin = panelLineNumbers.Visible ? panelLineNumbers.Width + 5 : 2;
             NativeMethods.SendMessage(richTextBox.Handle, NativeMethods.EM_SETMARGINS, NativeMethods.EC_LEFTMARGIN, (IntPtr)margin);
             richTextBox.Invalidate();
+        }
+
+        private void InvalidateLineNumbers()
+        {
+            if (panelLineNumbers.Visible)
+            {
+                panelLineNumbers.Invalidate();
+            }
         }
 
      
