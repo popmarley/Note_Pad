@@ -35,40 +35,28 @@ namespace Not_Defteri
                 // Sayaç sıfırla
                 pbPopMarleyClickCount = 0;
 
-                using (Password passwordForm = new Password())
+                using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
                 {
-                    if (passwordForm.ShowDialog() == DialogResult.OK)
+                    folderDialog.Description = "Uygulama dosyasının kopyalanacağı klasörü seçin.";
+                    if (folderDialog.ShowDialog() == DialogResult.OK)
                     {
-                        string girilenSifre = passwordForm.Passwords;
+                        string sourcePath = Application.ExecutablePath;
+                        string targetPath = Path.Combine(folderDialog.SelectedPath, Path.GetFileName(sourcePath));
 
-                        // Şifre kontrolü
-                        if (girilenSifre == "ferra") // Şifre doğruysa
+                        try
                         {
-                            // Kopyalanacak dosyanın yolu (uygulamanın .exe dosyası)
-                            string sourcePath = Application.ExecutablePath;
-
-                            // Hedef yolu tanımla
-                            string targetPath = @"\\fs.ferra.local\BT\Not_Defteri\Note_Pad-master\Not_Defteri\bin\Debug\" + Path.GetFileName(sourcePath);
-                            // Kopyalanan dosyanın bulunduğu klasörü aç
-                            string targetFolderPath = Path.GetDirectoryName(targetPath);
-                            try
+                            File.Copy(sourcePath, targetPath, true);
+                            MessageBox.Show("Dosya başarıyla kopyalandı.");
+                            this.Close();
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                             {
-                                // Dosyayı hedef yola kopyala
-                                File.Copy(sourcePath, targetPath, true);
-                                MessageBox.Show("Dosya başarıyla kopyalandı.");
-                                this.Close();
-                                // Klasörü aç
-                                System.Diagnostics.Process.Start(targetFolderPath);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Dosya kopyalanırken hata oluştu: " + ex.Message);
-
-                            }
+                                FileName = folderDialog.SelectedPath,
+                                UseShellExecute = true
+                            });
                         }
-                        else // Şifre yanlışsa
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Yanlış şifre girdiniz.");
+                            MessageBox.Show("Dosya kopyalanırken hata oluştu: " + ex.Message);
                         }
                     }
                 }
@@ -83,7 +71,11 @@ namespace Not_Defteri
 
             try
             {
-                System.Diagnostics.Process.Start(url);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
             }
             catch (Exception ex)
             {
@@ -91,5 +83,7 @@ namespace Not_Defteri
                 MessageBox.Show("Mail uygulaması açılırken bir hata oluştu: " + ex.Message);
             }
         }
+
+        
     }
 }

@@ -15,6 +15,8 @@ namespace Not_Defteri
 
 		public RichTextBox TextBoxReferans { get; set; }
         private Degistir degistirForm = null;
+        private int highlightedStart = -1;
+        private int highlightedLength = 0;
       
         public Bul()
 		{
@@ -49,20 +51,7 @@ namespace Not_Defteri
 
                 if (foundIndex != -1)
                 {
-                    ResetHighlight(); // Önceki aramalardaki renklendirmeyi sıfırla
-                    TextBoxReferans.Select(foundIndex, arananMetin.Length);
-                    TextBoxReferans.SelectionBackColor = Color.BlueViolet; // Seçili metnin arka plan rengini sarı yapar.
-                    TextBoxReferans.SelectionColor = Color.White; // Seçili metnin rengini kırmızı yapar.
-                    TextBoxReferans.ScrollToCaret();
-
-                    if (yukariRadioButton.Checked)
-                    {
-                        TextBoxReferans.SelectionStart = foundIndex;
-                    }
-                    else
-                    {
-                        TextBoxReferans.SelectionStart = foundIndex + arananMetin.Length;
-                    }
+                    HighlightMatch(foundIndex, arananMetin.Length);
                 }
                 else
                 {
@@ -78,10 +67,45 @@ namespace Not_Defteri
 
         private void ResetHighlight()
         {
-            TextBoxReferans.SelectAll();
-            TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
-            TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
-            TextBoxReferans.DeselectAll();
+            if (TextBoxReferans == null || highlightedStart < 0)
+            {
+                return;
+            }
+
+            bool wasModified = TextBoxReferans.Modified;
+            int selectionStart = TextBoxReferans.SelectionStart;
+            int selectionLength = TextBoxReferans.SelectionLength;
+
+            if (highlightedStart < TextBoxReferans.TextLength)
+            {
+                int safeLength = Math.Min(highlightedLength, TextBoxReferans.TextLength - highlightedStart);
+                TextBoxReferans.Select(highlightedStart, safeLength);
+                TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
+                TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
+            }
+
+            TextBoxReferans.Select(
+                Math.Min(selectionStart, TextBoxReferans.TextLength),
+                Math.Min(selectionLength, Math.Max(0, TextBoxReferans.TextLength - selectionStart)));
+            TextBoxReferans.Modified = wasModified;
+            highlightedStart = -1;
+            highlightedLength = 0;
+        }
+
+        private void HighlightMatch(int start, int length)
+        {
+            ResetHighlight();
+
+            bool wasModified = TextBoxReferans.Modified;
+            TextBoxReferans.Select(start, length);
+            TextBoxReferans.SelectionBackColor = Color.BlueViolet;
+            TextBoxReferans.SelectionColor = Color.White;
+            TextBoxReferans.ScrollToCaret();
+            TextBoxReferans.Select(start, length);
+            TextBoxReferans.Modified = wasModified;
+
+            highlightedStart = start;
+            highlightedLength = length;
         }
 
         private void Bul_FormClosing(object sender, FormClosingEventArgs e)

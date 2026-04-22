@@ -30,9 +30,14 @@ namespace Not_Defteri
 {
     public partial class NotDefteri : Form
     {
-        private string savedContent = "";
         private string currentFilePath = null;
+        private Encoding currentFileEncoding = TextFileService.DefaultEncoding;
         private bool isFileSaved = true;
+        private bool isLoadingDocument = false;
+        private readonly string recoverySessionId = Guid.NewGuid().ToString("N");
+        private static bool recoveryPromptShown = false;
+        private Timer autoSaveTimer;
+        private ToolStripMenuItem recentFilesMenuItem;
 
         private Bul bulForm = null;
         private Degistir degistirForm = null;
@@ -76,6 +81,9 @@ namespace Not_Defteri
             // RichTextBox'ın ContextMenuStrip özelliğini ayarla
             richTextBox.ContextMenuStrip = richtextBoxContextMenu;
 
+            InitializeRecentFilesMenu();
+            InitializeAdditionalMenus();
+            InitializeAutoSaveTimer();
             LoadFontSettings();
             LoadTextStyleSettings();
         }
@@ -125,63 +133,61 @@ namespace Not_Defteri
                 richTextBox.Font = new System.Drawing.Font(fontName, fontSize, fontStyle);
             }
         }
-        public void OpenFile(string filePath)
+        public bool OpenFile(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
-                // Dosyayı UTF-8 encoding'i ile oku
-                richTextBox.Text = File.ReadAllText(filePath, Encoding.UTF8);
-                currentFilePath = filePath; // Dosya yolu güncelleme
-                savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-                isFileSaved = true;
-                UpdateFormTitle(); // Başlık güncelleme
+                MessageBox.Show("Dosya bulunamadı.", "Dosya Aç", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
 
+            try
+            {
+                TextFileContent content = TextFileService.ReadAllText(filePath);
+                isLoadingDocument = true;
+                richTextBox.Text = content.Text;
+                isLoadingDocument = false;
+
+                currentFilePath = filePath;
+                currentFileEncoding = content.Encoding;
+                MarkFileSaved();
+                toolStripStatusLabel5.Text = content.DisplayName;
+                RecentFilesService.Add(filePath);
+                RefreshRecentFilesMenu();
                 AdjustRichTextBoxMarginForLineNumbers();
+                RecoveryService.Delete(recoverySessionId);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                isLoadingDocument = false;
+                MessageBox.Show("Dosya açılırken bir hata oluştu:\n" + ex.Message, "Dosya Aç", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
         #region Kısayollar
 
         private void yeniToolStripMenuItem_Click(object sender, EventArgs e)
-        {// Mevcut pencerede yapılan değişiklikleri kontrol et
-            if (richTextBox.Modified && !isFileSaved)
-            {
-                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        {
+            if (!ConfirmSaveIfNeeded())
+                return;
 
-                if (result == DialogResult.Yes)
-                {
-                    SaveFile(); // Kaydetme işlemi
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    return; // Kullanıcı iptal ederse, yeni pencere açmayı durdur
-                }
-                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan yeni pencere aç
-            }
             // Mevcut not defterinin içeriğini temizle
+            isLoadingDocument = true;
             richTextBox.Clear();
+            isLoadingDocument = false;
             currentFilePath = null; // Dosya yolu sıfırlanıyor
-            isFileSaved = true; // Dosya kaydedildi olarak işaretle
-            UpdateFormTitle(); // Başlık güncelleme
+            currentFileEncoding = TextFileService.DefaultEncoding;
+            toolStripStatusLabel5.Text = TextFileService.GetDisplayName(currentFileEncoding);
+            MarkFileSaved();
+            RecoveryService.Delete(recoverySessionId);
         }
 
         private void acToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Mevcut içerik değiştirildiyse ve kaydedilmediyse, kullanıcıya kaydetme seçeneği sun
-            if (richTextBox.Modified && !isFileSaved)
-            {
-                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    SaveFile(); // Kaydetme işlemi
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    return; // Kullanıcı iptal ederse, dosya açmayı durdur
-                }
-                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan devam et
-            }
+            if (!ConfirmSaveIfNeeded())
+                return;
 
             // 'Aç' diyalog kutusunu göster
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -189,52 +195,18 @@ namespace Not_Defteri
                 openFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    richTextBox.Text = File.ReadAllText(openFileDialog.FileName);
-                    currentFilePath = openFileDialog.FileName; // Dosya yolu güncelleme
-                    savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-                    isFileSaved = true;
-                    UpdateFormTitle(); // Başlık güncelleme
+                    OpenFile(openFileDialog.FileName);
                 }
             }
         }
 
         private void kaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Eğer dosya zaten bir kere kaydedildi ise, mevcut dosya yoluna kaydet
-            if (!string.IsNullOrEmpty(currentFilePath))
-            {
-                File.WriteAllText(currentFilePath, richTextBox.Text);
-                savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-                isFileSaved = true;
-                UpdateFormTitle(); // Başlık güncelleme
-            }
-            else
-            {
-                // Eğer dosya daha önce hiç kaydedilmediyse, "Farklı Kaydet" diyalogunu göster
-                SaveFileAs();
-            }
+            SaveFile();
         }
 
         private void yeniPencereToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Mevcut pencerede yapılan değişiklikleri kontrol et
-            if (richTextBox.Modified && !isFileSaved)
-            {
-                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    SaveFile(); // Kaydetme işlemi
-                }
-                else if (result == DialogResult.Cancel)
-                {
-
-                    return; // Kullanıcı iptal ederse, yeni pencere açmayı durdur
-                }
-
-                // Kullanıcı "Hayır" derse, hiçbir şey yapmadan yeni pencere aç
-            }
-
             // Yeni bir NotDefteri örneği oluştur ve göster
             NotDefteri yeniPencere = new NotDefteri();
             yeniPencere.Show();
@@ -242,15 +214,7 @@ namespace Not_Defteri
 
         private void farkliKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Farklı kaydetme işlemi
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "Metin Dosyaları (*.txt)|*.txt|Tüm Dosyalar (*.*)|*.*";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    File.WriteAllText(saveFileDialog.FileName, richTextBox.Text);
-                }
-            }
+            SaveFileAs();
         }
 
         private void notDefteriHakkindaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -302,7 +266,7 @@ namespace Not_Defteri
 
         private void richTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.LinkText);
+            OpenShellTarget(e.LinkText);
         }
 
         private void GeriAlStripButton1_Click(object sender, EventArgs e)
@@ -469,7 +433,7 @@ namespace Not_Defteri
         private bool promptShown = false;
         private void NotDefteri_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!promptShown && richTextBox.Modified && !isFileSaved)
+            if (!promptShown && HasUnsavedChanges())
             {
                 promptShown = true; // Uyarı gösterilmeden önce true olarak ayarla
 
@@ -477,7 +441,12 @@ namespace Not_Defteri
 
                 if (result == DialogResult.Yes)
                 {
-                    SaveFile();
+                    if (!SaveFile())
+                    {
+                        e.Cancel = true;
+                        promptShown = false;
+                        return;
+                    }
                 }
                 else if (result == DialogResult.Cancel)
                 {
@@ -496,6 +465,13 @@ namespace Not_Defteri
             {
                 // Yazı tipi ve boyutu ayarlarını kaydet
                 SaveFontSettings();
+                RecoveryService.Delete(recoverySessionId);
+                if (autoSaveTimer != null)
+                {
+                    autoSaveTimer.Stop();
+                    autoSaveTimer.Dispose();
+                    autoSaveTimer = null;
+                }
 
                 if (Application.OpenForms.Count == 1)
                 {
@@ -510,8 +486,6 @@ namespace Not_Defteri
             }
 
             Properties.Settings.Default.MenulerVisible = menulerToolStripMenuItem.Checked;
-            Properties.Settings.Default.Save();
-
             Properties.Settings.Default.DurumCubuguVisible = durumcubuguToolStripMenuItem.Checked;
             Properties.Settings.Default.Save();
         }
@@ -530,25 +504,208 @@ namespace Not_Defteri
             Properties.Settings.Default.Save();
         }
 
-        private void SaveFile()
+        private bool HasUnsavedChanges()
+        {
+            return !isFileSaved;
+        }
+
+        private bool ConfirmSaveIfNeeded()
+        {
+            if (!HasUnsavedChanges())
+            {
+                return true;
+            }
+
+            DialogResult result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?", "Not Defteri", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                return SaveFile();
+            }
+
+            return result == DialogResult.No;
+        }
+
+        private void MarkFileSaved()
+        {
+            richTextBox.Modified = false;
+            isFileSaved = true;
+            UpdateFormTitle();
+        }
+
+        private void InitializeRecentFilesMenu()
+        {
+            recentFilesMenuItem = new ToolStripMenuItem("Son Dosyalar");
+            int insertIndex = toolStripMenuItem1.DropDownItems.IndexOf(acToolStripMenuItem) + 1;
+            toolStripMenuItem1.DropDownItems.Insert(insertIndex, recentFilesMenuItem);
+            RefreshRecentFilesMenu();
+        }
+
+        private void InitializeAdditionalMenus()
+        {
+            ToolStripMenuItem renameFileItem = new ToolStripMenuItem("Dosya Adını Değiştir...");
+            renameFileItem.ShortcutKeys = Keys.F2;
+            renameFileItem.Click += dosyaAdiniDegistirToolStripMenuItem_Click;
+            int renameIndex = toolStripMenuItem1.DropDownItems.IndexOf(farkliKaydetToolStripMenuItem) + 1;
+            toolStripMenuItem1.DropDownItems.Insert(renameIndex, renameFileItem);
+
+            ToolStripMenuItem textColorItem = new ToolStripMenuItem("Yazı Rengi...");
+            textColorItem.Click += yaziRengiToolStripMenuItem_Click;
+            biçimToolStripMenuItem.DropDownItems.Add(textColorItem);
+
+            ToolStripMenuItem backgroundColorItem = new ToolStripMenuItem("Arka Plan Rengi...");
+            backgroundColorItem.Click += arkaPlanRengiToolStripMenuItem_Click;
+            biçimToolStripMenuItem.DropDownItems.Add(backgroundColorItem);
+        }
+
+        private void RefreshRecentFilesMenu()
+        {
+            if (recentFilesMenuItem == null)
+            {
+                return;
+            }
+
+            recentFilesMenuItem.DropDownItems.Clear();
+            IList<string> files = RecentFilesService.Load();
+            if (files.Count == 0)
+            {
+                ToolStripMenuItem emptyItem = new ToolStripMenuItem("Son dosya yok");
+                emptyItem.Enabled = false;
+                recentFilesMenuItem.DropDownItems.Add(emptyItem);
+                return;
+            }
+
+            foreach (string file in files)
+            {
+                string capturedPath = file;
+                ToolStripMenuItem item = new ToolStripMenuItem(Path.GetFileName(file));
+                item.ToolTipText = file;
+                item.Click += (sender, args) =>
+                {
+                    if (ConfirmSaveIfNeeded())
+                    {
+                        OpenFile(capturedPath);
+                    }
+                };
+                recentFilesMenuItem.DropDownItems.Add(item);
+            }
+
+            recentFilesMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            ToolStripMenuItem clearItem = new ToolStripMenuItem("Listeyi Temizle");
+            clearItem.Click += (sender, args) =>
+            {
+                RecentFilesService.Clear();
+                RefreshRecentFilesMenu();
+            };
+            recentFilesMenuItem.DropDownItems.Add(clearItem);
+        }
+
+        private void InitializeAutoSaveTimer()
+        {
+            autoSaveTimer = new Timer();
+            autoSaveTimer.Interval = 30000;
+            autoSaveTimer.Tick += (sender, args) => AutoSaveRecovery();
+            autoSaveTimer.Start();
+        }
+
+        private void AutoSaveRecovery()
+        {
+            if (HasUnsavedChanges() && richTextBox.TextLength > 0)
+            {
+                RecoveryService.Save(recoverySessionId, currentFilePath, richTextBox.Text);
+            }
+            else
+            {
+                RecoveryService.Delete(recoverySessionId);
+            }
+        }
+
+        private void OfferRecoveryIfNeeded()
+        {
+            if (recoveryPromptShown || !string.IsNullOrEmpty(currentFilePath) || richTextBox.TextLength > 0)
+            {
+                return;
+            }
+
+            recoveryPromptShown = true;
+            IList<RecoveryInfo> recoveries = RecoveryService.ListRecoveries();
+            if (recoveries.Count == 0)
+            {
+                return;
+            }
+
+            RecoveryInfo recovery = recoveries[0];
+            string source = string.IsNullOrWhiteSpace(recovery.OriginalPath) ? "Adsız belge" : recovery.OriginalPath;
+            DialogResult result = MessageBox.Show(
+                "Kaydedilmemiş bir çalışma bulundu.\n\nKaynak: " + source + "\nTarih: " + recovery.LastWriteTime + "\n\nGeri yüklemek ister misiniz?",
+                "Otomatik Kurtarma",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                isLoadingDocument = true;
+                richTextBox.Text = RecoveryService.Read(recovery);
+                isLoadingDocument = false;
+                currentFilePath = null;
+                currentFileEncoding = TextFileService.DefaultEncoding;
+                toolStripStatusLabel5.Text = "Kurtarma";
+                richTextBox.Modified = true;
+                isFileSaved = false;
+                UpdateFormTitle();
+            }
+
+            RecoveryService.Delete(recovery);
+        }
+
+        private void OpenShellTarget(string target)
+        {
+            if (string.IsNullOrWhiteSpace(target))
+            {
+                return;
+            }
+
+            try
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = target,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bağlantı açılırken bir hata oluştu:\n" + ex.Message, "Bağlantı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool SaveFile()
         {
             if (string.IsNullOrEmpty(currentFilePath))
             {
                 // Dosya daha önce kaydedilmemişse, "Farklı Kaydet" diyalogunu göster
-                SaveFileAs();
+                return SaveFileAs();
             }
             else
             {
-                // Dosya daha önce kaydedilmişse, mevcut dosya yoluna kaydet
-                // Dosyayı UTF-8 encoding'i ile kaydet
-                File.WriteAllText(currentFilePath, richTextBox.Text, Encoding.UTF8);
-                savedContent = richTextBox.Text; // Kaydedilmiş içerik güncelleme
-                isFileSaved = true;
-                UpdateFormTitle(); // Başlık güncelleme
+                try
+                {
+                    TextFileService.WriteAllTextAtomic(currentFilePath, richTextBox.Text, currentFileEncoding);
+                    MarkFileSaved();
+                    toolStripStatusLabel5.Text = TextFileService.GetDisplayName(currentFileEncoding);
+                    RecentFilesService.Add(currentFilePath);
+                    RefreshRecentFilesMenu();
+                    RecoveryService.Delete(recoverySessionId);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Dosya kaydedilirken bir hata oluştu:\n" + ex.Message, "Kaydet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
         }
 
-        private void SaveFileAs()
+        private bool SaveFileAs()
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -562,14 +719,23 @@ namespace Not_Defteri
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Dosyayı UTF-8 encoding'i ile kaydet
-                    File.WriteAllText(saveFileDialog.FileName, richTextBox.Text, Encoding.UTF8);
+                    string previousPath = currentFilePath;
+                    Encoding previousEncoding = currentFileEncoding;
                     currentFilePath = saveFileDialog.FileName; // Yeni dosya yolu güncelleme
-                    savedContent = richTextBox.Text;
-                    isFileSaved = true;
-                    UpdateFormTitle(); // Başlığı güncelle
+                    currentFileEncoding = TextFileService.DefaultEncoding;
+                    if (SaveFile())
+                    {
+                        return true;
+                    }
+
+                    currentFilePath = previousPath;
+                    currentFileEncoding = previousEncoding;
+                    UpdateFormTitle();
+                    return false;
                 }
             }
+
+            return false;
         }
 
         private void UpdateFormTitle()
@@ -602,23 +768,29 @@ namespace Not_Defteri
         private void richTextBox_TextChanged(object sender, EventArgs e)
         {
             panelLineNumbers.Invalidate();
-            if (richTextBox.Text == savedContent)
-            {
-                richTextBox.Modified = false;
-                isFileSaved = true;
-            }
-            else
+            toolStripStatusLabel4.Text = $"Krktr S: {richTextBox.TextLength:N0}";
+
+            if (isLoadingDocument)
+                return;
+
+            if (isFileSaved)
             {
                 richTextBox.Modified = true;
                 isFileSaved = false;
+                UpdateFormTitle();
             }
-            UpdateFormTitle();
         }
 
         private void NotDefteri_Load(object sender, EventArgs e)
         {
-            savedContent = richTextBox.Text;
-            UpdateFormTitle();
+            if (!HasUnsavedChanges())
+            {
+                MarkFileSaved();
+            }
+            else
+            {
+                UpdateFormTitle();
+            }
 
             foreach (FontFamily font in FontFamily.Families)
             {
@@ -664,7 +836,7 @@ namespace Not_Defteri
 
 
             // Kaydedilen durum cubugu görünürlüğünü yükle ve uygula
-            durumcubuguToolStripMenuItem.Checked = Properties.Settings.Default.MenulerVisible;
+            durumcubuguToolStripMenuItem.Checked = Properties.Settings.Default.DurumCubuguVisible;
             statusStrip1.Visible = durumcubuguToolStripMenuItem.Checked;
 
             string themeMode = Properties.Settings.Default["ThemeMode"].ToString();
@@ -680,6 +852,7 @@ namespace Not_Defteri
             panelLineNumbers.Visible = Properties.Settings.Default.SatirNumarasiVisible;
             satirNumaralariToolStripMenuItem.Checked = panelLineNumbers.Visible;
             AdjustRichTextBoxMarginForLineNumbers();
+            OfferRecoveryIfNeeded();
             
         }
 
@@ -704,30 +877,26 @@ namespace Not_Defteri
 
         private void DuplicateCurrentLineToNextLine()
         {
-            if (richTextBox.TextLength == 0 || richTextBox.Lines.Length == 0)
+            if (richTextBox.TextLength == 0)
                 return;
 
             int selectionStart = richTextBox.SelectionStart;
             int currentLineIndex = richTextBox.GetLineFromCharIndex(selectionStart);
+            int currentLineStart = richTextBox.GetFirstCharIndexFromLine(currentLineIndex);
+            if (currentLineStart < 0)
+                return;
 
-            string currentLineTextRaw = richTextBox.Lines[currentLineIndex];
+            int nextLineStart = richTextBox.GetFirstCharIndexFromLine(currentLineIndex + 1);
+            int currentLineEnd = nextLineStart >= 0 ? nextLineStart : richTextBox.TextLength;
+            string currentLineTextRaw = richTextBox.Text.Substring(currentLineStart, currentLineEnd - currentLineStart).TrimEnd('\r', '\n');
 
-            // 🔍 Satır sadece boşluklardan veya tamamen boşsa işlem yapma
+            // Satır sadece boşluklardan veya tamamen boşsa işlem yapma
             if (string.IsNullOrWhiteSpace(currentLineTextRaw))
                 return;
 
-            // Satırın sonuna \n yoksa ekle (Lines[] senkronizasyonu için)
-            if (!richTextBox.Text.EndsWith(Environment.NewLine))
-            {
-                richTextBox.AppendText(Environment.NewLine);
-            }
-
-            string currentLineText = currentLineTextRaw;
-
-            int insertLineIndex = currentLineIndex + 1;
-            int insertPos = richTextBox.GetFirstCharIndexFromLine(insertLineIndex);
-
-            string textToInsert = currentLineText + Environment.NewLine;
+            bool isLastLineWithoutLineBreak = nextLineStart < 0 && !richTextBox.Text.EndsWith("\n");
+            int insertPos = currentLineEnd;
+            string textToInsert = (isLastLineWithoutLineBreak ? Environment.NewLine : string.Empty) + currentLineTextRaw + Environment.NewLine;
 
             // Yapıştır
             richTextBox.SelectionStart = insertPos;
@@ -735,8 +904,15 @@ namespace Not_Defteri
             richTextBox.SelectedText = textToInsert;
 
             // İmleci yeni satırın sonuna taşı
-            int newCursorPos = insertPos + currentLineText.Length;
-            richTextBox.SelectionStart = newCursorPos;
+            int duplicatedLineStart = richTextBox.GetFirstCharIndexFromLine(currentLineIndex + 1);
+            if (duplicatedLineStart >= 0)
+            {
+                richTextBox.SelectionStart = Math.Min(duplicatedLineStart + currentLineTextRaw.Length, richTextBox.TextLength);
+            }
+            else
+            {
+                richTextBox.SelectionStart = Math.Min(insertPos + textToInsert.Length, richTextBox.TextLength);
+            }
             richTextBox.SelectionLength = 0;
         }
 
@@ -946,6 +1122,8 @@ namespace Not_Defteri
             public const int WM_VSCROLL = 0x115;
             public const int SB_PAGEUP = 2;
             public const int SB_PAGEDOWN = 3;
+            public const int EM_SETMARGINS = 0xD3;
+            public const int EC_LEFTMARGIN = 0x1;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
             public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, IntPtr lParam);
@@ -974,6 +1152,96 @@ namespace Not_Defteri
             }
         }
 
+        private void dosyaAdiniDegistirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(currentFilePath))
+            {
+                MessageBox.Show("Dosya adını değiştirmek için önce dosyayı kaydedin.", "Dosya Adını Değiştir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveFileAs();
+                return;
+            }
+
+            if (HasUnsavedChanges() && !SaveFile())
+            {
+                return;
+            }
+
+            string currentName = Path.GetFileName(currentFilePath);
+            string newName = Microsoft.VisualBasic.Interaction.InputBox("Yeni dosya adını girin:", "Dosya Adını Değiştir", currentName);
+            if (string.IsNullOrWhiteSpace(newName))
+            {
+                return;
+            }
+
+            if (Path.GetExtension(newName).Length == 0)
+            {
+                newName += Path.GetExtension(currentFilePath);
+            }
+
+            string newPath = Path.Combine(Path.GetDirectoryName(currentFilePath), newName);
+            if (string.Equals(currentFilePath, newPath, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            try
+            {
+                if (File.Exists(newPath))
+                {
+                    DialogResult overwrite = MessageBox.Show("Bu isimde bir dosya zaten var. Üzerine yazılsın mı?", "Dosya Adını Değiştir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (overwrite != DialogResult.Yes)
+                    {
+                        return;
+                    }
+
+                    File.Delete(newPath);
+                }
+
+                string oldPath = currentFilePath;
+                File.Move(currentFilePath, newPath);
+                currentFilePath = newPath;
+                RecentFilesService.Remove(oldPath);
+                RecentFilesService.Add(currentFilePath);
+                RefreshRecentFilesMenu();
+                MarkFileSaved();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Dosya adı değiştirilirken bir hata oluştu:\n" + ex.Message, "Dosya Adını Değiştir", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void yaziRengiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = richTextBox.SelectionColor.IsEmpty ? richTextBox.ForeColor : richTextBox.SelectionColor;
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox.SelectionColor = colorDialog.Color;
+                }
+            }
+        }
+
+        private void arkaPlanRengiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = richTextBox.SelectionBackColor.IsEmpty ? richTextBox.BackColor : richTextBox.SelectionBackColor;
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (richTextBox.SelectionLength > 0)
+                    {
+                        richTextBox.SelectionBackColor = colorDialog.Color;
+                    }
+                    else
+                    {
+                        richTextBox.BackColor = colorDialog.Color;
+                    }
+                }
+            }
+        }
+
         private void toolStripComboBoxYaziTipi_Click(object sender, EventArgs e)
         {
 
@@ -987,6 +1255,7 @@ namespace Not_Defteri
         private void metinKarsilastiriciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MetinKarsilastirici karakterSayaci = new MetinKarsilastirici();
+            karakterSayaci.EditorFont = richTextBox.Font;
             karakterSayaci.Show();
         }
 
@@ -1045,8 +1314,8 @@ namespace Not_Defteri
         {
             // Seçili yazı tipini ve mevcut boyutu kullanarak yeni Font nesnesi oluştur
             string seciliYaziTipi = toolStripComboBoxYaziTipi.SelectedItem.ToString();
-            float mevcutBoyut = richTextBox.Font.Size;
-            richTextBox.Font = new System.Drawing.Font(seciliYaziTipi, mevcutBoyut, richTextBox.Font.Style);
+            System.Drawing.Font baseFont = richTextBox.SelectionFont ?? richTextBox.Font;
+            ApplySelectedOrEditorFont(new System.Drawing.Font(seciliYaziTipi, baseFont.Size, baseFont.Style));
         }
 
         private void toolStripComboBoxYaziBoyutu_SelectedIndexChanged(object sender, EventArgs e)
@@ -1054,12 +1323,14 @@ namespace Not_Defteri
             // Seçili yazı boyutunu ve mevcut yazı tipini kullanarak yeni Font nesnesi oluştur
             if (float.TryParse(toolStripComboBoxYaziBoyutu.SelectedItem.ToString(), out float seciliBoyut) && seciliBoyut > 0)
             {
-                richTextBox.Font = new System.Drawing.Font(richTextBox.Font.FontFamily, seciliBoyut, richTextBox.Font.Style);
+                System.Drawing.Font baseFont = richTextBox.SelectionFont ?? richTextBox.Font;
+                ApplySelectedOrEditorFont(new System.Drawing.Font(baseFont.FontFamily, seciliBoyut, baseFont.Style));
             }
             else
             {
                 // Başarısız parse işlemi için hata mesajı göster veya varsayılan bir değer kullan
-                richTextBox.Font = new System.Drawing.Font(richTextBox.Font.FontFamily, 12.0f, richTextBox.Font.Style);
+                System.Drawing.Font baseFont = richTextBox.SelectionFont ?? richTextBox.Font;
+                ApplySelectedOrEditorFont(new System.Drawing.Font(baseFont.FontFamily, 12.0f, baseFont.Style));
             }
         }
 
@@ -1074,9 +1345,20 @@ namespace Not_Defteri
             else
             {
                 // Geçerli ise, yazı boyutunu ayarla
-                string mevcutYaziTipi = richTextBox.Font.FontFamily.Name;
-                FontStyle mevcutStil = richTextBox.Font.Style;
-                richTextBox.Font = new System.Drawing.Font(mevcutYaziTipi, newSize, mevcutStil);
+                System.Drawing.Font baseFont = richTextBox.SelectionFont ?? richTextBox.Font;
+                ApplySelectedOrEditorFont(new System.Drawing.Font(baseFont.FontFamily, newSize, baseFont.Style));
+            }
+        }
+
+        private void ApplySelectedOrEditorFont(System.Drawing.Font font)
+        {
+            if (richTextBox.SelectionLength > 0)
+            {
+                richTextBox.SelectionFont = font;
+            }
+            else
+            {
+                richTextBox.Font = font;
             }
         }
 
@@ -1156,8 +1438,6 @@ namespace Not_Defteri
             }
         }
 
-        private bool isDarkModeEnabled = false; // Koyu mod durumunu takip eden değişken
-
         private void ToggleDarkMode()
         {
 
@@ -1187,8 +1467,6 @@ namespace Not_Defteri
             yardımToolStripMenuItem.BackColor = Color.FromArgb(37, 37, 38); // Menü strip için koyu arka plan
             yardımToolStripMenuItem.ForeColor = Color.WhiteSmoke; // Menü strip için açık metin rengi
 
-
-            isDarkModeEnabled = true;
 
             Properties.Settings.Default["ThemeMode"] = "Dark";
             Properties.Settings.Default.Save(); // Ayarı kaydet
@@ -1232,9 +1510,6 @@ namespace Not_Defteri
             uygulamalarToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
             yardımToolStripMenuItem.BackColor = SystemColors.Control; // Menü strip'in arka plan rengi
             yardımToolStripMenuItem.ForeColor = Color.Black; // Menü strip'in metin rengi
-
-            // Koyu mod durumunu false yap (açık mod aktif)
-            isDarkModeEnabled = false;
 
             Properties.Settings.Default["ThemeMode"] = "Light";
             Properties.Settings.Default.Save(); // Ayarı kaydet
@@ -1299,7 +1574,7 @@ namespace Not_Defteri
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    Filter = "PDF (*.pdf)|*.pdf|Word Document (*.docx)|*.docx|Excel Workbook (*.xlsx)|*.xlsx|PowerPoint (*.pptx)|*.pptx|JPEG Image (*.jpg)|*.jpg|PNG Image (*.png)|*.png",
+                    Filter = "PDF (*.pdf)|*.pdf|Word Document (*.docx)|*.docx|Excel Workbook (*.xlsx)|*.xlsx|PowerPoint (*.pptx)|*.pptx|JPEG Image (*.jpg)|*.jpg|PNG Image (*.png)|*.png|HTML File (*.html)|*.html",
                     Title = "Dosyayı Kaydet",
                     FileName = "Dosyam"
                 };
@@ -1327,6 +1602,9 @@ namespace Not_Defteri
                         case ".png":
                             ExportToImage(selectedPath, extension);
                             break;
+                        case ".html":
+                            ExportToHtml(selectedPath);
+                            break;
                         default:
                             MessageBox.Show("Geçersiz dosya formatı seçildi.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
@@ -1334,41 +1612,84 @@ namespace Not_Defteri
                 }
             }
         }
+
+        private void ExportToHtml(string path)
+        {
+            try
+            {
+                string htmlContent = $"<html><head><meta charset='UTF-8'><title>Dosyam</title></head><body><pre>{System.Net.WebUtility.HtmlEncode(richTextBox.Text)}</pre></body></html>";
+                File.WriteAllText(path, htmlContent, Encoding.UTF8);
+                MessageBox.Show("HTML dosyası başarıyla kaydedildi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"HTML dosyası kaydedilirken bir hata oluştu:\n{ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ExportToPDF(string filePath)
         {
-            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+            try
             {
-                Document pdfDoc = new Document();
-                PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                pdfDoc.Add(new iTextSharp.text.Paragraph(richTextBox.Text));
-                pdfDoc.Close();
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    Document pdfDoc = new Document();
+                    PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+                    pdfDoc.Add(new iTextSharp.text.Paragraph(richTextBox.Text));
+                    pdfDoc.Close();
+                }
+                MessageBox.Show("PDF dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            MessageBox.Show("PDF dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show("PDF dosyası oluşturulurken bir hata oluştu:\n" + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ExportToWord(string filePath)
         {
+            Microsoft.Office.Interop.Word.Application wordApp = null;
+            Microsoft.Office.Interop.Word.Document wordDoc = null;
+            Microsoft.Office.Interop.Word.Paragraph paragraph = null;
+
             try
             {
                 // Word uygulamasını başlat
-                Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
-                Microsoft.Office.Interop.Word.Document wordDoc = wordApp.Documents.Add();
+                wordApp = new Microsoft.Office.Interop.Word.Application();
+                wordDoc = wordApp.Documents.Add();
 
                 // Paragraf ekleyip içeriği yazdır
-                Microsoft.Office.Interop.Word.Paragraph paragraph = wordDoc.Paragraphs.Add();
+                paragraph = wordDoc.Paragraphs.Add();
                 paragraph.Range.Text = richTextBox.Text;
 
                 // Word dosyasını kaydet
                 wordDoc.SaveAs2(filePath);
-                wordDoc.Close();
-                wordApp.Quit();
 
                 MessageBox.Show("Word dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (wordDoc != null)
+                {
+                    try { wordDoc.Close(false); } catch { }
+                    Marshal.FinalReleaseComObject(wordDoc);
+                }
+
+                if (paragraph != null)
+                {
+                    Marshal.FinalReleaseComObject(paragraph);
+                }
+
+                if (wordApp != null)
+                {
+                    try { wordApp.Quit(); } catch { }
+                    Marshal.FinalReleaseComObject(wordApp);
+                }
             }
         }
 
@@ -1435,14 +1756,42 @@ namespace Not_Defteri
 
         private void ExportToPowerPoint(string filePath)
         {
-            Microsoft.Office.Interop.PowerPoint.Application pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
-            Presentation presentation = pptApp.Presentations.Add();
-            Slide slide = presentation.Slides.Add(1, PpSlideLayout.ppLayoutText);
-            slide.Shapes[1].TextFrame.TextRange.Text = richTextBox.Text;
-            presentation.SaveAs(filePath);
-            presentation.Close();
-            pptApp.Quit();
-            MessageBox.Show("PowerPoint dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Microsoft.Office.Interop.PowerPoint.Application pptApp = null;
+            Presentation presentation = null;
+            Slide slide = null;
+
+            try
+            {
+                pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
+                presentation = pptApp.Presentations.Add();
+                slide = presentation.Slides.Add(1, PpSlideLayout.ppLayoutText);
+                slide.Shapes[1].TextFrame.TextRange.Text = richTextBox.Text;
+                presentation.SaveAs(filePath);
+                MessageBox.Show("PowerPoint dosyası başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (presentation != null)
+                {
+                    try { presentation.Close(); } catch { }
+                    Marshal.FinalReleaseComObject(presentation);
+                }
+
+                if (slide != null)
+                {
+                    Marshal.FinalReleaseComObject(slide);
+                }
+
+                if (pptApp != null)
+                {
+                    try { pptApp.Quit(); } catch { }
+                    Marshal.FinalReleaseComObject(pptApp);
+                }
+            }
         }
 
         private void ExportToImage(string filePath, string extension)
@@ -1475,81 +1824,47 @@ namespace Not_Defteri
 
         private async void guncellemeleriDenetleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string localVersionFile = Path.Combine(Application.StartupPath, "version.txt");
-            string repoVersionUrl = "https://raw.githubusercontent.com/popmarley/Note_Pad/master/version.txt";
-            string repoZipUrl = "https://github.com/popmarley/Note_Pad/archive/refs/heads/master.zip";
-            string tempDownloadPath = Path.Combine(Path.GetTempPath(), "Note_Pad_Update.zip");
-            string extractPath = Path.Combine(Path.GetTempPath(), "Note_Pad_Update");
+            string localVersionFile = AppPaths.StartupVersionFile;
 
             // Eğer yerel dosya yoksa, varsayılan bir sürüm numarası yaz
             if (!File.Exists(localVersionFile))
             {
-                File.WriteAllText(localVersionFile, "1.0.0");
+                File.WriteAllText(localVersionFile, "3.6.0");
             }
 
             // Yerel sürüm numarasını oku
             string localVersion = File.ReadAllText(localVersionFile).Trim();
 
-            using (HttpClient client = new HttpClient())
+            try
             {
-                try
+                guncellemeleriDenetleToolStripMenuItem.Enabled = false;
+                string onlineVersion = await UpdateService.GetOnlineVersionAsync();
+
+                // Eğer sürümler aynıysa güncelleme yapma
+                if (!UpdateService.IsOnlineVersionNewer(localVersion, onlineVersion))
                 {
-                    // GitHub'dan güncel sürüm numarasını al
-                    string onlineVersion = await client.GetStringAsync(repoVersionUrl);
-                    onlineVersion = onlineVersion.Trim();
-
-                    // Eğer sürümler aynıysa güncelleme yapma
-                    if (localVersion == onlineVersion)
-                    {
-                        MessageBox.Show("Uygulamanız güncel!", "Güncelleme Kontrolü", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-
-                    // Yeni sürüm varsa kullanıcıya bilgi ver
-                    DialogResult result = MessageBox.Show($"Yeni sürüm bulundu! ({onlineVersion})\nGüncellemek istiyor musunuz?", "Güncelleme Mevcut", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.No)
-                        return;
-
-                    // Güncellemeyi indir
-                    byte[] fileBytes = await client.GetByteArrayAsync(repoZipUrl);
-                    File.WriteAllBytes(tempDownloadPath, fileBytes);
-
-                    // Var olan güncelleme klasörünü temizle
-                    if (Directory.Exists(extractPath))
-                        Directory.Delete(extractPath, true);
-
-                    // Zip dosyasını çıkar
-                    ZipFile.ExtractToDirectory(tempDownloadPath, extractPath);
-
-                    // Güncellenmiş dosyaları uygulama dizinine taşı (Eski dosyaları değiştirerek)
-                    string extractedFolder = Directory.GetDirectories(extractPath).FirstOrDefault();
-                    if (!string.IsNullOrEmpty(extractedFolder))
-                    {
-                        foreach (string file in Directory.GetFiles(extractedFolder, "*", SearchOption.AllDirectories))
-                        {
-                            string relativePath = file.Substring(extractedFolder.Length + 1);
-                            string destinationPath = Path.Combine(Application.StartupPath, relativePath);
-
-                            // Klasörü oluştur
-                            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
-
-                            // Dosyayı taşı
-                            File.Copy(file, destinationPath, true);
-                        }
-                    }
-
-                    // Yeni sürüm numarasını kaydet
-                    File.WriteAllText(localVersionFile, onlineVersion);
-
-                    MessageBox.Show("Güncelleme tamamlandı! Uygulama yeniden başlatılacak.", "Güncelleme Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Uygulamayı yeniden başlat
-                    Application.Restart();
+                    MessageBox.Show("Uygulamanız güncel!", "Güncelleme Kontrolü", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-                catch (Exception ex)
+
+                DialogResult result = MessageBox.Show(
+                    $"Yeni sürüm bulundu! ({onlineVersion})\n\nGüvenli indirme sayfasını açmak ister misiniz?",
+                    "Güncelleme Mevcut",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
                 {
-                    MessageBox.Show("Güncelleme sırasında bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    OpenShellTarget(UpdateService.LatestReleaseUrl);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Güncelleme kontrolü sırasında bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                guncellemeleriDenetleToolStripMenuItem.Enabled = true;
             }
 
         }
@@ -1598,16 +1913,9 @@ namespace Not_Defteri
 
         private void AdjustRichTextBoxMarginForLineNumbers()
         {
-            richTextBox.SelectAll(); // Tüm metni seç
-            if (panelLineNumbers.Visible)
-            {
-                richTextBox.SelectionIndent = panelLineNumbers.Width + 5;
-            }
-            else
-            {
-                richTextBox.SelectionIndent = 0;
-            }
-            richTextBox.DeselectAll(); // Seçimi kaldır
+            int margin = panelLineNumbers.Visible ? panelLineNumbers.Width + 5 : 2;
+            NativeMethods.SendMessage(richTextBox.Handle, NativeMethods.EM_SETMARGINS, NativeMethods.EC_LEFTMARGIN, (IntPtr)margin);
+            richTextBox.Invalidate();
         }
 
      

@@ -1,49 +1,38 @@
 # Note_Pad
 
-Windows için tasarlanmış, hızlı ve kolay kullanımlı bir metin düzenleme uygulamasıdır. Temel düzenleme işlevleri, dosya yönetimi ve kullanışlı klavye kısayolları içeren bu uygulama, günlük metin işleme ihtiyaçlarınızı karşılamak üzere tasarlanmıştır.
+Windows için geliştirilmiş, hızlı ve kullanışlı bir metin düzenleme uygulamasıdır. Temel not defteri işlevlerinin yanında gelişmiş biçimlendirme, metin karşılaştırma, dikte, dışa aktarma ve güvenli dosya yönetimi özellikleri içerir.
 
 ## Özellikler
 
-- **Dosya Yönetimi:** Kolay dosya açma, kaydetme ve düzenleme.
-- **Klavye Kısayolları:** Verimli çalışmayı destekleyen geniş kısayol desteği.
-- **Gelişmiş Düzenleme İşlevleri:** Bul ve değiştir, font boyutu ayarlama, tema değiştirme gibi işlevler.
-- **UTF-8 Encoding Desteği:** Uluslararası karakter desteği ile dosyaları UTF-8 formatında kaydetme ve okuma.
-- **Açık/Kapalı Tema:** Kullanıcı tercihine göre tema seçimi.
+- Dosya açma, kaydetme, farklı kaydetme ve dosya adını değiştirme
+- UTF-8, UTF-8 BOM ve UTF-16 dosya okuma desteği
+- Son dosyalar menüsü
+- Otomatik kurtarma desteği
+- Bul ve değiştir
+- Yazı tipi, boyut, kalın, italik, altı çizili, hizalama ve renk seçenekleri
+- Satır numaraları, zoom ve durum çubuğu
+- Açık/koyu tema
+- Dikte
+- Metin karşılaştırıcı
+- PDF, Word, Excel, PowerPoint, HTML, JPG ve PNG dışa aktarma
+- Güvenli güncelleme kontrolü
 
-## Yenilikler
+## Son Sürüm
 
-Son güncellemelerle birlikte uygulamaya birçok yeni özellik ve iyileştirme eklendi:
+Versiyon 3.6 (is Derlemesi 1047)
 
-- Versiyon 2.5: Açık/Kapalı tema işlevi, UTF-8 Encoding desteği.
-- Versiyon 2.4: Ctrl+D ve F12 kısayolları.
-- Versiyon 2.3: Capslock veya insert tuşu açıksa uyarı verme.
-- Versiyon 2.2: Kısayolların kalıcılığı.
-- Versiyon 2.1: Bul ve değiştir işlevlerinde iyileştirmeler, metin karşılaştırma formu düzeltmeleri.
-- Daha fazla detay için [güncelleme notlarımıza](#https://github.com/popmarley/Note_Pad/releases/tag/v2.5) göz atın.
+Bu sürümde dosya encoding algılama, güvenli kaydetme, otomatik kurtarma, son dosyalar, dosya adı değiştirme, yazı/arka plan rengi, daha güvenli güncelleme kontrolü ve performans iyileştirmeleri eklendi.
 
-## Kurulum
+## Derleme
 
-1. GitHub reposundan son sürümü indirin.
-2. İndirdiğiniz dosyayı çıkartın ve kurulum dosyasını çalıştırın.
-3. Kurulum talimatlarını takip edin.
-4. Uygulamayı başlatın ve metin düzenlemeye başlayın!
+Proje .NET Framework 4.7.2 ve Windows Forms kullanır. Visual Studio 2022 ile açıp `Not_Defteri.sln` üzerinden derleyebilirsiniz.
 
-## Kullanım
+Komut satırından derlemek için Visual Studio MSBuild kullanılmalıdır:
 
-Uygulama içerisinde, dosya menüsünden yeni bir dosya açabilir, mevcut dosyaları düzenleyebilir ve kaydedebilirsiniz. Klavye kısayollarını kullanarak işlemlerinizi daha hızlı gerçekleştirebilirsiniz. Tüm kısayolları ve işlevleri öğrenmek için uygulama içerisindeki yardım bölümüne göz atın.
+```powershell
+& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" ".\Note_Pad-master\Note_Pad-master\Not_Defteri.sln" /p:Configuration=Debug /p:Platform="Any CPU"
+```
 
-## Lisans
+## Not
 
-Bu proje [MIT lisansı](LICENSE) altında lisanslanmıştır. Detaylar için lisans dosyasına bakınız.
-
-## Katkıda Bulunma
-
-Projeye katkıda bulunmak isteyenler için katkıda bulunma rehberimiz [CONTRIBUTING.md](CONTRIBUTING.md) dosyasında bulunmaktadır.
-
-## İletişim
-
-Öneri, soru veya geri bildirimleriniz için [issues](https://github.com/popmarley/Note_Pad/issues) sayfasını kullanabilirsiniz.
-
----
-
-Bu README, projenin kısa bir özeti ve başlamak için ihtiyacınız olan temel bilgileri sağlamak üzere hazırlanmıştır. Daha fazla bilgi ve detaylı kullanım için uygulama içi yardım bölümünü inceleyebilirsiniz.
+`dotnet msbuild` eski .NET Framework WinForms kaynak üretiminde takılabilir. Bu nedenle bu proje için Visual Studio MSBuild önerilir.

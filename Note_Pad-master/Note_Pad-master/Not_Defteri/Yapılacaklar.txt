@@ -1,69 +1,143 @@
-﻿
-Versiyon 3.5(is Derlemesi 250717,1601)
+Versiyon 3.6 (is Derlemesi 260422,1047)
 
-Bilenen hatalar ve eklenecekler
+Bilinen hatalar ve eklenecekler
 
--yumuşak kaydırma kapatma
--hesap makinası eventi
--todo list    
--yazı tipi stilindeki yazılar türkçe olsun
--yazı fontunu arama yapılsin
--yazıcılar eventi güncellenecek
--hakkında kısmını her güncellemeye göre metnin değişmesini sagla
--metin karşılastırıcı text fon yazı biçimine bagla
--sadece seçilen metinin yazı fontu ve boyutunu ayarlama
--yazı tipi formundan yazı fontunu elle girilebilme eklenecek
--iconların yanına görselleri eklenecek
--dosya adını değiştirme eklenecek
--yazılara renk verme eklenecek
--Dikte kullanılan dilde olmuyorsa sisteminiz dilinde desteklenmiyor yazısı yazacak. liste linki bırakılacak
-- versiyonunu githubdan kontrol edip güncelleme var mı diye denetleme menüsünden denetleyecek varsa yenisini kuracak
--arka plana resim koyma veya boyama eklenecek. dönüştürme yapılırken bunlar olmayacak
--güncelleme yapılırken yüzdelik dolma ekle
--eğer pc nete bağlıysa her not defterini açmaya güncellemeyi otomatik olarak denetlesin varsa yapılsın mı diye sorsun
--indirme yaparken komple projeyi indirmeyecek sadece bin klasöründeki uygulamayı indirip kuracak
--sayfa ilk açıldıgında beyaz oluyor aşagı kaydırınca yazılar geliyor (?)
-
-
-
+- Sekmeli belge düzenleme eklenecek.
+- Otomatik güncelleme için imzalı kurulum paketi veya doğrulanmış release asset akışı hazırlanacak.
+- Güncelleme indirme ekranına yüzde/progress göstergesi eklenecek (imzalı paket akışından sonra).
+- Yazdırma önizleme, sayfa ayarı ve yazıcı seçimi geliştirilecek.
+- Markdown önizleme seçeneği değerlendirilecek.
+- Dikte dil desteği daha açıklayıcı hale getirilecek; desteklenmeyen sistem dilinde bilgilendirme ve yardım bağlantısı gösterilecek.
+- Arama/değiştirme ekranına tam kelime ve regex seçenekleri eklenecek.
+- Satır sonu kopyalama simgesi ve satır bazlı hızlı işlemler değerlendirilecek.
+- Arka plana resim koyma veya sayfa arka planı boyama eklenecek; dışa aktarma sırasında isteğe bağlı hariç tutulacak.
+- Hesap makinesi daha kapsamlı ve düzenli bir arayüzle yenilenecek.
+- Todo list / görev listesi özelliği eklenecek.
+- Yazı tipi ekranında font arama ve elle font adı girme iyileştirilecek.
+- Hakkında ekranındaki metin her sürüme göre otomatik güncellenecek.
+- Proje SDK-style yapıya ve daha modern .NET Windows Forms sürümüne geçiş için ayrıca değerlendirilecek.
 
 Yapılanlar
 
-+ Dosya menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
-+ Düzen menüsü kısayolları eklendi (Versiyon 1.7(is Derlemesi 240125,1159))
-+ Hakkında resim eventi eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
-+ Hakkında resim eventi oluşturmak için şifreleme sistemi eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
-+ Bul formundaki değiştir butonuna metin aktarma olayı eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
-+ Değiştir eventi Bul formuna eklendi (Versiyon 1.8(is Derlemesi 240125,1517))
-+ Delete tuşuna basınca komple textboxun silinme hatası giderildi (Versiyon 1.9(is Derlemesi 240131,0914))
-+ Exe oluşturulduğunda dosya konumunun açılması eklendi (Versiyon 1.9(is Derlemesi 240131,0914))
-+ Ana ekranda yazı fontu ve boyutu ayarlayabilme eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Uygulamalar kısayolu eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Yazı tipi ekranında ki örnek yazı stili alanı anlık yazı fontuna göre değişmesi eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Metin font boyutu arttırma/azaltma da yazı boyutunu gösteren label kaldırıldı (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Ana ekranda metin boyutunu elle girilebilme eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Menüler ve durum çubugu görünürlüğü kapalı/açık durumunun kayıtlı kalması işlevi eklendi (Versiyon 2.0(is Derlemesi 240131,1037))
-+ Font boyutu azaltma/arttırma kısayoluna basıldıgında boyutun azalttıgı/arttırdığı görünüyor (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Değiştir formunda değiştire basınca harfle eşleşmiyor hatası giderildi (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Bul ve değiştir eventlerinde iyileştirmeler yapıldı (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Metin karşılaştırıcı formunun boyutunun ayarlanmama hatası düzeltildi (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Yazı tiplerinde eksik olan stiller eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Hakkında formuna görüş ve öneri sunmak için link eklendi (Versiyon 2.1(is Derlemesi 240201,0855))
-+ Kısayollar da programı aç kapa yapınca kalıcılık sağlandı (Versiyon 2.2(is Derlemesi 240202,1006))
-+ Capslock veya insert tuşu açıksa uyarı verme olayı eklendi (Versiyon 2.3(is Derlemesi 240205,1358))
-+ Ctrl+D ve F12 (Farklı Kaydet) işlevleri eklendi (Versiyon 2.4(is Derlemesi 240208,1617))
-+ Dosyaları UTF-8 Encoding ile kaydetme ve okuma eklendi (Versiyon 2.5(is Derlemesi 240219,0948))
-+ Açık/Kapalı tema işlevi eklendi (Versiyon 2.5(is Derlemesi 240219,1751))
-+ Saat ve Tarih göstergesi eklendi (Versiyon 2.6(is Derlemesi 240227,1424))
-+ Mesai bitimine kaç dakika kaldığını gösterme eklendi (Versiyon 2.7(is Derlemesi 240315,1448))
-+ Hesap makinesi uygulaması daha düzenli ve UI çalısması yapılmaıs adına belli bir süre kaldırıldı (Versiyon 2.8(is Derlemesi 240419,1124))
-+ Dikte eklendi (Versiyon 2.9(is Derlemesi 240507,1354))
-+ Kayıt bilgisini gösterme eklendi (Versiyon 3.0(is Derlemesi 240824,1015))
-+ Dikteyi açma/kapatma eklendi (Versiyon 3.1(is Derlemesi 240824,1557))
-+ Pdf, excel, word gibi dosya formatlarına dönüştürme eklendi (Versiyon 3.2(is Derlemesi 250207,1309))
-+ Ctrl + D işlevi güçlendirildi (Versiyon 3.3(is Derlemesi 250624,1313))
-+ Sayfa satırları işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
-+ Görünmez boşluk kopyalama işlevi eklendi (Versiyon 3.4 (is Derlemesi 250625,1105))
-+ Satır numaralarının kapalı kalma işlevi eklendi (Versiyon 3.5 (is Derlemesi 250717,1601))
-+ Satır numaralarının yazının üstünde kalma sorunu düzeltildi (Versiyon 3.5 (is Derlemesi 250717,1601))
+Versiyon 3.6 (is Derlemesi 260422,1047)
 
++ Dosya açma/kaydetme akışı güvenli hale getirildi; UTF-8, UTF-8 BOM, UTF-16 LE/BE algılama ve encoding koruma eklendi.
++ Kaydetme işlemi tek merkezden yapılacak şekilde düzenlendi; Aç, Kaydet, Farklı Kaydet ve kapanış uyarıları aynı güvenli akışı kullanıyor.
++ Büyük metinlerde her değişiklikte tüm içeriği karşılaştıran kayıt kontrolü kaldırıldı; dirty-state performansı iyileştirildi.
++ Son dosyalar menüsü eklendi.
++ Kaydedilmemiş çalışmalar için otomatik kurtarma sistemi eklendi.
++ Satır numarası girintisi tüm metni seçmeden uygulanacak şekilde düzeltildi.
++ Bul ve Değiştir ekranlarında tüm metni yeniden boyayan vurgulama kaldırıldı; native seçim vurgusu kullanıldı.
++ Değiştir işleminin seçili metin kontrolü düzeltildi.
++ Tümünü değiştir akışı sadeleştirildi ve gereksiz event sökme/takma kaldırıldı.
++ Güncelleme kontrolü güvenli hale getirildi; uygulama artık kaynak zip'i indirip exe klasörüne kopyalamıyor, yeni sürüm varsa release sayfasını açıyor.
++ Word ve PowerPoint dışa aktarma işlemlerinde COM nesneleri düzgün kapatılacak şekilde düzenlendi.
++ PDF dışa aktarma hata yönetimi eklendi.
++ Hakkında ekranındaki hard-coded şifre ve kurum içi ağ yolu kaldırıldı; exe kopyalama için kullanıcıdan hedef klasör seçmesi isteniyor.
++ Mail ve bağlantı açma işlemleri UseShellExecute ile daha güvenli hale getirildi.
++ Dosya adını değiştirme özelliği eklendi.
++ Seçili metne yazı rengi ve arka plan rengi verme özellikleri eklendi.
++ Araç çubuğundaki font ve boyut seçimleri artık seçili metne uygulanabiliyor.
++ Metin karşılaştırıcı formu ana editör fontunu devralacak şekilde iyileştirildi.
++ Yeni pencere açarken gereksiz kaydetme sorusu kaldırıldı.
++ Durum çubuğu görünürlük ayarının yanlış ayardan okunması düzeltildi.
++ Çıkışta değişiklik yokken kaydetme sorusu çıkmasına sebep olan kayıt durumu kontrolü düzeltildi.
++ Bul ve Değiştir ekranlarında bulunan metnin form açıkken de görünür renkle işaretlenmesi sağlandı.
++ Ctrl+D satır çoğaltma işlevinin son satır ve satır sonu olmayan metinlerde hata vermesi düzeltildi.
++ Metin Karşılaştırıcı ekranı dock/table layout ile yeniden tasarlandı ve kontrol çakışmaları giderildi.
++ Assembly ve uygulama sürümü 3.6 (is Derlemesi 1047) olarak güncellendi.
++ Yapılacaklar dosyası versiyonlara göre gruplandı ve yazım hataları düzeltildi.
+
+Versiyon 3.5 (is Derlemesi 250717,1601)
+
++ Satır numaralarının kapalı kalma işlevi eklendi.
++ Satır numaralarının yazının üstünde kalma sorunu düzeltildi.
+
+Versiyon 3.4 (is Derlemesi 250625,1105)
+
++ Sayfa satırları işlevi eklendi.
++ Görünmez boşluk kopyalama işlevi eklendi.
+
+Versiyon 3.3 (is Derlemesi 250624,1313)
+
++ Ctrl + D işlevi güçlendirildi.
+
+Versiyon 3.2 (is Derlemesi 250207,1309)
+
++ PDF, Excel, Word gibi dosya formatlarına dönüştürme eklendi.
+
+Versiyon 3.1 (is Derlemesi 240824,1557)
+
++ Dikteyi açma/kapatma eklendi.
+
+Versiyon 3.0 (is Derlemesi 240824,1015)
+
++ Kayıt bilgisini gösterme eklendi.
+
+Versiyon 2.9 (is Derlemesi 240507,1354)
+
++ Dikte eklendi.
+
+Versiyon 2.8 (is Derlemesi 240419,1124)
+
++ Hesap makinesi uygulaması daha düzenli UI çalışması için geçici olarak kaldırıldı.
+
+Versiyon 2.7 (is Derlemesi 240315,1448)
+
++ Mesai bitimine kaç dakika kaldığını gösterme eklendi.
+
+Versiyon 2.6 (is Derlemesi 240227,1424)
+
++ Saat ve tarih göstergesi eklendi.
+
+Versiyon 2.5 (is Derlemesi 240219,1751)
+
++ Açık/koyu tema işlevi eklendi.
++ Dosyaları UTF-8 encoding ile kaydetme ve okuma eklendi.
+
+Versiyon 2.4 (is Derlemesi 240208,1617)
+
++ Ctrl+D ve F12 (Farklı Kaydet) işlevleri eklendi.
+
+Versiyon 2.3 (is Derlemesi 240205,1358)
+
++ CapsLock veya Insert tuşu açıksa uyarı verme olayı eklendi.
+
+Versiyon 2.2 (is Derlemesi 240202,1006)
+
++ Kısayolların programı aç/kapat yaptıktan sonra kalıcılığı sağlandı.
+
+Versiyon 2.1 (is Derlemesi 240201,0855)
+
++ Font boyutu azaltma/arttırma kısayolunda boyut değişimi görünür hale getirildi.
++ Değiştir formunda değiştire basınca harfle eşleşmiyor hatası giderildi.
++ Bul ve Değiştir eventlerinde iyileştirmeler yapıldı.
++ Metin karşılaştırıcı formunun boyutunun ayarlanmama hatası düzeltildi.
++ Yazı tiplerinde eksik olan stiller eklendi.
++ Hakkında formuna görüş ve öneri sunmak için link eklendi.
+
+Versiyon 2.0 (is Derlemesi 240131,1037)
+
++ Ana ekranda yazı fontu ve boyutu ayarlayabilme eklendi.
++ Uygulamalar kısayolu eklendi.
++ Yazı tipi ekranındaki örnek yazı stili alanının anlık yazı fontuna göre değişmesi eklendi.
++ Metin font boyutu arttırma/azaltma işleminde yazı boyutunu gösteren label kaldırıldı.
++ Ana ekranda metin boyutunu elle girebilme eklendi.
++ Menüler ve durum çubuğu görünürlüğünün kayıtlı kalması sağlandı.
+
+Versiyon 1.9 (is Derlemesi 240131,0914)
+
++ Delete tuşuna basınca komple textbox'ın silinme hatası giderildi.
++ Exe oluşturulduğunda dosya konumunun açılması eklendi.
+
+Versiyon 1.8 (is Derlemesi 240125,1517)
+
++ Hakkında resim eventi eklendi.
++ Hakkında resim eventi için şifreleme sistemi eklendi.
++ Bul formundaki Değiştir butonuna metin aktarma olayı eklendi.
++ Değiştir eventi Bul formuna eklendi.
+
+Versiyon 1.7 (is Derlemesi 240125,1159)
+
++ Dosya menüsü kısayolları eklendi.
++ Düzen menüsü kısayolları eklendi.

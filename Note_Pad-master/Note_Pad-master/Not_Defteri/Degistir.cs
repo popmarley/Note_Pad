@@ -14,6 +14,9 @@ namespace Not_Defteri
     public partial class Degistir : Form
     {
         public RichTextBox TextBoxReferans { get; set; }
+        private int highlightedStart = -1;
+        private int highlightedLength = 0;
+
         public Degistir()
         {
             InitializeComponent();
@@ -57,20 +60,7 @@ namespace Not_Defteri
 
                 if (foundIndex != -1)
                 {
-                    ResetHighlight(); // Önceki aramalardaki renklendirmeyi sıfırla
-                    TextBoxReferans.Select(foundIndex, arananMetin.Length);
-                    TextBoxReferans.SelectionBackColor = Color.BlueViolet; // Seçili metnin arka plan rengini sarı yapar.
-                    TextBoxReferans.SelectionColor = Color.White; // Seçili metnin rengini kırmızı yapar.
-                    TextBoxReferans.ScrollToCaret();
-
-                    if (yukariRadioButton.Checked)
-                    {
-                        TextBoxReferans.SelectionStart = foundIndex;
-                    }
-                    else
-                    {
-                        TextBoxReferans.SelectionStart = foundIndex + arananMetin.Length;
-                    }
+                    HighlightMatch(foundIndex, arananMetin.Length);
                 }
                 else
                 {
@@ -80,13 +70,45 @@ namespace Not_Defteri
         }
         private void ResetHighlight()
         {
-            if (TextBoxReferans != null)
+            if (TextBoxReferans == null || highlightedStart < 0)
             {
-                TextBoxReferans.SelectAll();
+                return;
+            }
+
+            bool wasModified = TextBoxReferans.Modified;
+            int selectionStart = TextBoxReferans.SelectionStart;
+            int selectionLength = TextBoxReferans.SelectionLength;
+
+            if (highlightedStart < TextBoxReferans.TextLength)
+            {
+                int safeLength = Math.Min(highlightedLength, TextBoxReferans.TextLength - highlightedStart);
+                TextBoxReferans.Select(highlightedStart, safeLength);
                 TextBoxReferans.SelectionBackColor = TextBoxReferans.BackColor;
                 TextBoxReferans.SelectionColor = TextBoxReferans.ForeColor;
-                TextBoxReferans.DeselectAll();
             }
+
+            TextBoxReferans.Select(
+                Math.Min(selectionStart, TextBoxReferans.TextLength),
+                Math.Min(selectionLength, Math.Max(0, TextBoxReferans.TextLength - selectionStart)));
+            TextBoxReferans.Modified = wasModified;
+            highlightedStart = -1;
+            highlightedLength = 0;
+        }
+
+        private void HighlightMatch(int start, int length)
+        {
+            ResetHighlight();
+
+            bool wasModified = TextBoxReferans.Modified;
+            TextBoxReferans.Select(start, length);
+            TextBoxReferans.SelectionBackColor = Color.BlueViolet;
+            TextBoxReferans.SelectionColor = Color.White;
+            TextBoxReferans.ScrollToCaret();
+            TextBoxReferans.Select(start, length);
+            TextBoxReferans.Modified = wasModified;
+
+            highlightedStart = start;
+            highlightedLength = length;
         }
 
         private void arananTextBox_TextChanged(object sender, EventArgs e)
@@ -112,20 +134,14 @@ namespace Not_Defteri
 
             if (!string.IsNullOrEmpty(arananMetin) && TextBoxReferans.SelectionLength > 0)
             {
-                int selectionStart = TextBoxReferans.SelectionStart;
+                string seciliMetin = TextBoxReferans.SelectedText;
+                StringComparison comparison = buyukKucukHarfCheckBox.Checked ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
 
-                // Eğer seçim başlangıcı 0'dan büyükse, bir karakter geriye git
-                if (selectionStart > 0)
+                if (seciliMetin.Equals(arananMetin, comparison))
                 {
-                    selectionStart -= 1;
-                }
-
-                string seciliMetin = TextBoxReferans.Text.Substring(selectionStart, arananMetin.Length);
-
-                if (seciliMetin.Equals(arananMetin))
-                {
+                    highlightedStart = -1;
+                    highlightedLength = 0;
                     // Seçili metni, yeni metinle değiştir
-                    TextBoxReferans.Select(selectionStart, arananMetin.Length);
                     TextBoxReferans.SelectedText = yeniMetin;
                 }
                 else
@@ -149,10 +165,13 @@ namespace Not_Defteri
             string yeniMetin = yeniDegerTextBox.Text;
             RichTextBoxFinds options = GetOptions();
 
-            // Arama ve değiştirme işlemleri için geçici olarak olayları devre dışı bırak
-            TextBoxReferans.TextChanged -= new EventHandler(arananTextBox_TextChanged);
+            if (TextBoxReferans == null || string.IsNullOrEmpty(arananMetin))
+            {
+                return;
+            }
 
-            if (!string.IsNullOrEmpty(arananMetin))
+            TextBoxReferans.SuspendLayout();
+            try
             {
                 int index = 0;
                 while ((index = TextBoxReferans.Find(arananMetin, index, options)) != -1)
@@ -162,9 +181,10 @@ namespace Not_Defteri
                     index += yeniMetin.Length; // Değiştirilen metnin sonundan devam et
                 }
             }
-
-            // Olay işleyicilerini tekrar bağla
-            TextBoxReferans.TextChanged += new EventHandler(arananTextBox_TextChanged);
+            finally
+            {
+                TextBoxReferans.ResumeLayout();
+            }
 
         }
 
